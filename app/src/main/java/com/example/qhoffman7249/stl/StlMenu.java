@@ -12,8 +12,8 @@ public class StlMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stl_menu);
-        Button newgame = findViewById(R.id.newgame);
-        Button loadgame = findViewById(R.id.loadgame);
+        Button newgame = findViewById(R.id.newGame);
+        Button loadgame = findViewById(R.id.loadGame);
         Button settings = findViewById(R.id.settings);
         Button exit = findViewById(R.id.exit);
 
