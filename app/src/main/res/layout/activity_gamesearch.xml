@@ -6,4 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".gamesearch">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".1"
+            android:hint="name of the game"
+            android:id="@+id/search"/>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".9"
+            android:id="@+id/puzzles"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
