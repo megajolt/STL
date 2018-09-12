@@ -31,6 +31,19 @@ public class StlMenu extends AppCompatActivity {
                 startActivity(lg);
             }
         });
-
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent s = new Intent(StlMenu.this, settings.class);
+                startActivity(s);
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+                System.exit(0);
+            }
+        });
     }
 }
