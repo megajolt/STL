@@ -19,7 +19,6 @@
         <activity android:name=".gamesearch" />
         <activity android:name=".newgame" />
         <activity android:name=".settings"></activity>
-        <activity android:name=".gamesearch" />
         <activity android:name=".GameActivity"></activity>
     </application>
 
