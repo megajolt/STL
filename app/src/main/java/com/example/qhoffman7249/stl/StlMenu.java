@@ -20,9 +20,17 @@ public class StlMenu extends AppCompatActivity {
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ms = new Intent(StlMenu.this, mainservice.class);
-                startService(ms);
+                Intent ng = new Intent(StlMenu.this, newgame.class);
+                startActivity(ng);
             }
         });
+        loadgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lg = new Intent(StlMenu.this, gamesearch.class);
+                startActivity(lg);
+            }
+        });
+
     }
 }
