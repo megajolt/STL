@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -28,7 +29,7 @@ public class gamesearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesearch);
         //loadfile();
-        load("string1-object2-thing3-stuff4");
+        loadfile();
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -49,23 +50,25 @@ public class gamesearch extends AppCompatActivity {
     }
     public void loadfile(){
         RequestQueue queue = Volley.newRequestQueue(gamesearch.this);
-        String url = "http://10.162.37.175//userdata.php";
+        String url = "http://philosophism.org/php/userdata.php";
         final StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.equals("not allowed")){
-
+                    Toast.makeText(gamesearch.this, "response: " + response, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     response = response.trim();
                     response = response.substring(0, response.length() - 1);
-                    load(response);
+                   load(response);
+                    Toast.makeText(gamesearch.this, "response: " + response, Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                Toast.makeText(gamesearch.this, "error: " + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             protected Map<String, String> getParams() {
