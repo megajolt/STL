@@ -55,7 +55,7 @@
 
     <ProgressBar
         android:id="@+id/healthBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="10dp"
         android:layout_marginEnd="8dp"
