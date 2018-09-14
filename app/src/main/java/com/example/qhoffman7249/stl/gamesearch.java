@@ -1,5 +1,8 @@
 package com.example.qhoffman7249.stl;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +34,13 @@ public class gamesearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesearch);
-        //loadfile();
-        loadfile();
+        boolean test = check();
+        if(test) {
+            loadfile();
+        }
+        else{
+            readfile("game.txt", "load");
+        }
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -61,7 +72,7 @@ public class gamesearch extends AppCompatActivity {
                     response = response.trim();
                     response = response.substring(0, response.length() - 1);
                    load(response);
-                    Toast.makeText(gamesearch.this, "response: " + response, Toast.LENGTH_SHORT).show();
+                    writefile(response, "game.txt");
                 }
             }
         }, new Response.ErrorListener() {
@@ -100,5 +111,41 @@ public class gamesearch extends AppCompatActivity {
             }
         });
 
+    }
+    public boolean check(){
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+        if(netinfo != null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public void readfile(String filename, String action){
+        String op = "hello world";
+        if(action.equals("save")){
+            writefile(op, "game.txt");
+        }
+    }
+    public void writefile(String mresponse, String filename){
+        FileOutputStream fos = null;
+        try{
+            fos = openFileOutput(filename, Context.MODE_PRIVATE);
+            fos.write(mresponse.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if(fos != null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
