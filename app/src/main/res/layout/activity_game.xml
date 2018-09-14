@@ -56,7 +56,7 @@
     <ProgressBar
         android:id="@+id/healthBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -72,7 +72,7 @@
     <ProgressBar
         android:id="@+id/shieldBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
