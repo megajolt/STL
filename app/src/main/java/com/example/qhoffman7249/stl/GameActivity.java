@@ -17,7 +17,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-        healthBar=(ProgressBar) findViewById(R.id.progressbar);
+        healthBar= findViewById(R.id.healthBar);
 
         new Thread(new Runnable() {
             @Override
@@ -32,21 +32,9 @@ public class GameActivity extends AppCompatActivity {
                         }
                     });
                 }
-               healthHandler.post(new Runnable () {
-                   @Override
-                   public void run() {
 
-                   }
-
-               });
             }
         }).start();
-    }
-
-
-    public void hello(){
-
-
     }
 
 }

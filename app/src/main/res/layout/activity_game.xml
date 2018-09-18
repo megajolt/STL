@@ -55,21 +55,15 @@
 
     <ProgressBar
         android:id="@+id/healthBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="150dp"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="100dp"
-        android:layout_height="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
         android:max="100"
         android:progress="0"
-        android:progressDrawable="@android:color/holo_green_dark"
+        android:progressTint="#388e3c"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/shieldBar"
