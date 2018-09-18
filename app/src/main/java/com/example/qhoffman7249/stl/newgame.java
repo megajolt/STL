@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class newgame extends AppCompatActivity {
-
+    //random comment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
