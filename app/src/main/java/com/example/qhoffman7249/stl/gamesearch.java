@@ -1,6 +1,7 @@
 package com.example.qhoffman7249.stl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -22,11 +23,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class gamesearch extends AppCompatActivity {
     public ArrayAdapter adapter;
@@ -35,12 +40,7 @@ public class gamesearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesearch);
         boolean test = check();
-        if(test) {
-            loadfile();
-        }
-        else{
-            readfile("game.txt", "load");
-        }
+        readfile("game.txt", "load");
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -72,7 +72,6 @@ public class gamesearch extends AppCompatActivity {
                     response = response.trim();
                     response = response.substring(0, response.length() - 1);
                    load(response);
-                    writefile(response, "game.txt");
                 }
             }
         }, new Response.ErrorListener() {
@@ -105,9 +104,8 @@ public class gamesearch extends AppCompatActivity {
         myview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String puzzlename = String.valueOf(adapterView.getItemAtPosition(i));
-                EditText search = findViewById(R.id.search);
-                search.setText(puzzlename);
+                //String puzzlename = String.valueOf(adapterView.getItemAtPosition(i));
+                readprogress(i);
             }
         });
 
@@ -122,13 +120,59 @@ public class gamesearch extends AppCompatActivity {
             return false;
         }
     }
-    public void readfile(String filename, String action){
-        String op = "hello world";
-        if(action.equals("save")){
-            writefile(op, "game.txt");
+    public String readfile(String filename, String action){
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(filename);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String content;
+            int check = 0;
+            while((content = br.readLine()) != null){
+                sb.append(content);
+                check = check + 1;
+            }
+            if(check == 0){
+                return "null";
+            }
+            else{
+                if(action.equals("save")){
+                    return sb.toString();
+                }
+                else if(action.equals("load")){
+                    load(sb.toString());
+                    Toast.makeText(gamesearch.this, "load ran", Toast.LENGTH_SHORT).show();
+                    return "nnull";
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "random";
     }
-    public void writefile(String mresponse, String filename){
+    public void writefile(String response, String filename){
+        String existing = readfile(filename, "save");
+        String mresponse = "null";
+        if(existing.equals("random")){
+            Intent l = new Intent(gamesearch.this, StlMenu.class);
+            Toast.makeText(gamesearch.this, "Error: you are not connected to the internet and no games are saved", Toast.LENGTH_LONG).show();
+            startActivity(l);
+        }
+        else{
+            mresponse = existing + "-" + response;
+        }
         FileOutputStream fos = null;
         try{
             fos = openFileOutput(filename, Context.MODE_PRIVATE);
@@ -147,5 +191,13 @@ public class gamesearch extends AppCompatActivity {
                 }
             }
         }
+    }
+    public void readprogress(int cgame){
+        String p = readfile("progress.txt", "cprogress");
+        String[] progress = p.split("-");
+        String fprogress = progress[cgame];
+        Intent game = new Intent(gamesearch.this, GameActivity.class);
+        game.putExtra("progress", fprogress);
+        startActivity(game);
     }
 }
