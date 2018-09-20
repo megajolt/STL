@@ -11,6 +11,10 @@ public class GameActivity extends AppCompatActivity {
     public int currentHealth=100;
     public Handler healthHandler= new Handler();
 
+    public ProgressBar shieldBar;
+    public int currentShield=100;
+    public Handler shieldHandler= new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +26,6 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 while(currentHealth>0){
-                    currentHealth=currentHealth-1;
-                    android.os.SystemClock.sleep(50);
                     healthHandler.post(new Runnable(){
                         @Override
                       public void run(){
@@ -34,6 +36,24 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }).start();
+
+        shieldBar=findViewById(R.id.shieldBar);
+        shieldBar.setScaleY(2f);
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+               while(currentShield>0){
+                   shieldHandler.post(new Runnable() {
+                       @Override
+                       public void run() {
+                           shieldBar.setProgress(currentShield);
+                       }
+                   });
+               }
+           }
+       }).start();
+
+
     }
 
 }
