@@ -16,9 +16,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-
         healthBar= findViewById(R.id.healthBar);
-
+        healthBar.setScaleY(2f);
         new Thread(new Runnable() {
             @Override
             public void run() {
