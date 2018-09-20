@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -199,5 +201,27 @@ public class gamesearch extends AppCompatActivity {
         Intent game = new Intent(gamesearch.this, GameActivity.class);
         game.putExtra("progress", fprogress);
         startActivity(game);
+    }
+    private class customadapter extends BaseAdapter{
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = getLayoutInflater().inflate(R.id.adapterlayout);
+            return null;
+        }
     }
 }
