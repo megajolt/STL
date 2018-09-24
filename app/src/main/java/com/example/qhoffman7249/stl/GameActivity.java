@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import static java.lang.Thread.sleep;
+
 public class GameActivity extends AppCompatActivity {
     public int damage=5;
 
@@ -27,6 +29,8 @@ public class GameActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
+
                 while(currentShield>0){
                     shieldHandler.post(new Runnable() {
                         @Override
