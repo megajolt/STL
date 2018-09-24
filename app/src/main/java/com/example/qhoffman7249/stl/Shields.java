@@ -6,7 +6,7 @@ public class Shields {
      //placeholder
     //when damaged decrease shield health, if there is excess damage after shield is destroyed damage ship health
     public int OnDamage(int damage){
-        if(shieldHealth>0) {
+        if(shieldHealth>=0) {
             if (damage <= shieldHealth) {
                 shieldHealth = shieldHealth - damage;
             }
@@ -15,9 +15,6 @@ public class Shields {
 
                 // call health subtraction method with damage
             }
-        }
-        else{
-            // call health subtraction method with damage
         }
        return shieldHealth;
     }
