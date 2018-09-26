@@ -11,15 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <EditText
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:hint="name of the game"
-            android:id="@+id/search"/>
+            android:hint="name of the game" />
+
         <ListView
+            android:id="@+id/puzzles"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".9"
-            android:id="@+id/puzzles"/>
+            android:layout_weight=".9" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
