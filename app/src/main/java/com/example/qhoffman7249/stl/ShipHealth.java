@@ -1,15 +1,15 @@
 package com.example.qhoffman7249.stl;
 
 public class ShipHealth {
-    public int shipHealth=100;
-    public int HealthCalc (int damage, int currentShield){
+
+    public int HealthCalc (int damage, int currentShield, int currentHealth){
         if(damage>currentShield){
             damage=damage-currentShield;
-            shipHealth=shipHealth-damage;
-            return shipHealth;
+            currentHealth=currentHealth-damage;
+            return currentHealth;
         }
         else{
-            return shipHealth;
+            return currentHealth;
         }
 
     }

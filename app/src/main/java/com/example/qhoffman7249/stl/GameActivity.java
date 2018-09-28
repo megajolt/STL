@@ -4,10 +4,11 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 public class GameActivity extends AppCompatActivity {
-    public int damage=140;
+    public int damage=0;
 
 
     public ProgressBar shieldBar;
@@ -17,12 +18,21 @@ public class GameActivity extends AppCompatActivity {
 //commit comment
     public ProgressBar healthBar;
     public Handler healthHandler= new Handler();
-    public ShipHealth shipHealth=new ShipHealth();
-    public int currentHealth=shipHealth.HealthCalc(damage, currentShield);
+    public ShipHealth health= new ShipHealth();
+    public int currentHealth=100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Button damageTest = findViewById(R.id.button4);
+
+        damageTest.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage++;
+            }
+        });
 
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
@@ -30,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                while(currentShield>0){
+                while(currentShield!=0){
                     shieldHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -53,10 +63,11 @@ public class GameActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(currentHealth>0){
+                while(currentHealth!=0){
                     healthHandler.post(new Runnable(){
                         @Override
                       public void run(){
+                            currentHealth= health.HealthCalc(damage,currentShield,currentHealth);
                             healthBar.setProgress(currentHealth);
                         }
                     });
