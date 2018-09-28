@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import com.example.qhoffman7249.stl.connection;
 import java.util.StringTokenizer;
 
 public class gamesearch extends AppCompatActivity {
@@ -220,7 +221,7 @@ public class gamesearch extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.id.adapterlayout);
+            //convertView = getLayoutInflater().inflate(R.id.adapterlayout);
             return null;
         }
     }
