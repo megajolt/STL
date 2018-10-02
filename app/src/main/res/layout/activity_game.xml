@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameActivity">
+    tools:context=".GameActivity"
+    android:id="@+id/view">
 
     <Button
         android:id="@+id/button"
@@ -58,14 +59,14 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="150dp"
         android:layout_height="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:max="100"
         android:progress="0"
         android:progressTint="#388e3c"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/shieldBar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
@@ -73,14 +74,14 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="100dp"
         android:layout_height="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:max="100"
         android:progress="0"
         android:progressTint="#0288d1"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/healthBar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
