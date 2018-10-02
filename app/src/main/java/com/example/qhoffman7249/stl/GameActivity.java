@@ -3,8 +3,10 @@ package com.example.qhoffman7249.stl;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=140;
@@ -23,7 +25,21 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        View myview = findViewById(R.id.view);
+        myview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int x = (int)event.getX();
+                int y = (int)event.getY();
+                Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+                    case MotionEvent.ACTION_UP:
+                }
+                return false;
+            }
+        });
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         new Thread(new Runnable() {
