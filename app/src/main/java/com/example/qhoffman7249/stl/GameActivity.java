@@ -32,7 +32,7 @@ public class GameActivity extends AppCompatActivity {
         damageTest.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                damage++;
+                damage=damage+10;
             }
         });
 
