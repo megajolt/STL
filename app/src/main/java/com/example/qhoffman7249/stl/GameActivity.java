@@ -68,8 +68,11 @@ public class GameActivity extends AppCompatActivity {
                                 currentShield = shields.OnDamage(damage, currentShield);
                                 damage=0;
                             }
-                            shieldBar.setProgress(currentShield);
-
+                            int num=100;
+                            while(num!=currentShield){
+                                shieldBar.setProgress(num-1);
+                                num=num-1;
+                            }
                         }
                     });
                 }
@@ -80,11 +83,18 @@ public class GameActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 while(currentHealth!=0){
                     healthHandler.post(new Runnable(){
                         @Override
                       public void run(){
-                            currentHealth= health.HealthCalc(damage,currentShield,currentHealth);
+                            if(damage>currentHealth){
+                                currentHealth=0;
+                            }
+                            else{
+                                currentHealth=health.HealthCalc(damage,currentShield,currentHealth);
+                                damage=0;
+                            }
                             healthBar.setProgress(currentHealth);
                         }
                     });
