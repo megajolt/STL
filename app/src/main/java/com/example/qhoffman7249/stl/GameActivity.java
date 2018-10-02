@@ -16,7 +16,7 @@ public class GameActivity extends AppCompatActivity {
     public Handler shieldHandler= new Handler();
     public Shields shields= new Shields();
     public int currentShield=100;
-//commit comment
+
     public ProgressBar healthBar;
     public Handler healthHandler= new Handler();
     public ShipHealth shipHealth=new ShipHealth();
