@@ -1,13 +1,18 @@
 package com.example.qhoffman7249.stl;
 
+import android.animation.ObjectAnimator;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
@@ -17,11 +22,16 @@ public class GameActivity extends AppCompatActivity {
     public Handler shieldHandler= new Handler();
     public Shields shields= new Shields();
     public int currentShield=100;
+    public static float xpos = 0;
+    public float xfin = 0;
 //commit comment
     public ProgressBar healthBar;
     public Handler healthHandler= new Handler();
     public ShipHealth health= new ShipHealth();
     public int currentHealth=100;
+    public int y;
+    public int x;
+    public List<String> charichternames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +43,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 damage=damage+10;
+
             }
         });
 
@@ -40,8 +51,8 @@ public class GameActivity extends AppCompatActivity {
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                int x = (int)event.getX();
-                int y = (int)event.getY();
+                x = (int)event.getX();
+                y = (int)event.getY();
                 Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -49,6 +60,19 @@ public class GameActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                 }
                 return false;
+            }
+
+        });
+        Button animate = findViewById(R.id.anim);
+        animate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button btn = findViewById(R.id.anim);
+                xfin = xpos + 100;
+                ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
+                xpos = xfin;
+                animation.setDuration(2000);
+                animation.start();
             }
         });
         shieldBar=findViewById(R.id.shieldBar);
