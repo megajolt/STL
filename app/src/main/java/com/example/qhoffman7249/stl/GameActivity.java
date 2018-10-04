@@ -24,25 +24,59 @@ public class GameActivity extends AppCompatActivity {
     public int currentShield=100;
     public static float xpos = 0;
     public float xfin = 0;
-//commit comment
+
     public ProgressBar healthBar;
     public Handler healthHandler= new Handler();
     public ShipHealth health= new ShipHealth();
     public int currentHealth=100;
     public int y;
     public int x;
-    public List<String> charichternames;
+
+    public Gun weapons=new Gun();
+    public List<String> characternames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Button damageTest = findViewById(R.id.button4);
+        Button halberd=findViewById(R.id.halberd);
+        Button glaive=findViewById(R.id.glaive);
+        Button bastardSword=findViewById(R.id.bastardSword);
+        Button pruningShears=findViewById(R.id.pruningShears);
+        Button maul=findViewById(R.id.maul);
 
-        damageTest.setOnClickListener(new View.OnClickListener(){
+        halberd.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                damage=damage+10;
+                damage=weapons.halberd;
+
+            }
+        });
+        bastardSword.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.bastardSword;
+
+            }
+        });
+        maul.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.maul;
+
+            }
+        });
+        glaive.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.glaive;
+
+            }
+        });
+        pruningShears.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.pruningShears;
 
             }
         });
@@ -92,11 +126,7 @@ public class GameActivity extends AppCompatActivity {
                                 currentShield = shields.OnDamage(damage, currentShield);
                                 damage=0;
                             }
-                            int num=100;
-                            while(num!=currentShield){
-                                shieldBar.setProgress(num-1);
-                                num=num-1;
-                            }
+                            shieldBar.setProgress(currentShield);
                         }
                     });
                 }
