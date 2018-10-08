@@ -34,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
     public int x;
 
     public Gun weapons=new Gun();
-  //  public List<String> characternames;
+    public List<String> characternames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -85,7 +85,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
-        shieldBar.setProgress(currentShield);
 
         //animation code
         View myview = findViewById(R.id.view);
@@ -124,6 +123,7 @@ public class GameActivity extends AppCompatActivity {
         //Status bar code
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
+        shieldBar.setProgress(100);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -163,7 +163,7 @@ public class GameActivity extends AppCompatActivity {
                                 currentHealth=health.HealthCalc(damage,currentShield,currentHealth);
                             }
                             healthBar.setProgress(currentHealth);
-                            /*mainHealth.setText(currentHealth);*/
+                            //mainHealth.setText(currentHealth);
                         }
                     });
                 }

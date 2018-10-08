@@ -123,7 +123,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/glaive"
         app:layout_constraintTop_toBottomOf="@+id/healthBar" />
 
@@ -133,7 +132,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shieldBar" />
     <android.support.v7.widget.AppCompatImageView
