@@ -34,9 +34,10 @@ public class GameActivity extends AppCompatActivity {
     public int x;
 
     public Gun weapons=new Gun();
-    public List<String> characternames;
+  //  public List<String> characternames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
@@ -84,7 +85,9 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+        shieldBar.setProgress(currentShield);
 
+        //animation code
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -113,6 +116,8 @@ public class GameActivity extends AppCompatActivity {
                 animation.start();
             }
         });
+
+        //Status bar code
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         new Thread(new Runnable() {
@@ -152,7 +157,6 @@ public class GameActivity extends AppCompatActivity {
                             }
                             else{
                                 currentHealth=health.HealthCalc(damage,currentShield,currentHealth);
-                                damage=0;
                             }
                             healthBar.setProgress(currentHealth);
                             /*mainHealth.setText(currentHealth);*/
