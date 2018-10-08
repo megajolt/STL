@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,6 +39,9 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        /*final TextView shieldHealth=findViewById(R.id.shieldHealth);
+        final TextView mainHealth=findViewById(R.id.mainHealth);*/
 
         Button halberd=findViewById(R.id.halberd);
         Button glaive=findViewById(R.id.glaive);
@@ -127,6 +131,7 @@ public class GameActivity extends AppCompatActivity {
                                 damage=0;
                             }
                             shieldBar.setProgress(currentShield);
+                            //shieldHealth.setText(currentShield);
                         }
                     });
                 }
@@ -150,6 +155,7 @@ public class GameActivity extends AppCompatActivity {
                                 damage=0;
                             }
                             healthBar.setProgress(currentHealth);
+                            /*mainHealth.setText(currentHealth);*/
                         }
                     });
                 }

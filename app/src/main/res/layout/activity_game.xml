@@ -36,12 +36,12 @@
         android:id="@+id/pruningShears"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:text="Pruning Shears"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bastardSword" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/healthBar"
@@ -77,43 +77,63 @@
         android:id="@+id/bastardSword"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:text="Bastard Sword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/halberd" />
+        app:layout_constraintBottom_toTopOf="@+id/pruningShears"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/halberd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:text="Halberd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maul" />
+        app:layout_constraintBottom_toTopOf="@+id/bastardSword"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/maul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:text="maul"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/glaive" />
+        app:layout_constraintBottom_toTopOf="@+id/halberd"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/glaive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:text="Glaive"
+        app:layout_constraintBottom_toTopOf="@+id/maul"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/mainHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/glaive"
+        app:layout_constraintTop_toBottomOf="@+id/healthBar" />
+
+    <TextView
+        android:id="@+id/shieldHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shieldBar" />
 
