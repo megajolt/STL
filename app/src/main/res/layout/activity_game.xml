@@ -136,5 +136,11 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shieldBar" />
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="50dp"
+        android:id="@+id/crew1"
+        android:layout_height="50dp"
+        android:src="@drawable/crewfl"/>
 
 </android.support.constraint.ConstraintLayout>
+

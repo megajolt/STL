@@ -25,7 +25,7 @@ public class GameActivity extends AppCompatActivity {
     public int currentShield=100;
     public static float xpos = 0;
     public float xfin = 0;
-
+    public boolean isclickedcrew = false;
     public ProgressBar healthBar;
     public Handler healthHandler= new Handler();
     public ShipHealth health= new ShipHealth();
@@ -94,7 +94,10 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
-                Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                if(isclickedcrew) {
+                    Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                    isclickedcrew = false;
+                }
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_MOVE:
@@ -114,6 +117,7 @@ public class GameActivity extends AppCompatActivity {
                 xpos = xfin;
                 animation.setDuration(2000);
                 animation.start();
+                isclickedcrew = true;
             }
         });
 
