@@ -6,4 +6,5 @@ public class Gun {
     public int glaive=90;
     public int pruningShears=2;
     public int halberd=65;
+    //go Craig
 }
