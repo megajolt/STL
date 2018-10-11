@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,71 +25,22 @@ public class GameActivity extends AppCompatActivity {
     public int hdamage = 0;
     public Shields shields= new Shields();
     public int currentShield=100;
-    public static float xpos = 0;
-    public float xfin = 0;
-    public boolean isclickedcrew = false;
     public ProgressBar healthBar;
-    public Handler healthHandler= new Handler();
     public int health= 100;
-    public int currentHealth=100;
     public int y;
+    public boolean isclickedcrew;
+    public int xfin = 0;
+    public int xpos = 0;
     public int x;
+    final TextView shieldHealth=findViewById(R.id.shieldHealth);
+    final TextView mainHealth=findViewById(R.id.mainHealth);
     //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        /*final TextView shieldHealth=findViewById(R.id.shieldHealth);
-        final TextView mainHealth=findViewById(R.id.mainHealth);*/
-
-        Button halberd=findViewById(R.id.halberd);
-        Button glaive=findViewById(R.id.glaive);
-        Button bastardSword=findViewById(R.id.bastardSword);
-        Button pruningShears=findViewById(R.id.pruningShears);
-        Button maul=findViewById(R.id.maul);
-
-        halberd.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.halberd;
-
-            }
-        });
-        bastardSword.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.bastardSword;
-
-            }
-        });
-        maul.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.maul;
-
-            }
-        });
-        glaive.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.glaive;
-
-            }
-        });
-        pruningShears.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.pruningShears;
-
-            }
-        });
-        //shieldBar.setProgress(currentShield);
-
-        //animation code
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -108,6 +60,53 @@ public class GameActivity extends AppCompatActivity {
             }
 
         });
+        Button bastardSword=findViewById(R.id.bastardSword);
+        Button pruningShears=findViewById(R.id.pruningShears);
+        Button maul=findViewById(R.id.maul);
+        Button halberd=findViewById(R.id.halberd);
+        Button glaive=findViewById(R.id.glaive);
+        halberd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.halberd;
+
+            }
+        });
+        pruningShears.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.pruningShears;
+
+            }
+        });
+        maul.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.maul;
+
+            }
+        });
+        glaive.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.glaive;
+
+            }
+        });
+        bastardSword.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=10;
+                checkdamage();
+            }
+        });
+        //Status bar code
+        healthBar= findViewById(R.id.healthBar);
+        healthBar.setScaleY(2f);
+        healthBar.setProgress(100);
+        shieldBar=findViewById(R.id.shieldBar);
+        shieldBar.setScaleY(2f);
+        shieldBar.setProgress(100);
         Button animate = findViewById(R.id.anim);
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,60 +120,19 @@ public class GameActivity extends AppCompatActivity {
                 isclickedcrew = true;
             }
         });
-
-        //Status bar code
-        healthBar= findViewById(R.id.healthBar);
-        healthBar.setScaleY(2f);
-        shieldBar=findViewById(R.id.shieldBar);
-        shieldBar.setScaleY(2f);
-        shieldBar.setProgress(100);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while(currentShield!=0){
-                    shieldHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(damage>currentShield){
-                                hdamage = currentShield - damage;
-                                health = health - (hdamage * -1);
-                                currentShield=0;
-                            }
-                            else {
-                                currentShield = shields.OnDamage(damage, currentShield);
-                                damage=0;
-                            }
-                            shieldBar.setProgress(currentShield);
-                            healthBar.setProgress(health);
-                            //shieldHealth.setText(currentShield);
-                        }
-                    });
-                }
-            }
-        }).start();
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while(currentHealth!=0){
-                    healthHandler.post(new Runnable(){
-                        @Override
-                      public void run(){
-                            if(damage>currentHealth){
-                                currentHealth=0;
-                            }
-                            else{
-
-                            }
-                            healthBar.setProgress(currentHealth);
-                            mainHealth.setText(currentHealth);
-                        }
-                    });
-                }
-
-            }
-        }).start();*/
     }
+    public void checkdamage(){
+        if(damage>currentShield){
+            health = health - damage;
+        }
+        else if(currentShield>=damage){
+            currentShield = currentShield - damage;
+        }
+        damage = 0;
+        healthBar.setProgress(health);
+        shieldBar.setProgress(currentShield);
+    }
+    public void animage(){
 
+    }
 }
