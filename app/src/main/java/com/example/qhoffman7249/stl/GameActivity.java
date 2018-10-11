@@ -132,7 +132,4 @@ public class GameActivity extends AppCompatActivity {
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
     }
-    public void animage(){
-
-    }
 }
