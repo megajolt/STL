@@ -80,7 +80,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="Bastard Sword"
+        android:text="@string/bastard_sword"
         app:layout_constraintBottom_toTopOf="@+id/pruningShears"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -91,7 +91,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="Halberd"
+        android:text="@string/halberd"
         app:layout_constraintBottom_toTopOf="@+id/bastardSword"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -102,7 +102,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="maul"
+        android:text="@string/maul"
         app:layout_constraintBottom_toTopOf="@+id/halberd"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -113,7 +113,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="Glaive"
+        android:text="@string/glaive"
         app:layout_constraintBottom_toTopOf="@+id/maul"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -134,11 +134,14 @@
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shieldBar" />
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="50dp"
-        android:id="@+id/crew1"
-        android:layout_height="50dp"
-        android:src="@drawable/crewfl"/>
 
+    <android.support.v7.widget.AppCompatImageView
+
+        android:id="@+id/crew1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/crewfl"
+        android:visibility="invisible" />
+    <!--set to invisible for to improve visibility of shield health-->
 </android.support.constraint.ConstraintLayout>
 

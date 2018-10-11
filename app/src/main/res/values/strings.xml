@@ -73,4 +73,9 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="halberd">Halberd</string>
+    <string name="maul">maul</string>
+    <string name="glaive">Glaive</string>
+    <string name="bastard_sword">Bastard Sword</string>
+    <string name="pause_resume">Pause/Resume</string>
 </resources>

@@ -42,8 +42,8 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        /*final TextView shieldHealth=findViewById(R.id.shieldHealth);
-        final TextView mainHealth=findViewById(R.id.mainHealth);*/
+        final TextView shieldHealth=findViewById(R.id.shieldHealth);
+        final TextView mainHealth=findViewById(R.id.mainHealth);
 
         Button halberd=findViewById(R.id.halberd);
         Button glaive=findViewById(R.id.glaive);
@@ -148,6 +148,8 @@ public class GameActivity extends AppCompatActivity {
                             shieldBar.setProgress(currentShield);
                             healthBar.setProgress(health);
                             //shieldHealth.setText(currentShield);
+                           shieldHealth.setText(""+currentShield);
+                            mainHealth.setText(""+currentHealth);
                         }
                     });
                 }
@@ -168,7 +170,7 @@ public class GameActivity extends AppCompatActivity {
 
                             }
                             healthBar.setProgress(currentHealth);
-                            mainHealth.setText(currentHealth);
+                            mainHealth.setText(""+currentHealth);
                         }
                     });
                 }
