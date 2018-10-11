@@ -21,6 +21,7 @@ public class GameActivity extends AppCompatActivity {
 
     public ProgressBar shieldBar;
     public Handler shieldHandler= new Handler();
+    public int hdamage = 0;
     public Shields shields= new Shields();
     public int currentShield=100;
     public static float xpos = 0;
@@ -28,11 +29,11 @@ public class GameActivity extends AppCompatActivity {
     public boolean isclickedcrew = false;
     public ProgressBar healthBar;
     public Handler healthHandler= new Handler();
-    public ShipHealth health= new ShipHealth();
+    public int health= 100;
     public int currentHealth=100;
     public int y;
     public int x;
-
+    //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
     @Override
@@ -85,6 +86,7 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+        //shieldBar.setProgress(currentShield);
 
         //animation code
         View myview = findViewById(R.id.view);
@@ -121,6 +123,8 @@ public class GameActivity extends AppCompatActivity {
         });
 
         //Status bar code
+        healthBar= findViewById(R.id.healthBar);
+        healthBar.setScaleY(2f);
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
@@ -133,6 +137,8 @@ public class GameActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             if(damage>currentShield){
+                                hdamage = currentShield - damage;
+                                health = health - (hdamage * -1);
                                 currentShield=0;
                             }
                             else {
@@ -140,15 +146,14 @@ public class GameActivity extends AppCompatActivity {
                                 damage=0;
                             }
                             shieldBar.setProgress(currentShield);
+                            healthBar.setProgress(health);
                             //shieldHealth.setText(currentShield);
                         }
                     });
                 }
             }
         }).start();
-        healthBar= findViewById(R.id.healthBar);
-        healthBar.setScaleY(2f);
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
 
@@ -160,17 +165,16 @@ public class GameActivity extends AppCompatActivity {
                                 currentHealth=0;
                             }
                             else{
-                                currentHealth=health.HealthCalc(damage,currentShield,currentHealth);
+
                             }
                             healthBar.setProgress(currentHealth);
-                            //mainHealth.setText(currentHealth);
+                            mainHealth.setText(currentHealth);
                         }
                     });
                 }
 
             }
-        }).start();
-
+        }).start();*/
     }
 
 }
