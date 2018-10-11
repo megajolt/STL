@@ -92,6 +92,7 @@ public class GameActivity extends AppCompatActivity {
                 damage=weapons.glaive;
 
             }
+            //fuck
         });
         bastardSword.setOnClickListener(new View.OnClickListener(){
             @Override
