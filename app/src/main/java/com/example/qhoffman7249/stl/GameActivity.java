@@ -3,6 +3,7 @@ package com.example.qhoffman7249.stl;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,11 +18,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
-
 
     public ProgressBar shieldBar;
     public Handler shieldHandler= new Handler();
@@ -30,10 +34,254 @@ public class GameActivity extends AppCompatActivity {
     public int currentShield=100;
     public ProgressBar healthBar;
     public int health= 100;
+    List<Integer> yList= new List<Integer>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return false;
+        }
+
+        @NonNull
+        @Override
+        public Iterator<Integer> iterator() {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @NonNull
+        @Override
+        public <T> T[] toArray(@NonNull T[] a) {
+            return null;
+        }
+
+        @Override
+        public boolean add(Integer integer) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(@NonNull Collection<? extends Integer> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(int index, @NonNull Collection<? extends Integer> c) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+
+        @Override
+        public Integer get(int index) {
+            return null;
+        }
+
+        @Override
+        public Integer set(int index, Integer element) {
+            return null;
+        }
+
+        @Override
+        public void add(int index, Integer element) {
+
+        }
+
+        @Override
+        public Integer remove(int index) {
+            return null;
+        }
+
+        @Override
+        public int indexOf(Object o) {
+            return 0;
+        }
+
+        @Override
+        public int lastIndexOf(Object o) {
+            return 0;
+        }
+
+        @NonNull
+        @Override
+        public ListIterator<Integer> listIterator() {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public ListIterator<Integer> listIterator(int index) {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public List<Integer> subList(int fromIndex, int toIndex) {
+            return null;
+        }
+    };
     public int y;
     public boolean isclickedcrew;
     public int xfin = 0;
     public int xpos = 0;
+    List<Integer> xList= new List<Integer>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return false;
+        }
+
+        @NonNull
+        @Override
+        public Iterator<Integer> iterator() {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @NonNull
+        @Override
+        public <T> T[] toArray(@NonNull T[] a) {
+            return null;
+        }
+
+        @Override
+        public boolean add(Integer integer) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(@NonNull Collection<? extends Integer> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(int index, @NonNull Collection<? extends Integer> c) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(@NonNull Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+
+        @Override
+        public Integer get(int index) {
+            return null;
+        }
+
+        @Override
+        public Integer set(int index, Integer element) {
+            return null;
+        }
+
+        @Override
+        public void add(int index, Integer element) {
+
+        }
+
+        @Override
+        public Integer remove(int index) {
+            return null;
+        }
+
+        @Override
+        public int indexOf(Object o) {
+            return 0;
+        }
+
+        @Override
+        public int lastIndexOf(Object o) {
+            return 0;
+        }
+
+        @NonNull
+        @Override
+        public ListIterator<Integer> listIterator() {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public ListIterator<Integer> listIterator(int index) {
+            return null;
+        }
+
+        @NonNull
+        @Override
+        public List<Integer> subList(int fromIndex, int toIndex) {
+            return null;
+        }
+    };
     public int x;
     public boolean menvis = false;
     //random comment

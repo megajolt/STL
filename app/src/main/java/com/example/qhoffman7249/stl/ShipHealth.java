@@ -8,6 +8,7 @@ public class ShipHealth {
             currentHealth=currentHealth-damage;
             return currentHealth;
         }
+
         else{
             return currentHealth;
         }
