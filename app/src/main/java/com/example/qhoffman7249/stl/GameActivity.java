@@ -1,6 +1,7 @@
 package com.example.qhoffman7249.stl;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +34,7 @@ public class GameActivity extends AppCompatActivity {
     public int xfin = 0;
     public int xpos = 0;
     public int x;
-    final TextView shieldHealth=findViewById(R.id.shieldHealth);
-    final TextView mainHealth=findViewById(R.id.mainHealth);
+    public boolean menvis = false;
     //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
@@ -41,6 +42,21 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Button openMenu = findViewById(R.id.menu);
+        openMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout Menu = findViewById(R.id.Menu);
+                if(!menvis) {
+                    Menu.setVisibility(View.VISIBLE);
+                    menvis = true;
+                }
+                else if(menvis){
+                    Menu.setVisibility(View.GONE);
+                    menvis = false;
+                }
+            }
+        });
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -89,18 +105,47 @@ public class GameActivity extends AppCompatActivity {
         glaive.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                damage=weapons.glaive;
-
+                damage=2;
+                checkdamage();
             }
             //fuck
         });
-        bastardSword.setOnClickListener(new View.OnClickListener(){
+        bastardSword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                damage=10;
+            public void onClick(View view) {
+                damage=weapons.bastardSword;
                 checkdamage();
             }
         });
+        maul.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.maul;
+                checkdamage();
+            }
+        });
+        glaive.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.glaive;
+                checkdamage();
+            }
+        });
+        pruningShears.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.pruningShears;
+                checkdamage();
+            }
+        });
+        halberd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                damage=weapons.halberd;
+                checkdamage();
+            }
+        });
+
         //Status bar code
         healthBar= findViewById(R.id.healthBar);
         healthBar.setScaleY(2f);
@@ -124,10 +169,17 @@ public class GameActivity extends AppCompatActivity {
     }
     public void checkdamage(){
         if(damage>currentShield){
+            damage = damage - currentShield;
+            currentShield = 0;
             health = health - damage;
         }
         else if(currentShield>=damage){
             currentShield = currentShield - damage;
+        }
+        if(health <= 0){
+            Toast.makeText(GameActivity.this, "You Dead", Toast.LENGTH_SHORT).show();
+            Intent r = new Intent(GameActivity.this, StlMenu.class);
+            startActivity(r);
         }
         damage = 0;
         healthBar.setProgress(health);

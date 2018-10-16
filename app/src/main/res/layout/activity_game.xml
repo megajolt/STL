@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity"
+    android:background="@drawable/starry"
     android:id="@+id/view">
 
     <Button
@@ -15,6 +16,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Pause/Resume"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
     <!--Steven-->
@@ -27,22 +29,27 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:visibility="gone"
         android:text="animate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/pruningShears"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Pruning Shears"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <LinearLayout
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight=".5"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/statusBar"
+            android:layout_marginBottom="20dp">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/menu"
+                android:text="menu"/>
     <ProgressBar
         android:id="@+id/healthBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -72,17 +79,31 @@
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Menu"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+        <Button
+            android:id="@+id/pruningShears"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Pruning Shears"
+            />
     <Button
         android:id="@+id/bastardSword"
         android:layout_width="wrap_content"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/bastard_sword"
-        app:layout_constraintBottom_toTopOf="@+id/pruningShears"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/bastard_sword"/>
 
     <Button
         android:id="@+id/halberd"
@@ -92,8 +113,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/halberd"
-        app:layout_constraintBottom_toTopOf="@+id/bastardSword"
-        app:layout_constraintStart_toStartOf="parent" />
+        />
 
     <Button
         android:id="@+id/maul"
@@ -103,8 +123,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/maul"
-        app:layout_constraintBottom_toTopOf="@+id/halberd"
-        app:layout_constraintStart_toStartOf="parent" />
+       />
 
     <Button
         android:id="@+id/glaive"
@@ -114,27 +133,55 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/glaive"
-        app:layout_constraintBottom_toTopOf="@+id/maul"
-        app:layout_constraintStart_toStartOf="parent" />
+         />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintHorizontal_weight=".5"
+        android:id="@+id/enemy"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/enemystatusBar"
+            android:layout_marginBottom="20dp">
+            <ProgressBar
+                android:id="@+id/enemyhealthBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="150dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="#388e3c"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/shieldBar"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/mainHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/glaive"
-        app:layout_constraintTop_toBottomOf="@+id/healthBar" />
-
-    <TextView
-        android:id="@+id/shieldHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shieldBar" />
-
+            <ProgressBar
+                android:id="@+id/enemyshieldBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="100dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="#0288d1"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+    </LinearLayout>
     <android.support.v7.widget.AppCompatImageView
 
         android:id="@+id/crew1"
