@@ -2,6 +2,7 @@ package com.example.qhoffman7249.stl;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -439,8 +440,11 @@ public class GameActivity extends AppCompatActivity {
         else if(currentShield>=damage){
             currentShield = currentShield - damage;
         }
-        if(health < 50){
-            //healthBar.setProgressTintList(R.color.testcolor);
+        if(health < 50 && health > 25){
+           healthBar.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        if(health < 25){
+            healthBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         if(health <= 0){
             Toast.makeText(GameActivity.this, "You Dead", Toast.LENGTH_SHORT).show();
