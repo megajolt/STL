@@ -8,35 +8,13 @@
     android:background="@drawable/starry"
     android:id="@+id/view">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Pause/Resume"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-    <!--Steven-->
-    <Button
-        android:id="@+id/anim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:visibility="gone"
-        android:text="animate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
     <LinearLayout
         android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight=".5"
+        android:layout_weight=".5"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
@@ -142,50 +120,61 @@
         </LinearLayout>
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintHorizontal_weight=".5"
-        android:id="@+id/enemy"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/enemystatusBar"
-            android:layout_marginBottom="20dp">
-            <ProgressBar
-                android:id="@+id/enemyhealthBar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="150dp"
-                android:layout_height="10dp"
-                android:max="100"
-                android:progress="0"
-                android:progressTint="#388e3c"
-                android:visibility="visible"
-                 />
+            android:rotation="90"
+            android:src="@drawable/shiprm1"/>
+</LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/enemyshieldBar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="100dp"
-                android:layout_height="10dp"
-                android:max="100"
-                android:progress="0"
-                android:progressTint="#0288d1"
-                android:visibility="visible"
-                />
+        <LinearLayout
+            android:id="@+id/enemy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:orientation="vertical"
+            android:gravity="right">
+
+            <LinearLayout
+                android:id="@+id/enemystatusBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical"
+                android:gravity="right">
+
+                <ProgressBar
+                    android:id="@+id/enemyHealthBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="150dp"
+                    android:layout_height="10dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="#388e3c"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="visible" />
+
+                <ProgressBar
+                    android:id="@+id/enemyShieldBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="100dp"
+                    android:layout_height="10dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="#0288d1"
+                    android:visibility="visible"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <android.support.v7.widget.AppCompatImageView
-
+    <!--<Button
         android:id="@+id/crew1"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/crewfl"
-        android:visibility="invisible" />
-    <!--set to invisible for to improve visibility of shield health-->
+        android:background="@drawable/crewfl"
+        />
+    set to invisible for to improve visibility of shield health-->
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 

@@ -42,7 +42,7 @@ public class gamesearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesearch);
-        boolean test = check();
+        /*boolean test = check();
         readfile("game.txt", "load");
         EditText search = findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
@@ -60,7 +60,9 @@ public class gamesearch extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 gamesearch.this.adapter.getFilter().filter(editable);
             }
-        });
+        });*/
+        Intent t = new Intent(gamesearch.this, GameActivity.class);
+        startActivity(t);
     }
     public void loadfile(){
         RequestQueue queue = Volley.newRequestQueue(gamesearch.this);

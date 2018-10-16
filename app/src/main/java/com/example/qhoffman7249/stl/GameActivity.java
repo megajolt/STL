@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,6 +43,12 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        ProgressBar enemyShieldBar = findViewById(R.id.enemyShieldBar);
+        ProgressBar enemyHealthBar = findViewById(R.id.enemyHealthBar);
+        enemyHealthBar.setProgress(100);
+        enemyShieldBar.setProgress(100);
+        enemyHealthBar.setScaleY(2f);
+        enemyShieldBar.setScaleY(2f);
         Button openMenu = findViewById(R.id.menu);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +160,7 @@ public class GameActivity extends AppCompatActivity {
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
-        Button animate = findViewById(R.id.anim);
+        /*Button animate = findViewById(R.id.anim);
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +172,15 @@ public class GameActivity extends AppCompatActivity {
                 animation.start();
                 isclickedcrew = true;
             }
-        });
+        });*/
+        /*
+        Button dudebro = findViewById(R.id.crew1);
+        dudebro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isclickedcrew = true;
+            }
+        });*/
     }
     public void checkdamage(){
         if(damage>currentShield){
@@ -175,6 +190,9 @@ public class GameActivity extends AppCompatActivity {
         }
         else if(currentShield>=damage){
             currentShield = currentShield - damage;
+        }
+        if(health < 50){
+            //healthBar.setProgressTintList(R.color.testcolor);
         }
         if(health <= 0){
             Toast.makeText(GameActivity.this, "You Dead", Toast.LENGTH_SHORT).show();
