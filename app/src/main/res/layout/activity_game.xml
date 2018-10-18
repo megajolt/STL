@@ -67,57 +67,73 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Menu"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_marginTop="8dp"
-            android:visibility="gone">
-        <Button
-            android:id="@+id/pruningShears"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Pruning Shears"
-            />
-    <Button
-        android:id="@+id/bastardSword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/bastard_sword"/>
+            android:visibility="gone"
+            android:gravity="left"
+            android:weightSum="2">
 
-    <Button
-        android:id="@+id/halberd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/halberd"
-        />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:weightSum="2">
 
-    <Button
-        android:id="@+id/maul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/maul"
-       />
+                <Button
+                    android:id="@+id/pruningShears"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".4"
+                    android:text="Pruning Shears" />
 
-    <Button
-        android:id="@+id/glaive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/glaive"
-         />
+                <Button
+                    android:id="@+id/bastardSword"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".4"
+                    android:text="@string/bastard_sword" />
+
+                <Button
+                    android:id="@+id/halberd"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".4"
+                    android:text="@string/halberd"
+                     />
+
+                <Button
+                    android:id="@+id/maul"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".4"
+                    android:text="@string/maul" />
+
+                <Button
+                    android:id="@+id/glaive"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".4"
+                    android:text="@string/glaive" />
+            </LinearLayout>
         </LinearLayout>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -151,6 +167,7 @@
                     android:progressTint="#388e3c"
                     android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:visibility="visible" />
 
@@ -165,6 +182,7 @@
                     android:visibility="visible"
                     android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"/>
             </LinearLayout>
 
