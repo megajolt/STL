@@ -35,256 +35,16 @@ public class GameActivity extends AppCompatActivity {
     public int currentShield=100;
     public ProgressBar healthBar;
     public int health= 100;
-    List<Integer> yList= new List<Integer>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        @NonNull
-        @Override
-        public Iterator<Integer> iterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @NonNull
-        @Override
-        public <T> T[] toArray(@NonNull T[] a) {
-            return null;
-        }
-
-        @Override
-        public boolean add(Integer integer) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(@NonNull Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(@NonNull Collection<? extends Integer> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(int index, @NonNull Collection<? extends Integer> c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(@NonNull Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(@NonNull Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Integer get(int index) {
-            return null;
-        }
-
-        @Override
-        public Integer set(int index, Integer element) {
-            return null;
-        }
-
-        @Override
-        public void add(int index, Integer element) {
-
-        }
-
-        @Override
-        public Integer remove(int index) {
-            return null;
-        }
-
-        @Override
-        public int indexOf(Object o) {
-            return 0;
-        }
-
-        @Override
-        public int lastIndexOf(Object o) {
-            return 0;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator<Integer> listIterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator<Integer> listIterator(int index) {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public List<Integer> subList(int fromIndex, int toIndex) {
-            return null;
-        }
-    };
+    public int enemycurrentShield = 100;
+    public int enemyhealth = 100;
     public int y;
     public boolean isclickedcrew;
     public int xfin = 0;
     public int xpos = 0;
-    List<Integer> xList= new List<Integer>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        @NonNull
-        @Override
-        public Iterator<Integer> iterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @NonNull
-        @Override
-        public <T> T[] toArray(@NonNull T[] a) {
-            return null;
-        }
-
-        @Override
-        public boolean add(Integer integer) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(@NonNull Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(@NonNull Collection<? extends Integer> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(int index, @NonNull Collection<? extends Integer> c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(@NonNull Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(@NonNull Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Integer get(int index) {
-            return null;
-        }
-
-        @Override
-        public Integer set(int index, Integer element) {
-            return null;
-        }
-
-        @Override
-        public void add(int index, Integer element) {
-
-        }
-
-        @Override
-        public Integer remove(int index) {
-            return null;
-        }
-
-        @Override
-        public int indexOf(Object o) {
-            return 0;
-        }
-
-        @Override
-        public int lastIndexOf(Object o) {
-            return 0;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator<Integer> listIterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator<Integer> listIterator(int index) {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public List<Integer> subList(int fromIndex, int toIndex) {
-            return null;
-        }
-    };
     public int x;
     public boolean menvis = false;
+    public ProgressBar enemyShieldBar;
+    public ProgressBar enemyHealthBar;
     //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
@@ -292,10 +52,12 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        ProgressBar enemyShieldBar = findViewById(R.id.enemyShieldBar);
-        ProgressBar enemyHealthBar = findViewById(R.id.enemyHealthBar);
+        enemyShieldBar = findViewById(R.id.enemyShieldBar);
+        enemyHealthBar = findViewById(R.id.enemyHealthBar);
         enemyHealthBar.setProgress(100);
         enemyShieldBar.setProgress(100);
+        enemyShieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar),android.graphics.PorterDuff.Mode.SRC_IN);
+        enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.setScaleY(2f);
         enemyShieldBar.setScaleY(2f);
         Button openMenu = findViewById(R.id.menu);
@@ -341,28 +103,28 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 damage=weapons.halberd;
-
+                enemycheckdamage();
             }
         });
         pruningShears.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 damage=weapons.pruningShears;
-
+                enemycheckdamage();
             }
         });
         maul.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 damage=weapons.maul;
-
+                enemycheckdamage();
             }
         });
         glaive.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                damage=2;
-                checkdamage();
+                damage=weapons.glaive;
+                enemycheckdamage();
             }
             //fuck
         });
@@ -370,35 +132,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 damage=weapons.bastardSword;
-                checkdamage();
-            }
-        });
-        maul.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.maul;
-                checkdamage();
-            }
-        });
-        glaive.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.glaive;
-                checkdamage();
-            }
-        });
-        pruningShears.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.pruningShears;
-                checkdamage();
-            }
-        });
-        halberd.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                damage=weapons.halberd;
-                checkdamage();
+                enemycheckdamage();
             }
         });
 
@@ -406,22 +140,25 @@ public class GameActivity extends AppCompatActivity {
         healthBar= findViewById(R.id.healthBar);
         healthBar.setScaleY(2f);
         healthBar.setProgress(100);
+        //healthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
+        //shieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
-        /*Button animate = findViewById(R.id.anim);
+        Button animate = findViewById(R.id.crew1);
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button btn = findViewById(R.id.anim);
-                xfin = xpos + 100;
+                Button btn = findViewById(R.id.crew1);
+                xfin = xpos - 1000;
                 ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
+                Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
                 xpos = xfin;
                 animation.setDuration(2000);
                 animation.start();
                 isclickedcrew = true;
             }
-        });*/
+        });
         /*
         Button dudebro = findViewById(R.id.crew1);
         dudebro.setOnClickListener(new View.OnClickListener() {
@@ -432,6 +169,7 @@ public class GameActivity extends AppCompatActivity {
         });*/
     }
     public void checkdamage(){
+        //first check damage relative to enemy action
         if(damage>currentShield){
             damage = damage - currentShield;
             currentShield = 0;
@@ -454,5 +192,28 @@ public class GameActivity extends AppCompatActivity {
         damage = 0;
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
+    }
+    public void enemycheckdamage(){
+        Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
+        if(damage>enemycurrentShield){
+            damage = damage - enemycurrentShield;
+            enemycurrentShield = 0;
+            enemyhealth = enemyhealth - damage;
+        }
+        else if(enemycurrentShield>=damage){
+            enemycurrentShield = enemycurrentShield - damage;
+        }
+        if(enemyhealth < 50 && enemyhealth > 25){
+            enemyHealthBar.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        if(enemyhealth < 25){
+            enemyHealthBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        if(enemyhealth <= 0){
+            Toast.makeText(GameActivity.this, "you win", Toast.LENGTH_SHORT).show();
+        }
+        damage = 0;
+        enemyHealthBar.setProgress(enemyhealth);
+        enemyShieldBar.setProgress(enemycurrentShield);
     }
 }

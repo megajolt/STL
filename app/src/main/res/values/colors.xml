@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="healthbar">#388e3c</color>
+    <color name="shieldbar">#0288d1</color>
 </resources>

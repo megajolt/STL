@@ -167,14 +167,15 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"/>
             </LinearLayout>
+
         </LinearLayout>
-    <!--<Button
+    <Button
         android:id="@+id/crew1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/crewfl"
         />
-    set to invisible for to improve visibility of shield health-->
+    <!--set to invisible for to improve visibility of shield health-->
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 
