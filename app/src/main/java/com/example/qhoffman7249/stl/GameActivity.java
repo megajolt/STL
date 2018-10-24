@@ -3,7 +3,9 @@ package com.example.qhoffman7249.stl;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
     public float xfin = 0;
     public float xpos = 0;
     public int x;
+    public MediaPlayer player;
     public boolean menvis = false;
     public ProgressBar enemyShieldBar;
     public ProgressBar enemyHealthBar;
@@ -52,6 +55,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Intent m = new Intent(GameActivity.this, music.class);
+        startService(m);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         enemyHealthBar.setProgress(100);
@@ -81,12 +86,6 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
-                    enemyShieldBar.setRotation(5);
-                    try{
-                        wait(1000);
-                    }catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
                 if(isclickedcrew) {
                     Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                     animate(x, y);
@@ -221,5 +220,12 @@ public class GameActivity extends AppCompatActivity {
         animation.setDuration(2000);
         animation.start();
         isclickedcrew = true;
+    }
+
+    @Override
+    protected void onStop() {
+        Intent m = new Intent(GameActivity.this, music.class);
+        stopService(m);
+        super.onStop();
     }
 }

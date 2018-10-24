@@ -131,15 +131,15 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight=".4"
                     android:text="@string/glaive" />
-                <Button
-                    android:id="@+id/crew1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/crewfl"
-                    />
+
             </LinearLayout>
         </LinearLayout>
-
+        <Button
+            android:id="@+id/crew1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/crewfl"
+            />
         <ImageView
             android:layout_width="wrap_content"
             android:id="@+id/shipmap"
