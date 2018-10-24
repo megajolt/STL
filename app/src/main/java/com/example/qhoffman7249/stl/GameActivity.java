@@ -39,8 +39,8 @@ public class GameActivity extends AppCompatActivity {
     public int enemyhealth = 100;
     public int y;
     public boolean isclickedcrew;
-    public int xfin = 0;
-    public int xpos = 0;
+    public float xfin = 0;
+    public float xpos = 0;
     public int x;
     public boolean menvis = false;
     public ProgressBar enemyShieldBar;
@@ -81,8 +81,15 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
+                    enemyShieldBar.setRotation(5);
+                    try{
+                        wait(1000);
+                    }catch(InterruptedException e){
+                        e.printStackTrace();
+                    }
                 if(isclickedcrew) {
                     Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                    animate(x, y);
                     isclickedcrew = false;
                 }
                 switch (event.getAction()) {
@@ -145,28 +152,14 @@ public class GameActivity extends AppCompatActivity {
         shieldBar=findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
-        Button animate = findViewById(R.id.crew1);
-        animate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Button btn = findViewById(R.id.crew1);
-                xfin = xpos - 1000;
-                ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
-                Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
-                xpos = xfin;
-                animation.setDuration(2000);
-                animation.start();
-                isclickedcrew = true;
-            }
-        });
-        /*
+
         Button dudebro = findViewById(R.id.crew1);
         dudebro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isclickedcrew = true;
             }
-        });*/
+        });
     }
     public void checkdamage(){
         //first check damage relative to enemy action
@@ -215,5 +208,18 @@ public class GameActivity extends AppCompatActivity {
         damage = 0;
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
+    }
+    public void animate(float x, float y){
+        Button btn = findViewById(R.id.crew1);
+        float cxp = btn.getX();
+        float cyp = btn.getY();
+        xfin = x - cxp;
+        //xfin = xpos - 1000;
+        ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
+        Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
+        xpos = xfin;
+        animation.setDuration(2000);
+        animation.start();
+        isclickedcrew = true;
     }
 }
