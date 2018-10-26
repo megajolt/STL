@@ -130,21 +130,21 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight=".4"
                     android:text="@string/glaive" />
-                <Button
-                    android:id="@+id/crew1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/crewfl"
-                    />
+
             </LinearLayout>
         </LinearLayout>
 
+        <Button
+            android:id="@+id/crew1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/crewfl" />
         <ImageView
             android:layout_width="wrap_content"
-            android:id="@+id/shipmap"
             android:layout_height="wrap_content"
             android:rotation="90"
             android:src="@drawable/ship1rm2"/>
+
 </LinearLayout>
 
         <LinearLayout
@@ -197,10 +197,9 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:rotation="270"
                 android:src="@drawable/ship2"/>
         </LinearLayout>
-    <!--set to invisible for to improve visibility of shield health-->
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 

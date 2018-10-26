@@ -3,7 +3,9 @@ package com.example.qhoffman7249.stl;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +44,8 @@ public class GameActivity extends AppCompatActivity {
     public float xfin = 0;
     public float xpos = 0;
     public int x;
+    public int manHealth=99;
+    public MediaPlayer player;
     public boolean menvis = false;
     public ProgressBar enemyShieldBar;
     public ProgressBar enemyHealthBar;
@@ -52,6 +56,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Intent m = new Intent(GameActivity.this, music.class);
+        startService(m);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         enemyHealthBar.setProgress(100);
@@ -81,12 +87,7 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
-                    enemyShieldBar.setRotation(5);
-                    try{
-                        wait(1000);
-                    }catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
+                System.out.println(x+", " + y);
                 if(isclickedcrew) {
                     Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                     animate(x, y);
@@ -153,15 +154,18 @@ public class GameActivity extends AppCompatActivity {
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
 
-        Button dudebro = findViewById(R.id.crew1);
-        dudebro.setOnClickListener(new View.OnClickListener() {
+       Button animate = findViewById(R.id.crew1);
+        animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               Button btn = findViewById(R.id.crew1);
+                xpos = btn.getX();
+                System.out.println("Xpos: "+xpos);
                 isclickedcrew = true;
             }
         });
     }
-    public void checkdamage(){
+   /* public void checkdamage(){
         //first check damage relative to enemy action
         if(damage>currentShield){
             damage = damage - currentShield;
@@ -185,7 +189,7 @@ public class GameActivity extends AppCompatActivity {
         damage = 0;
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
-    }
+    }*/
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
@@ -203,13 +207,14 @@ public class GameActivity extends AppCompatActivity {
             enemyHealthBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         if(enemyhealth <= 0){
-            Toast.makeText(GameActivity.this, "you win", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GameActivity.this, "You Win!!", Toast.LENGTH_SHORT).show();
         }
         damage = 0;
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
     public void animate(float x, float y){
+        xfin = 0;
         Button btn = findViewById(R.id.crew1);
         float cxp = btn.getX();
         float cyp = btn.getY();
@@ -217,9 +222,20 @@ public class GameActivity extends AppCompatActivity {
         //xfin = xpos - 1000;
         ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
         Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
-        xpos = xfin;
         animation.setDuration(2000);
+        if(xpos<490){
+            manHealth++;
+            Toast.makeText(GameActivity.this,"Health: "+manHealth,Toast.LENGTH_SHORT).show();
+        }
         animation.start();
         isclickedcrew = true;
+
+    }
+
+    @Override
+    protected void onStop() {
+        Intent m = new Intent(GameActivity.this, music.class);
+        stopService(m);
+        super.onStop();
     }
 }
