@@ -57,7 +57,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent m = new Intent(GameActivity.this, music.class);
-        startService(m);
+        //startService(m);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         enemyHealthBar.setProgress(100);
@@ -160,7 +160,6 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                Button btn = findViewById(R.id.crew1);
                 xpos = btn.getX();
-                System.out.println("Xpos: "+xpos);
                 isclickedcrew = true;
             }
         });
@@ -218,16 +217,13 @@ public class GameActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.crew1);
         float cxp = btn.getX();
         float cyp = btn.getY();
-        xfin = x - cxp;
-        //xfin = xpos - 1000;
-        ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
+        ObjectAnimator animationx = ObjectAnimator.ofFloat(btn, "translationX", cxp, x);
         Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
-        animation.setDuration(2000);
-        if(xpos<490){
-            manHealth++;
-            Toast.makeText(GameActivity.this,"Health: "+manHealth,Toast.LENGTH_SHORT).show();
-        }
-        animation.start();
+        animationx.setDuration(2000);
+        animationx.start();
+        /*ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
+        animatory.setDuration(2000);
+        animatory.start();*/
         isclickedcrew = true;
 
     }
