@@ -225,7 +225,7 @@ public class GameActivity extends AppCompatActivity {
         animatory.setDuration(2000);
         animatory.start();*/
         isclickedcrew = true;
-
+        //hello world hits ihaliks jhdfoias hfdoisahfdoias
     }
 
     @Override
