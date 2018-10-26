@@ -156,6 +156,8 @@ public class GameActivity extends AppCompatActivity {
         dudebro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               Button btn = findViewById(R.id.crew1);
+                xpos = btn.getX();
                 isclickedcrew = true;
             }
         });
@@ -209,6 +211,7 @@ public class GameActivity extends AppCompatActivity {
         enemyShieldBar.setProgress(enemycurrentShield);
     }
     public void animate(float x, float y){
+        xfin = 0;
         Button btn = findViewById(R.id.crew1);
         float cxp = btn.getX();
         float cyp = btn.getY();
@@ -216,10 +219,11 @@ public class GameActivity extends AppCompatActivity {
         //xfin = xpos - 1000;
         ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
         Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
-        xpos = xfin;
         animation.setDuration(2000);
         animation.start();
         isclickedcrew = true;
+        x = 0;
+        y = 0;
     }
 
     @Override
