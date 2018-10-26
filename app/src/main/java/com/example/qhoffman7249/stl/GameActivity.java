@@ -44,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
     public float xfin = 0;
     public float xpos = 0;
     public int x;
+    public int manHealth=99;
     public MediaPlayer player;
     public boolean menvis = false;
     public ProgressBar enemyShieldBar;
@@ -86,6 +87,7 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
+                System.out.println(x+", " + y);
                 if(isclickedcrew) {
                     Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                     animate(x, y);
@@ -152,17 +154,18 @@ public class GameActivity extends AppCompatActivity {
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
 
-        Button dudebro = findViewById(R.id.crew1);
-        dudebro.setOnClickListener(new View.OnClickListener() {
+       Button animate = findViewById(R.id.crew1);
+        animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Button btn = findViewById(R.id.crew1);
                 xpos = btn.getX();
+                System.out.println("Xpos: "+xpos);
                 isclickedcrew = true;
             }
         });
     }
-    public void checkdamage(){
+   /* public void checkdamage(){
         //first check damage relative to enemy action
         if(damage>currentShield){
             damage = damage - currentShield;
@@ -186,7 +189,7 @@ public class GameActivity extends AppCompatActivity {
         damage = 0;
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
-    }
+    }*/
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
@@ -204,7 +207,7 @@ public class GameActivity extends AppCompatActivity {
             enemyHealthBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         if(enemyhealth <= 0){
-            Toast.makeText(GameActivity.this, "you win", Toast.LENGTH_SHORT).show();
+            Toast.makeText(GameActivity.this, "You Win!!", Toast.LENGTH_SHORT).show();
         }
         damage = 0;
         enemyHealthBar.setProgress(enemyhealth);
@@ -220,10 +223,13 @@ public class GameActivity extends AppCompatActivity {
         ObjectAnimator animation = ObjectAnimator.ofFloat(btn, "translationX", xpos, xfin);
         Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
         animation.setDuration(2000);
+        if(xpos<490){
+            manHealth++;
+            Toast.makeText(GameActivity.this,"Health: "+manHealth,Toast.LENGTH_SHORT).show();
+        }
         animation.start();
         isclickedcrew = true;
-        x = 0;
-        y = 0;
+
     }
 
     @Override
