@@ -79,4 +79,6 @@
     <string name="bastard_sword">Bastard Sword</string>
     <string name="pause_resume">Pause/Resume</string>
     <string name="pruning_shears">Pruning Shears</string>
+    <string name="menu">Menu</string>
+    <string name="room_layout_sprite">Room Layout Sprite</string>
 </resources>
