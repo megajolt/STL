@@ -39,11 +39,12 @@ public class GameActivity extends AppCompatActivity {
     public int health= 100;
     public int enemycurrentShield = 100;
     public int enemyhealth = 100;
-    public int y;
+    public int y=0;
+    public float ypos=0;
     public boolean isclickedcrew;
     public float xfin = 0;
     public float xpos = 0;
-    public int x;
+    public int x=0;
     public int manHealth=99;
     public MediaPlayer player;
     public boolean menvis = false;
@@ -160,6 +161,8 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                Button btn = findViewById(R.id.crew1);
                 xpos = btn.getX();
+                ypos = btn.getY();
+                System.out.println("xpos: "+xpos+ " ypos: "+ypos);
                 isclickedcrew = true;
             }
         });
@@ -217,15 +220,16 @@ public class GameActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.crew1);
         float cxp = btn.getX();
         float cyp = btn.getY();
+        y=y-204;
         ObjectAnimator animationx = ObjectAnimator.ofFloat(btn, "translationX", cxp, x);
         Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
         animationx.setDuration(2000);
         animationx.start();
-        /*ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
+        ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
         animatory.setDuration(2000);
-        animatory.start();*/
+        animatory.start();
         isclickedcrew = true;
-        //hello world hits ihaliks jhdfoias hfdoisahfdoias
+
     }
 
     @Override
