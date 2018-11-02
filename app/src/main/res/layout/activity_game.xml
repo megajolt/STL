@@ -88,11 +88,10 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible"
-                android:weightSum="2">
+                android:visibility="visible">
                 <Button
                     android:id="@+id/weapons"
                     android:layout_width="match_parent"
@@ -100,7 +99,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".25"
                     android:text="weapons" />
 
                 <Button
@@ -110,7 +109,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".25"
                     android:text="crew" />
 
                 <Button
@@ -120,7 +119,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".25"
                     android:text="rooms" />
 
                 <Button
@@ -130,18 +129,18 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".25"
                     android:text="power regulation" />
 
             </LinearLayout>
-
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical"
-                android:visibility="visible"
-                android:weightSum="2">
+                android:visibility="visible">
                 <Button
                     android:id="@+id/pruningShears"
                     android:layout_width="match_parent"
@@ -190,10 +189,10 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".4"
+                    android:layout_weight="1"
                     android:text="@string/glaive" />
-
             </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
         <Button
