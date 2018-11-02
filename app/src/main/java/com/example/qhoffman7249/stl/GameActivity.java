@@ -88,10 +88,11 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
+                Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                 System.out.println(x+", " + y);
                 if(isclickedcrew) {
                     Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
-                    animate(x, y);
+                    animate();
                     isclickedcrew = false;
                 }
                 switch (event.getAction()) {
@@ -215,8 +216,7 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
-    public void animate(float x, float y){
-        xfin = 0;
+    public void animate(){
         Button btn = findViewById(R.id.crew1);
         float cxp = btn.getX();
         float cyp = btn.getY();
