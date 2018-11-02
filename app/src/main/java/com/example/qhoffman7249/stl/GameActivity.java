@@ -107,9 +107,7 @@ public class GameActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                 }
                 return false;
-            }
-
-        });
+            }        });
         Button bastardSword=findViewById(R.id.bastardSword);
         Button pruningShears=findViewById(R.id.pruningShears);
         Button maul=findViewById(R.id.maul);
@@ -142,7 +140,6 @@ public class GameActivity extends AppCompatActivity {
                 damage=weapons.glaive;
                 enemycheckdamage();
             }
-            //fuck
         });
         bastardSword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,7 +232,6 @@ public class GameActivity extends AppCompatActivity {
         animatory.setDuration(2000);
         animatory.start();
         isclickedcrew = true;
-
     }
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel){
