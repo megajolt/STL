@@ -50,6 +50,10 @@ public class GameActivity extends AppCompatActivity {
     public boolean menvis = false;
     public ProgressBar enemyShieldBar;
     public ProgressBar enemyHealthBar;
+    public int oxygenLevel=100;
+    public ImageView oxygenEmergency;
+    public ImageView largerOxygenEmergency;
+
     //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
@@ -59,6 +63,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
+        oxygenEmergency=findViewById(R.id.oxygenEmergency);
+        largerOxygenEmergency=findViewById(R.id.largerOxygenEmergency);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         enemyHealthBar.setProgress(100);
@@ -231,7 +237,20 @@ public class GameActivity extends AppCompatActivity {
         isclickedcrew = true;
 
     }
-
+    //call this with whatever changes oxygen
+    public void oxygenCheck(int oxygenLevel){
+        if (oxygenLevel<50){
+            oxygenEmergency.setVisibility(View.VISIBLE);
+        }
+        if(oxygenLevel>=50){
+            oxygenEmergency.setVisibility(View.GONE);
+            largerOxygenEmergency.setVisibility(View.GONE);
+        }
+        if (oxygenLevel<15){
+            oxygenEmergency.setVisibility(View.GONE);
+            largerOxygenEmergency.setVisibility(View.VISIBLE);
+        }
+    }
     @Override
     protected void onStop() {
         Intent m = new Intent(GameActivity.this, music.class);
