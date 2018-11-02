@@ -100,7 +100,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".4"
+                    android:layout_weight=".5"
                     android:text="weapons" />
 
                 <Button
@@ -110,7 +110,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".4"
+                    android:layout_weight=".5"
                     android:text="crew" />
 
                 <Button
@@ -120,9 +120,8 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".4"
-                    android:text="rooms"
-                    />
+                    android:layout_weight=".5"
+                    android:text="rooms" />
 
                 <Button
                     android:id="@+id/fourthsub"
@@ -131,7 +130,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_weight=".4"
+                    android:layout_weight=".5"
                     android:text="power regulation" />
 
             </LinearLayout>
