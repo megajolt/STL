@@ -99,6 +99,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="weapons" />
 
                 <Button
@@ -108,6 +109,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="crew" />
 
                 <Button
@@ -117,6 +119,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="rooms" />
 
                 <Button
@@ -126,6 +129,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="power regulation" />
 
             </LinearLayout>
@@ -144,6 +148,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="Pruning Shears" />
 
                 <Button
@@ -153,6 +158,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="@string/bastard_sword" />
 
                 <Button
@@ -162,6 +168,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="@string/halberd"
                      />
 
@@ -172,6 +179,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="@string/maul" />
 
                 <Button
@@ -181,6 +189,25 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
+                    android:text="@string/glaive" />
+                <Button
+                    android:id="@+id/glaive1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
+                    android:text="@string/glaive" />
+                <Button
+                    android:id="@+id/glaive2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight=".25"
                     android:text="@string/glaive" />
             </LinearLayout>
             </ScrollView>
