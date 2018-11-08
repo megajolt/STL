@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +49,15 @@ public class GameActivity extends AppCompatActivity {
     public int manHealth=99;
     public MediaPlayer player;
     public boolean menvis = false;
+    public boolean weaponVisibility=false;
     public ProgressBar enemyShieldBar;
     public ProgressBar enemyHealthBar;
     public int oxygenLevel=100;
     public ImageView oxygenEmergency;
     public ImageView largerOxygenEmergency;
-
+    public ScrollView weaponMenu;
+    public ImageView enemy;
+    public boolean damaged=false;
     //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
@@ -63,6 +67,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
+        weaponMenu=findViewById(R.id.weaponMenu);
         oxygenEmergency=findViewById(R.id.oxygenEmergency);
         largerOxygenEmergency=findViewById(R.id.largerOxygenEmergency);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
@@ -73,7 +78,9 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.setScaleY(2f);
         enemyShieldBar.setScaleY(2f);
+        enemy=findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
+        Button openWeaponMenu= findViewById(R.id.weapons);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +95,27 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+       openWeaponMenu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if(!weaponVisibility) {
+                   weaponMenu.setVisibility(View.VISIBLE);
+                   weaponVisibility = true;
+               }
+               else if(weaponVisibility){
+                   weaponMenu.setVisibility(View.GONE);
+                   weaponVisibility = false;
+               }
+           }
+       });
+       enemy.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+               damage=20;
+               checkdamage();
+               return false;
+           }
+       });
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -170,8 +198,19 @@ public class GameActivity extends AppCompatActivity {
                 isclickedcrew = true;
             }
         });
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(damaged){
+                    Toast.makeText(GameActivity.this, "oxygen level"+oxygenLevel, Toast.LENGTH_SHORT).show();
+                    oxygenLevel=oxygenLevel-15;
+                    oxygenCheck(oxygenLevel);
+
+                }
+            }
+        }, 100);
     }
-   /* public void checkdamage(){
+    public void checkdamage(){
         //first check damage relative to enemy action
         if(damage>currentShield){
             damage = damage - currentShield;
@@ -192,10 +231,13 @@ public class GameActivity extends AppCompatActivity {
             Intent r = new Intent(GameActivity.this, StlMenu.class);
             startActivity(r);
         }
+        if(health<100){
+            damaged=false;
+        }
         damage = 0;
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
-    }*/
+    }
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
