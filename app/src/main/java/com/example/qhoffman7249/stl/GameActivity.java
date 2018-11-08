@@ -30,7 +30,11 @@ import java.util.ListIterator;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
-
+    //Infirmary: X:694 y: 560
+    // Shield: X: 408 y:655
+    //Gun: X: 675 y:722
+    //Control: X868 y: 638
+    //Engine: X:415 y: 731
     public ProgressBar shieldBar;
     public Handler shieldHandler= new Handler();
     public int hdamage = 0;
@@ -42,10 +46,12 @@ public class GameActivity extends AppCompatActivity {
     public int enemyhealth = 100;
     public int y=0;
     public float ypos=0;
+    public double yfin=0;
     public boolean isclickedcrew;
-    public float xfin = 0;
+    public double xfin = 0;
     public float xpos = 0;
     public int x=0;
+    public List<Integer> iOccupied;
     public int manHealth=99;
     public MediaPlayer player;
     public boolean menvis = false;
@@ -194,10 +200,25 @@ public class GameActivity extends AppCompatActivity {
                Button btn = findViewById(R.id.crew1);
                 xpos = btn.getX();
                 ypos = btn.getY();
+                if(xpos==694 && ypos==560){
+                    iOccupied.add(R.id.crew1);
+                }
                 System.out.println("xpos: "+xpos+ " ypos: "+ypos);
                 isclickedcrew = true;
             }
         });
+        //Room utility code
+        //Infirmary: X:694 y: 560
+        // Shield: X: 408 y:655
+        //Gun: X: 675 y:722
+        //Control: X868 y: 638
+        //Engine: X:415 y: 731
+        if(iOccupied!=null && iOccupied.isEmpty()){
+            if(xpos>=646 && xpos<=781 && ypos>=504 && ypos<=708){
+                manHealth++;
+            }
+        }
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
