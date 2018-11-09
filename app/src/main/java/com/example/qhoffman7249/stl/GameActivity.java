@@ -52,6 +52,10 @@ public class GameActivity extends AppCompatActivity {
     public float xpos = 0;
     public int x=0;
     public List<Integer> iOccupied;
+    public List<Integer> sOccupied;
+    public List<Integer> gOccupied;
+    public List<Integer> cOccupied;
+    public List<Integer> eOccupied;
     public int manHealth=99;
     public MediaPlayer player;
     public boolean menvis = false;
@@ -128,10 +132,10 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
-                Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                 System.out.println(x+", " + y);
                 if(isclickedcrew) {
-                    Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                     animate();
                     isclickedcrew = false;
                 }
@@ -203,6 +207,18 @@ public class GameActivity extends AppCompatActivity {
                 if(xpos==694 && ypos==560){
                     iOccupied.add(R.id.crew1);
                 }
+                if(xpos==408 && ypos== 655){
+                    sOccupied.add(R.id.crew1);
+                }
+                if(xpos==675 && ypos==722){
+                    gOccupied.add(R.id.crew1);
+                }
+                if(xpos==868 && ypos==638){
+                    cOccupied.add(R.id.crew1);
+                }
+                if(xpos==415 && ypos==731){
+                    eOccupied.add(R.id.crew1);
+                }
                 System.out.println("xpos: "+xpos+ " ypos: "+ypos);
                 isclickedcrew = true;
             }
@@ -218,7 +234,18 @@ public class GameActivity extends AppCompatActivity {
                 manHealth++;
             }
         }
+        if(sOccupied!=null && sOccupied.isEmpty()){
 
+        }
+        if(gOccupied!=null && gOccupied.isEmpty()){
+
+        }
+        if(cOccupied!=null && cOccupied.isEmpty()){
+
+        }
+        if(eOccupied!=null && eOccupied.isEmpty()){
+
+        }
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
