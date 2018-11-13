@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,11 @@ import java.util.ListIterator;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
-
+    //Infirmary: X:694 y: 560
+    // Shield: X: 408 y:655
+    //Gun: X: 675 y:722
+    //Control: X868 y: 638
+    //Engine: X:415 y: 731
     public ProgressBar shieldBar;
     public Handler shieldHandler= new Handler();
     public int hdamage = 0;
@@ -41,19 +46,28 @@ public class GameActivity extends AppCompatActivity {
     public int enemyhealth = 100;
     public int y=0;
     public float ypos=0;
+    public double yfin=0;
     public boolean isclickedcrew;
-    public float xfin = 0;
+    public double xfin = 0;
     public float xpos = 0;
     public int x=0;
+    public List<Integer> iOccupied;
+    public List<Integer> sOccupied;
+    public List<Integer> gOccupied;
+    public List<Integer> cOccupied;
+    public List<Integer> eOccupied;
     public int manHealth=99;
     public MediaPlayer player;
     public boolean menvis = false;
+    public boolean weaponVisibility=false;
     public ProgressBar enemyShieldBar;
     public ProgressBar enemyHealthBar;
     public int oxygenLevel=100;
     public ImageView oxygenEmergency;
     public ImageView largerOxygenEmergency;
-
+    public ScrollView weaponMenu;
+    public ImageView enemy;
+    public boolean damaged=false;
     //random comment
     public Gun weapons=new Gun();
     public List<String> characternames;
@@ -63,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
+        weaponMenu=findViewById(R.id.weaponMenu);
         oxygenEmergency=findViewById(R.id.oxygenEmergency);
         largerOxygenEmergency=findViewById(R.id.largerOxygenEmergency);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
@@ -73,7 +88,9 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.setScaleY(2f);
         enemyShieldBar.setScaleY(2f);
+        enemy=findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
+        Button openWeaponMenu= findViewById(R.id.weapons);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,16 +105,37 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+       openWeaponMenu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if(!weaponVisibility) {
+                   weaponMenu.setVisibility(View.VISIBLE);
+                   weaponVisibility = true;
+               }
+               else if(weaponVisibility){
+                   weaponMenu.setVisibility(View.GONE);
+                   weaponVisibility = false;
+               }
+           }
+       });
+       enemy.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+               damage=20;
+               checkdamage();
+               return false;
+           }
+       });
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 x = (int)event.getX();
                 y = (int)event.getY();
-                Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                 System.out.println(x+", " + y);
                 if(isclickedcrew) {
-                    Toast.makeText(GameActivity.this, "cordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                     animate();
                     isclickedcrew = false;
                 }
@@ -166,12 +204,61 @@ public class GameActivity extends AppCompatActivity {
                Button btn = findViewById(R.id.crew1);
                 xpos = btn.getX();
                 ypos = btn.getY();
+                if(xpos==694 && ypos==560){
+                    iOccupied.add(R.id.crew1);
+                }
+                if(xpos==408 && ypos== 655){
+                    sOccupied.add(R.id.crew1);
+                }
+                if(xpos==675 && ypos==722){
+                    gOccupied.add(R.id.crew1);
+                }
+                if(xpos==868 && ypos==638){
+                    cOccupied.add(R.id.crew1);
+                }
+                if(xpos==415 && ypos==731){
+                    eOccupied.add(R.id.crew1);
+                }
                 System.out.println("xpos: "+xpos+ " ypos: "+ypos);
                 isclickedcrew = true;
             }
         });
+        //Room utility code
+        //Infirmary: X:694 y: 560
+        // Shield: X: 408 y:655
+        //Gun: X: 675 y:722
+        //Control: X868 y: 638
+        //Engine: X:415 y: 731
+        if(iOccupied!=null && iOccupied.isEmpty()){
+            if(xpos>=646 && xpos<=781 && ypos>=504 && ypos<=708){
+                manHealth++;
+            }
+        }
+        if(sOccupied!=null && sOccupied.isEmpty()){
+
+        }
+        if(gOccupied!=null && gOccupied.isEmpty()){
+
+        }
+        if(cOccupied!=null && cOccupied.isEmpty()){
+
+        }
+        if(eOccupied!=null && eOccupied.isEmpty()){
+
+        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(damaged){
+                    Toast.makeText(GameActivity.this, "oxygen level"+oxygenLevel, Toast.LENGTH_SHORT).show();
+                    oxygenLevel=oxygenLevel-15;
+                    oxygenCheck(oxygenLevel);
+
+                }
+            }
+        }, 100);
     }
-   /* public void checkdamage(){
+    public void checkdamage(){
         //first check damage relative to enemy action
         if(damage>currentShield){
             damage = damage - currentShield;
@@ -192,10 +279,13 @@ public class GameActivity extends AppCompatActivity {
             Intent r = new Intent(GameActivity.this, StlMenu.class);
             startActivity(r);
         }
+        if(health<100){
+            damaged=false;
+        }
         damage = 0;
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
-    }*/
+    }
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
