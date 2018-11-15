@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-
+//names are for meeple
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
     //Infirmary: X:694 y: 560
