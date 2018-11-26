@@ -118,14 +118,7 @@ public class GameActivity extends AppCompatActivity {
                }
            }
        });
-       enemy.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View v, MotionEvent event) {
-               damage=20;
-               checkdamage();
-               return false;
-           }
-       });
+
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
