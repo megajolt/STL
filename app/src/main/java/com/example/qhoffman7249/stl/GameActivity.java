@@ -77,57 +77,62 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
-        weaponMenu=findViewById(R.id.weaponMenu);
-        oxygenEmergency=findViewById(R.id.oxygenEmergency);
-        largerOxygenEmergency=findViewById(R.id.largerOxygenEmergency);
+        weaponMenu = findViewById(R.id.weaponMenu);
+        oxygenEmergency = findViewById(R.id.oxygenEmergency);
+        largerOxygenEmergency = findViewById(R.id.largerOxygenEmergency);
         enemyShieldBar = findViewById(R.id.enemyShieldBar);
         enemyHealthBar = findViewById(R.id.enemyHealthBar);
         enemyHealthBar.setProgress(100);
         enemyShieldBar.setProgress(100);
-        enemyShieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar),android.graphics.PorterDuff.Mode.SRC_IN);
+        enemyShieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.setScaleY(2f);
         enemyShieldBar.setScaleY(2f);
-        //enemy=findViewById(R.id.enemyShip);
+        enemy = findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
-        Button openWeaponMenu= findViewById(R.id.weapons);
+        Button openWeaponMenu = findViewById(R.id.weapons);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LinearLayout Menu = findViewById(R.id.Menu);
-                if(!menvis) {
+                if (!menvis) {
                     Menu.setVisibility(View.VISIBLE);
                     menvis = true;
-                }
-                else if(menvis){
+                } else if (menvis) {
                     Menu.setVisibility(View.GONE);
                     menvis = false;
                 }
             }
         });
-       openWeaponMenu.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               if(!weaponVisibility) {
-                   weaponMenu.setVisibility(View.VISIBLE);
-                   weaponVisibility = true;
-               }
-               else if(weaponVisibility){
-                   weaponMenu.setVisibility(View.GONE);
-                   weaponVisibility = false;
-               }
-           }
-       });
-
+        openWeaponMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!weaponVisibility) {
+                    weaponMenu.setVisibility(View.VISIBLE);
+                    weaponVisibility = true;
+                } else if (weaponVisibility) {
+                    weaponMenu.setVisibility(View.GONE);
+                    weaponVisibility = false;
+                }
+            }
+        });
+        enemy.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                damage = 20;
+                checkdamage();
+                return false;
+            }
+        });
         View myview = findViewById(R.id.view);
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                x = (int)event.getX();
-                y = (int)event.getY();
+                x = (int) event.getX();
+                y = (int) event.getY();
                 Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
-                System.out.println(x+", " + y);
-                if(isclickedcrew) {
+                System.out.println(x + ", " + y);
+                if (isclickedcrew) {
                     Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
                     animate();
                     isclickedcrew = false;
@@ -138,81 +143,82 @@ public class GameActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                 }
                 return false;
-            }        });
-        Button bastardSword=findViewById(R.id.bastardSword);
-        Button pruningShears=findViewById(R.id.pruningShears);
-        Button maul=findViewById(R.id.maul);
-        Button halberd=findViewById(R.id.halberd);
-        Button glaive=findViewById(R.id.glaive);
-        halberd.setOnClickListener(new View.OnClickListener(){
+            }
+        });
+        Button bastardSword = findViewById(R.id.bastardSword);
+        Button pruningShears = findViewById(R.id.pruningShears);
+        Button maul = findViewById(R.id.maul);
+        Button halberd = findViewById(R.id.halberd);
+        Button glaive = findViewById(R.id.glaive);
+        halberd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                damage=weapons.halberd;
+            public void onClick(View v) {
+                damage = weapons.halberd;
                 enemycheckdamage();
             }
         });
-        pruningShears.setOnClickListener(new View.OnClickListener(){
+        pruningShears.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                damage=weapons.pruningShears;
+            public void onClick(View v) {
+                damage = weapons.pruningShears;
                 enemycheckdamage();
             }
         });
-        maul.setOnClickListener(new View.OnClickListener(){
+        maul.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                damage=weapons.maul;
+            public void onClick(View v) {
+                damage = weapons.maul;
                 enemycheckdamage();
             }
         });
-        glaive.setOnClickListener(new View.OnClickListener(){
+        glaive.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                damage=weapons.glaive;
+            public void onClick(View v) {
+                damage = weapons.glaive;
                 enemycheckdamage();
             }
         });
         bastardSword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                damage=weapons.bastardSword;
+                damage = weapons.bastardSword;
                 enemycheckdamage();
             }
         });
 
         //Status bar code
-        healthBar= findViewById(R.id.healthBar);
+        healthBar = findViewById(R.id.healthBar);
         healthBar.setScaleY(2f);
         healthBar.setProgress(100);
         //healthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         //shieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        shieldBar=findViewById(R.id.shieldBar);
+        shieldBar = findViewById(R.id.shieldBar);
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
 
-       Button animate = findViewById(R.id.crew1);
+        Button animate = findViewById(R.id.crew1);
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Button btn = findViewById(R.id.crew1);
+                Button btn = findViewById(R.id.crew1);
                 xpos = btn.getX();
                 ypos = btn.getY();
-                if(xpos==694 && ypos==560){
+                if (xpos == 694 && ypos == 560) {
                     iOccupied.add(R.id.crew1);
                 }
-                if(xpos==408 && ypos== 655){
+                if (xpos == 408 && ypos == 655) {
                     sOccupied.add(R.id.crew1);
                 }
-                if(xpos==675 && ypos==722){
+                if (xpos == 675 && ypos == 722) {
                     gOccupied.add(R.id.crew1);
                 }
-                if(xpos==868 && ypos==638){
+                if (xpos == 868 && ypos == 638) {
                     cOccupied.add(R.id.crew1);
                 }
-                if(xpos==415 && ypos==731){
+                if (xpos == 415 && ypos == 731) {
                     eOccupied.add(R.id.crew1);
                 }
-                System.out.println("xpos: "+xpos+ " ypos: "+ypos);
+                System.out.println("xpos: " + xpos + " ypos: " + ypos);
                 isclickedcrew = true;
             }
         });
@@ -222,34 +228,23 @@ public class GameActivity extends AppCompatActivity {
         //Gun: X: 675 y:722
         //Control: X868 y: 638
         //Engine: X:415 y: 731
-        if(iOccupied!=null && iOccupied.isEmpty()){
-            if(xpos>=646 && xpos<=781 && ypos>=504 && ypos<=708){
+        if (iOccupied != null && iOccupied.isEmpty()) {
+            if (xpos >= 646 && xpos <= 781 && ypos >= 504 && ypos <= 708) {
                 manHealth++;
             }
         }
-        if(sOccupied!=null && sOccupied.isEmpty()){
+        if (sOccupied != null && sOccupied.isEmpty()) {
 
         }
-        if(gOccupied!=null && gOccupied.isEmpty()){
+        if (gOccupied != null && gOccupied.isEmpty()) {
 
         }
-        if(cOccupied!=null && cOccupied.isEmpty()){
+        if (cOccupied != null && cOccupied.isEmpty()) {
 
         }
-        if(eOccupied!=null && eOccupied.isEmpty()){
+        if (eOccupied != null && eOccupied.isEmpty()) {
 
         }
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                if(damaged){
-                    Toast.makeText(GameActivity.this, "oxygen level"+oxygenLevel, Toast.LENGTH_SHORT).show();
-                    oxygenLevel=oxygenLevel-15;
-                    oxygenCheck(oxygenLevel);
-
-                }
-            }
-        }, 100);
     }
 
     public void checkdamage(){
