@@ -269,7 +269,7 @@ public class GameActivity extends AppCompatActivity {
             startActivity(r);
         }
         if(health<100){
-            damaged=false;
+            damaged=true;
         }
         damage = 0;
         healthBar.setProgress(health);
