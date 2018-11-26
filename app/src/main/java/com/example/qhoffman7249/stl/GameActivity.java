@@ -88,7 +88,7 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.setScaleY(2f);
         enemyShieldBar.setScaleY(2f);
-        enemy=findViewById(R.id.enemyShip);
+        //enemy=findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
         Button openWeaponMenu= findViewById(R.id.weapons);
         openMenu.setOnClickListener(new View.OnClickListener() {
