@@ -258,6 +258,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 100);
     }
+
     public void checkdamage(){
         //first check damage relative to enemy action
         if(damage>currentShield){
@@ -332,7 +333,7 @@ public class GameActivity extends AppCompatActivity {
             oxygenEmergency.setVisibility(View.GONE);
             largerOxygenEmergency.setVisibility(View.GONE);
         }
-        if (oxygenLevel<15){
+        if (oxygenLevel<25){
             oxygenEmergency.setVisibility(View.GONE);
             largerOxygenEmergency.setVisibility(View.VISIBLE);
         }
