@@ -60,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
     public MediaPlayer player;
     public boolean menvis = false;
     public boolean weaponVisibility=false;
+    public boolean roomVisibility=false;
     public ProgressBar enemyShieldBar;
     public ProgressBar enemyHealthBar;
     public int oxygenLevel=100;
@@ -90,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
         enemyShieldBar.setScaleY(2f);
         enemy = findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
-        Button openWeaponMenu = findViewById(R.id.weapons);
+        Button openWeaponMenu= findViewById(R.id.firstSubM);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,18 +105,20 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
-        openWeaponMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!weaponVisibility) {
-                    weaponMenu.setVisibility(View.VISIBLE);
-                    weaponVisibility = true;
-                } else if (weaponVisibility) {
-                    weaponMenu.setVisibility(View.GONE);
-                    weaponVisibility = false;
-                }
-            }
-        });
+       openWeaponMenu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if(!weaponVisibility) {
+                   weaponMenu.setVisibility(View.VISIBLE);
+                   weaponVisibility = true;
+
+               }
+               else if(weaponVisibility){
+                   weaponMenu.setVisibility(View.GONE);
+                   weaponVisibility = false;
+               }
+           }
+       });
         enemy.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -245,6 +248,17 @@ public class GameActivity extends AppCompatActivity {
         if (eOccupied != null && eOccupied.isEmpty()) {
 
         }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(damaged){
+                    Toast.makeText(GameActivity.this, "oxygen level"+oxygenLevel, Toast.LENGTH_SHORT).show();
+                    oxygenLevel=oxygenLevel-15;
+                    oxygenCheck(oxygenLevel);
+
+                }
+            }
+        }, 100);
     }
 
     public void checkdamage(){
