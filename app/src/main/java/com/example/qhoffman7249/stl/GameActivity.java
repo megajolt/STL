@@ -91,7 +91,14 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
         enemyHealthBar.setScaleY(2f);
         enemyShieldBar.setScaleY(2f);
-        enemy = findViewById(R.id.enemyShip);
+        //enemy=findViewById(R.id.enemyShip);
+        ImageView enemyShip = findViewById(R.id.enemyShip);
+        enemyShip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkdamage();
+            }
+        });
         Button openMenu = findViewById(R.id.menu);
         Button openWeaponMenu= findViewById(R.id.firstSubM);
         Button openRoomMenu= findViewById(R.id.thirdSubM);
@@ -110,7 +117,6 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
-
        openWeaponMenu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -118,16 +124,15 @@ public class GameActivity extends AppCompatActivity {
                    weaponMenu.setVisibility(View.VISIBLE);
                    weaponButtons.setVisibility(LinearLayout.VISIBLE);
                    weaponVisibility = true;
-
                }
                else if(weaponVisibility){
                    weaponMenu.setVisibility(View.GONE);
                    weaponButtons.setVisibility(LinearLayout.GONE);
                    weaponVisibility = false;
                }
-
            }
        });
+
         openRoomMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -362,5 +367,9 @@ public class GameActivity extends AppCompatActivity {
         Intent m = new Intent(GameActivity.this, music.class);
         stopService(m);
         super.onStop();
+    }
+    public void test(){
+        Pair<String, String> myPair = new Pair<String, String>("test", "test");
+        String out = myPair.getX();
     }
 }
