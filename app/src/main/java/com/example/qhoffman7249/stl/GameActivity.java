@@ -71,8 +71,10 @@ public class GameActivity extends AppCompatActivity {
     public LinearLayout roomButtons;
     public ImageView enemy;
     public boolean damaged=false;
+    public int coords=0;
     //random comment
     public Gun weapons=new Gun();
+    public Coordinates room=new Coordinates();
     public List<String> characternames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +172,12 @@ public class GameActivity extends AppCompatActivity {
         Button maul = findViewById(R.id.maul);
         Button halberd = findViewById(R.id.halberd);
         Button glaive = findViewById(R.id.glaive);
+        Button medRoomButton = findViewById(R.id.medBay);
+        Button engineRoomButton = findViewById(R.id.engine);
+        Button shieldRoomButton = findViewById(R.id.shield);
+        Button gunRoomButton = findViewById(R.id.gun);
+        Button controlRoomButton = findViewById(R.id.control);
+
         halberd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +211,46 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 damage = weapons.bastardSword;
                 enemycheckdamage();
+            }
+        });
+        medRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.medCoords;
+                coordMaker(coords);
+                animate();
+            }
+        });
+        engineRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.engineCoords;
+                coordMaker(coords);
+                animate();
+            }
+        });
+        shieldRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.shieldCoords;
+                coordMaker(coords);
+                animate();
+            }
+        });
+        gunRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.gunCoords;
+                coordMaker(coords);
+                animate();
+            }
+        });
+        controlRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.controlCoords;
+                coordMaker(coords);
+                animate();
             }
         });
 
@@ -243,11 +291,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         //Room utility code
-        //Infirmary: X:694 y: 560
-        // Shield: X: 408 y:655
-        //Gun: X: 675 y:722
-        //Control: X868 y: 638
-        //Engine: X:415 y: 731
+
         if (iOccupied != null && iOccupied.isEmpty()) {
             if (xpos >= 646 && xpos <= 781 && ypos >= 504 && ypos <= 708) {
                 manHealth++;
@@ -356,6 +400,10 @@ public class GameActivity extends AppCompatActivity {
             oxygenEmergency.setVisibility(View.GONE);
             largerOxygenEmergency.setVisibility(View.VISIBLE);
         }
+    }
+    public void coordMaker(int coords){
+        x=coords/1000;
+        y=coords%1000;
     }
     @Override
     protected void onStop() {
