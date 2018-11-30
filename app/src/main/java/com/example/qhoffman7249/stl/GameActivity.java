@@ -67,6 +67,8 @@ public class GameActivity extends AppCompatActivity {
     public ImageView oxygenEmergency;
     public ImageView largerOxygenEmergency;
     public ScrollView weaponMenu;
+    public  LinearLayout weaponButtons;
+    public LinearLayout roomButtons;
     public ImageView enemy;
     public boolean damaged=false;
     //random comment
@@ -92,6 +94,9 @@ public class GameActivity extends AppCompatActivity {
         enemy = findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
         Button openWeaponMenu= findViewById(R.id.firstSubM);
+        Button openRoomMenu= findViewById(R.id.thirdSubM);
+        final LinearLayout weaponButtons= findViewById(R.id.weaponButtons);
+        final LinearLayout roomButtons= findViewById(R.id.roomButtons);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,26 +110,38 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+
        openWeaponMenu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                if(!weaponVisibility) {
                    weaponMenu.setVisibility(View.VISIBLE);
+                   weaponButtons.setVisibility(LinearLayout.VISIBLE);
                    weaponVisibility = true;
 
                }
                else if(weaponVisibility){
                    weaponMenu.setVisibility(View.GONE);
+                   weaponButtons.setVisibility(LinearLayout.GONE);
                    weaponVisibility = false;
                }
+
            }
        });
-        enemy.setOnTouchListener(new View.OnTouchListener() {
+        openRoomMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                damage = 20;
-                checkdamage();
-                return false;
+            public void onClick(View v) {
+                if(!roomVisibility){
+                    Toast.makeText(GameActivity.this, "Called Roomvis", Toast.LENGTH_SHORT).show();
+                    weaponMenu.setVisibility(View.VISIBLE);
+                    roomButtons.setVisibility(LinearLayout.VISIBLE);
+                    roomVisibility= true;
+                }
+                else if(roomVisibility){
+                    weaponMenu.setVisibility(View.GONE);
+                    roomButtons.setVisibility(LinearLayout.GONE);
+                    roomVisibility = false;
+                }
             }
         });
         View myview = findViewById(R.id.view);

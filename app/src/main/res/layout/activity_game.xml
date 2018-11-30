@@ -140,18 +140,18 @@
                 android:id="@+id/weaponMenu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="visible">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="visible"
-                    >
+                    android:visibility="visible">
                 <LinearLayout
+                    android:id="@+id/weaponButtons"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/pruningShears"
@@ -202,33 +202,14 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight=".25"
                         android:text="@string/glaive" />
-
-                    <Button
-                        android:id="@+id/glaive1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight=".25"
-                        android:text="@string/glaive" />
-
-                    <Button
-                        android:id="@+id/glaive2"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight=".25"
-                        android:text="@string/glaive" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/roomButtons"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <Button
                         android:id="@+id/control"
