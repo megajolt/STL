@@ -120,7 +120,8 @@ public class GameActivity extends AppCompatActivity {
                    weaponMenu.setVisibility(View.VISIBLE);
                    weaponButtons.setVisibility(LinearLayout.VISIBLE);
                    weaponVisibility = true;
-
+                   roomButtons.setVisibility(LinearLayout.GONE);
+                   roomVisibility = false;
                }
                else if(weaponVisibility){
                    weaponMenu.setVisibility(View.GONE);
@@ -134,10 +135,11 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!roomVisibility){
-                    Toast.makeText(GameActivity.this, "Called Roomvis", Toast.LENGTH_SHORT).show();
                     weaponMenu.setVisibility(View.VISIBLE);
                     roomButtons.setVisibility(LinearLayout.VISIBLE);
                     roomVisibility= true;
+                    weaponButtons.setVisibility(LinearLayout.GONE);
+                    weaponVisibility = false;
                 }
                 else if(roomVisibility){
                     weaponMenu.setVisibility(View.GONE);
