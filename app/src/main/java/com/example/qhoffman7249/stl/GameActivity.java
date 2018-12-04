@@ -70,6 +70,7 @@ public class GameActivity extends AppCompatActivity {
     public  LinearLayout weaponButtons;
     public LinearLayout roomButtons;
     public ImageView enemy;
+    public Button crew1;
     public boolean damaged=false;
     public int coords=0;
     //random comment
@@ -297,6 +298,7 @@ public class GameActivity extends AppCompatActivity {
         if (iOccupied != null && iOccupied.isEmpty()) {
             if (xpos >= 646 && xpos <= 781 && ypos >= 504 && ypos <= 708) {
                 manHealth++;
+
             }
         }
         if (sOccupied != null && sOccupied.isEmpty()) {
