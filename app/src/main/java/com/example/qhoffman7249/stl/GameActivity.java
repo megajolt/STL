@@ -150,6 +150,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         View myview = findViewById(R.id.view);
+        /*
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -169,7 +170,7 @@ public class GameActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
+        });*/
         Button bastardSword = findViewById(R.id.bastardSword);
         Button pruningShears = findViewById(R.id.pruningShears);
         Button maul = findViewById(R.id.maul);
@@ -267,7 +268,7 @@ public class GameActivity extends AppCompatActivity {
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
 
-        Button animate = findViewById(R.id.crew1);
+        /*Button animate = findViewById(R.id.crew1);
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -292,7 +293,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("xpos: " + xpos + " ypos: " + ypos);
                 isclickedcrew = true;
             }
-        });
+        });*/
         //Room utility code
 
         if (iOccupied != null && iOccupied.isEmpty()) {

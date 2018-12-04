@@ -272,8 +272,8 @@
             android:id="@+id/crew1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/engine2"
-            android:visibility="gone"
+            android:background="@drawable/frontwalk1"
+            android:visibility="visible"
             />
 
         <ImageView
