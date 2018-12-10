@@ -73,6 +73,7 @@ public class GameActivity extends AppCompatActivity {
     public Button crew1;
     public boolean damaged=false;
     public int coords=0;
+    public boolean crewVisibility=false;
     //random comment
     public Gun weapons=new Gun();
     public Coordinates room=new Coordinates();
@@ -97,9 +98,11 @@ public class GameActivity extends AppCompatActivity {
         enemy = findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
         Button openWeaponMenu= findViewById(R.id.firstSubM);
+        final Button openCrewMenu = findViewById(R.id.secondSubM);
         Button openRoomMenu= findViewById(R.id.thirdSubM);
         final LinearLayout weaponButtons= findViewById(R.id.weaponButtons);
         final LinearLayout roomButtons= findViewById(R.id.roomButtons);
+        final LinearLayout crewButtons=findViewById(R.id.crewButtons);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +116,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+
        openWeaponMenu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -122,11 +126,33 @@ public class GameActivity extends AppCompatActivity {
                    weaponVisibility = true;
                    roomButtons.setVisibility(LinearLayout.GONE);
                    roomVisibility = false;
+                   crewButtons.setVisibility(LinearLayout.GONE);
+                   crewVisibility = false;
                }
                else if(weaponVisibility){
                    weaponMenu.setVisibility(View.GONE);
                    weaponButtons.setVisibility(LinearLayout.GONE);
                    weaponVisibility = false;
+               }
+
+           }
+       });
+       openCrewMenu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if(!crewVisibility){
+                   weaponMenu.setVisibility(View.VISIBLE);
+                   crewButtons.setVisibility(View.VISIBLE);
+                   crewVisibility= true;
+                   weaponButtons.setVisibility(LinearLayout.GONE);
+                   weaponVisibility = false;
+                   roomButtons.setVisibility(LinearLayout.GONE);
+                   roomVisibility = false;
+               }
+               else if(crewVisibility){
+                   crewButtons.setVisibility(LinearLayout.GONE);
+                   weaponMenu.setVisibility(View.GONE);
+                   crewVisibility = false;
                }
            }
        });
@@ -139,6 +165,8 @@ public class GameActivity extends AppCompatActivity {
                     roomVisibility= true;
                     weaponButtons.setVisibility(LinearLayout.GONE);
                     weaponVisibility = false;
+                    crewButtons.setVisibility(LinearLayout.GONE);
+                    crewVisibility = false;
                 }
                 else if(roomVisibility){
                     weaponMenu.setVisibility(View.GONE);
@@ -147,7 +175,9 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+
         View myview = findViewById(R.id.view);
+        /*
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -167,7 +197,7 @@ public class GameActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
+        });*/
         Button bastardSword = findViewById(R.id.bastardSword);
         Button pruningShears = findViewById(R.id.pruningShears);
         Button maul = findViewById(R.id.maul);
@@ -265,7 +295,7 @@ public class GameActivity extends AppCompatActivity {
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
 
-        Button animate = findViewById(R.id.crew1);
+        /*Button animate = findViewById(R.id.crew1);
         animate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,7 +320,7 @@ public class GameActivity extends AppCompatActivity {
                 System.out.println("xpos: " + xpos + " ypos: " + ypos);
                 isclickedcrew = true;
             }
-        });
+        });*/
         //Room utility code
 
         if (iOccupied != null && iOccupied.isEmpty()) {
@@ -412,9 +442,5 @@ public class GameActivity extends AppCompatActivity {
         Intent m = new Intent(GameActivity.this, music.class);
         stopService(m);
         super.onStop();
-    }
-    public void test(){
-        Pair<String, String> myPair = new Pair<String, String>("test", "test");
-        String out = myPair.getX();
     }
 }
