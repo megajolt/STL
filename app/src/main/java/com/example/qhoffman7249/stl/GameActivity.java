@@ -73,6 +73,7 @@ public class GameActivity extends AppCompatActivity {
     public Button crew1;
     public boolean damaged=false;
     public int coords=0;
+    public boolean crewVisibility=false;
     //random comment
     public Gun weapons=new Gun();
     public Coordinates room=new Coordinates();
@@ -97,9 +98,11 @@ public class GameActivity extends AppCompatActivity {
         enemy = findViewById(R.id.enemyShip);
         Button openMenu = findViewById(R.id.menu);
         Button openWeaponMenu= findViewById(R.id.firstSubM);
+        final Button openCrewMenu = findViewById(R.id.secondSubM);
         Button openRoomMenu= findViewById(R.id.thirdSubM);
         final LinearLayout weaponButtons= findViewById(R.id.weaponButtons);
         final LinearLayout roomButtons= findViewById(R.id.roomButtons);
+        final LinearLayout crewButtons=findViewById(R.id.crewButtons);
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +126,8 @@ public class GameActivity extends AppCompatActivity {
                    weaponVisibility = true;
                    roomButtons.setVisibility(LinearLayout.GONE);
                    roomVisibility = false;
+                   crewButtons.setVisibility(LinearLayout.GONE);
+                   crewVisibility = false;
                }
                else if(weaponVisibility){
                    weaponMenu.setVisibility(View.GONE);
@@ -130,6 +135,25 @@ public class GameActivity extends AppCompatActivity {
                    weaponVisibility = false;
                }
 
+           }
+       });
+       openCrewMenu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               if(!crewVisibility){
+                   weaponMenu.setVisibility(View.VISIBLE);
+                   crewButtons.setVisibility(View.VISIBLE);
+                   crewVisibility= true;
+                   weaponButtons.setVisibility(LinearLayout.GONE);
+                   weaponVisibility = false;
+                   roomButtons.setVisibility(LinearLayout.GONE);
+                   roomVisibility = false;
+               }
+               else if(crewVisibility){
+                   crewButtons.setVisibility(LinearLayout.GONE);
+                   weaponMenu.setVisibility(View.GONE);
+                   crewVisibility = false;
+               }
            }
        });
         openRoomMenu.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +165,8 @@ public class GameActivity extends AppCompatActivity {
                     roomVisibility= true;
                     weaponButtons.setVisibility(LinearLayout.GONE);
                     weaponVisibility = false;
+                    crewButtons.setVisibility(LinearLayout.GONE);
+                    crewVisibility = false;
                 }
                 else if(roomVisibility){
                     weaponMenu.setVisibility(View.GONE);
@@ -149,6 +175,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             }
         });
+
         View myview = findViewById(R.id.view);
         /*
         myview.setOnTouchListener(new View.OnTouchListener() {
