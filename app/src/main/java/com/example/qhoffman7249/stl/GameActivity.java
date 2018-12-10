@@ -1,9 +1,12 @@
 package com.example.qhoffman7249.stl;
 
 import android.animation.ObjectAnimator;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -41,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
     public Shields shields= new Shields();
     public int currentShield=100;
     public ProgressBar healthBar;
+    //private Runnable myhandler;
     public int health= 100;
     public int enemycurrentShield = 100;
     public int enemyhealth = 100;
@@ -72,6 +76,7 @@ public class GameActivity extends AppCompatActivity {
     public ImageView enemy;
     public Button crew1;
     public boolean damaged=false;
+    public int enemydamage;
     public int coords=0;
     public boolean crewVisibility=false;
     //random comment
@@ -83,6 +88,12 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent m = new Intent(GameActivity.this, music.class);
+        BroadcastReceiver bcr = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                checkdamage();
+            }
+        };
         //startService(m);
         weaponMenu = findViewById(R.id.weaponMenu);
         oxygenEmergency = findViewById(R.id.oxygenEmergency);
@@ -106,14 +117,8 @@ public class GameActivity extends AppCompatActivity {
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout Menu = findViewById(R.id.Menu);
-                if (!menvis) {
-                    Menu.setVisibility(View.VISIBLE);
-                    menvis = true;
-                } else if (menvis) {
-                    Menu.setVisibility(View.GONE);
-                    menvis = false;
-                }
+               Intent i = new Intent(GameActivity.this, PopTivity.class);
+               startActivity(i);
             }
         });
 
@@ -341,27 +346,16 @@ public class GameActivity extends AppCompatActivity {
         if (eOccupied != null && eOccupied.isEmpty()) {
 
         }
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                if(damaged){
-                    Toast.makeText(GameActivity.this, "oxygen level"+oxygenLevel, Toast.LENGTH_SHORT).show();
-                    oxygenLevel=oxygenLevel-15;
-                    oxygenCheck(oxygenLevel);
-
-                }
-            }
-        }, 100);
     }
 
     public void checkdamage(){
         //first check damage relative to enemy action
-        if(damage>currentShield){
-            damage = damage - currentShield;
+        if(enemydamage>currentShield){
+            enemydamage = enemydamage - currentShield;
             currentShield = 0;
-            health = health - damage;
+            health = health - enemydamage;
         }
-        else if(currentShield>=damage){
+        else if(currentShield>=enemydamage){
             currentShield = currentShield - damage;
         }
         if(health < 50 && health > 25){
