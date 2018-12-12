@@ -39,7 +39,7 @@ public class PopTivity extends AppCompatActivity {
                 current = findViewById(R.id.rooms);
                 current.setVisibility(View.VISIBLE);
             }
-        });
+        });//some random comment
         Button showweapons = findViewById(R.id.firstSubM);
         showweapons.setOnClickListener(new View.OnClickListener() {
             @Override
