@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -42,6 +43,18 @@ public class gamesearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesearch);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        double width = dm.widthPixels;
+        double height = dm.heightPixels;
+
+        height = height * .8;
+        width = width * .6;
+
+        int intwidth = (int)width;
+        int intheight = (int)height;
+        getWindow().setLayout(intwidth,intheight);
         /*boolean test = check();
         readfile("game.txt", "load");
         EditText search = findViewById(R.id.search);

@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="healthbar">#388e3c</color>
     <color name="shieldbar">#0288d1</color>
+    <color name="mainbackground">#00000000</color>
 </resources>

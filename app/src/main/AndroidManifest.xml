@@ -21,9 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gamesearch" />
-        <activity android:name=".newgame" />
-        <activity android:name=".settings" />
+        <activity android:name=".gamesearch"
+            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity android:name=".newgame"
+            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity android:name=".settings"
+            android:theme="@style/AppTheme.CustomTheme"/>
         <activity
             android:name=".GameActivity"
             android:screenOrientation="landscape" />
