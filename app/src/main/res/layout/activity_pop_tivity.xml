@@ -73,46 +73,51 @@
             <Button
                 android:id="@+id/pruningShears"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight=".25"
                 android:text="Pruning Shears" />
 
             <Button
                 android:id="@+id/bastardSword"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight=".25"
                 android:text="@string/bastard_sword" />
 
             <Button
                 android:id="@+id/halberd"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight=".25"
                 android:text="@string/halberd" />
 
             <Button
                 android:id="@+id/maul"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight=".25"
                 android:text="@string/maul" />
 
             <Button
                 android:id="@+id/glaive"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight=".25"
                 android:text="@string/glaive" />
             </LinearLayout>
         </ScrollView>
