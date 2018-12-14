@@ -89,7 +89,7 @@ public class GameActivity extends AppCompatActivity {
         Intent p = new Intent(GameActivity.this, pause.class);
         startActivity(p);
     }
-
+//random comment to put to server
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
