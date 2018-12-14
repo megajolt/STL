@@ -188,7 +188,6 @@ public class GameActivity extends AppCompatActivity {
         if (iOccupied != null && iOccupied.isEmpty()) {
             if (xpos >= 646 && xpos <= 781 && ypos >= 504 && ypos <= 708) {
                 manHealth++;
-
             }
         }
         if (sOccupied != null && sOccupied.isEmpty()) {
@@ -262,7 +261,6 @@ public class GameActivity extends AppCompatActivity {
         float cyp = btn.getY();
         y=y-204;
         ObjectAnimator animationx = ObjectAnimator.ofFloat(btn, "translationX", cxp, x);
-        Toast.makeText(GameActivity.this, "x: " + btn.getX() + "y: " + btn.getY(), Toast.LENGTH_SHORT).show();
         animationx.setDuration(2000);
         animationx.start();
         ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
