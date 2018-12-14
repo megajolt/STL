@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PopTivity">
+    tools:context=".PopTivity"
+    android:background="#82000000">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_height="250dp"
         android:id="@+id/mydude"
-        android:background="#ffffff"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/menuMenu"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
+            android:layout_gravity="center"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -61,9 +63,8 @@
 
         </LinearLayout>
         <ScrollView
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
             android:orientation="vertical"
             android:id="@+id/weapons">
             <LinearLayout
@@ -73,7 +74,8 @@
             <Button
                 android:id="@+id/pruningShears"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
+                android:layout_weight=".25"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
@@ -82,7 +84,8 @@
             <Button
                 android:id="@+id/bastardSword"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
+                android:layout_weight=".25"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
@@ -91,7 +94,8 @@
             <Button
                 android:id="@+id/halberd"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
+                android:layout_weight=".25"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
@@ -100,7 +104,8 @@
             <Button
                 android:id="@+id/maul"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
+                android:layout_weight=".25"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
@@ -109,7 +114,8 @@
             <Button
                 android:id="@+id/glaive"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="0dp"
+                android:layout_weight=".25"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
@@ -117,9 +123,8 @@
             </LinearLayout>
         </ScrollView>
         <ScrollView
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
             android:id="@+id/rooms"
             android:visibility="gone">
             <LinearLayout
@@ -178,9 +183,8 @@
             </LinearLayout>
         </ScrollView>
         <ScrollView
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
             android:id="@+id/crew"
             android:visibility="gone">
             <LinearLayout
@@ -239,9 +243,8 @@
             </LinearLayout>
         </ScrollView>
         <ScrollView
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
             android:id="@+id/power"
             android:visibility="gone">
             <LinearLayout
