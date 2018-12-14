@@ -21,19 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gamesearch"
-            android:theme="@style/AppTheme.CustomTheme"/>
-        <activity android:name=".newgame"
-            android:theme="@style/AppTheme.CustomTheme"/>
-        <activity android:name=".settings"
-            android:theme="@style/AppTheme.CustomTheme"/>
+        <activity
+            android:name=".gamesearch"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".newgame"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".settings"
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".GameActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".PopTivity"
-            android:theme="@style/AppTheme.CustomTheme">
-
-        </activity>
+        <activity
+            android:name=".PopTivity"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
+        <activity android:name=".pause"
+            android:theme="@style/AppTheme.CustomTheme"
+            ></activity>
     </application>
 
 </manifest>
