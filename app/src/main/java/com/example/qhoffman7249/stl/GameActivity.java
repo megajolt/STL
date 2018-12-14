@@ -6,30 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
@@ -400,7 +388,7 @@ public class GameActivity extends AppCompatActivity {
         enemyShieldBar.setProgress(enemycurrentShield);
     }
     public void animate(){
-        Button btn = findViewById(R.id.crew1);
+        Button btn = findViewById(R.id.crew2);
         float cxp = btn.getX();
         float cyp = btn.getY();
         y=y-204;
