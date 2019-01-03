@@ -1,43 +1,26 @@
 package com.example.qhoffman7249.stl;
 
-import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GameActivity extends AppCompatActivity {
     public int damage=0;
-    //Infirmary: X:694 y: 560
-    // Shield: X: 408 y:655
-    //Gun: X: 675 y:722
-    //Control: X868 y: 638
-    //Engine: X:415 y: 731
+
     public ProgressBar shieldBar;
     public Handler shieldHandler= new Handler();
     public int hdamage = 0;
@@ -78,6 +61,11 @@ public class GameActivity extends AppCompatActivity {
     public int enemydamage;
     public int coords=0;
     public boolean crewVisibility=false;
+    boolean gClicked=false;
+    boolean iClicked=false;
+    boolean sClicked=false;
+    boolean cClicked=false;
+    boolean eClicked=false;
     //random comment
     public Gun weapons=new Gun();
     public Coordinates room=new Coordinates();
@@ -146,6 +134,217 @@ public class GameActivity extends AppCompatActivity {
                 return false;
             }
         });*/
+        Button bastardSword = findViewById(R.id.bastardSword);
+        Button pruningShears = findViewById(R.id.pruningShears);
+        Button maul = findViewById(R.id.maul);
+        Button halberd = findViewById(R.id.halberd);
+        Button glaive = findViewById(R.id.glaive);
+        Button medRoomButton = findViewById(R.id.medBay);
+        Button engineRoomButton = findViewById(R.id.engine);
+        Button shieldRoomButton = findViewById(R.id.shield);
+        final Button gunRoomButton = findViewById(R.id.gun);
+        Button controlRoomButton = findViewById(R.id.control);
+        final Button crewMan= findViewById(R.id.crewDude);
+
+        //damage buttons
+        halberd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.halberd;
+                enemycheckdamage();
+            }
+        });
+        pruningShears.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.peaShooter;
+                enemycheckdamage();
+            }
+        });
+        maul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.maul;
+                enemycheckdamage();
+            }
+        });
+        glaive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.glaive;
+                enemycheckdamage();
+            }
+        });
+        bastardSword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                damage = weapons.bastardSword;
+                enemycheckdamage();
+            }
+        });
+
+        //animation buttons
+
+        medRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.medCoords;
+                iClicked=true;
+                coordMaker(coords);
+
+            }
+        });
+        engineRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.engineCoords;
+                eClicked=true;
+                coordMaker(coords);
+
+            }
+        });
+        shieldRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.shieldCoords;
+                sClicked=true;
+                coordMaker(coords);
+
+            }
+        });
+        gunRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.gunCoords;
+                gClicked=true;
+                coordMaker(coords);
+
+            }
+        });
+        controlRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.controlCoords;
+                cClicked=true;
+                coordMaker(coords);
+
+            }
+        });
+        //Infirmary: X:694 y: 560
+        // Shield: X: 408 y:655
+        //Gun: X: 675 y:722
+        //Control: X868 y: 638
+        //Engine: X:415 y: 731
+        crewMan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xpos=crewMan.getX();
+                ypos=crewMan.getY();
+                //if the clicked crew member is in the control room
+                if(xpos==868&&ypos==638){
+                    if(iClicked==true){
+                        //runs animations from control room to infirmary
+                        iClicked=false;
+                    }
+                    else if(gClicked==true){
+                        //control room to gun room
+                        gClicked=false;
+                    }
+                   else if(sClicked==true){
+                        //control room to shield room
+                        sClicked=false;
+                    }
+                    else if(eClicked==true){
+                        //control room engine room
+                        eClicked=false;
+                    }
+                    else{}
+                }
+                //Infirmary
+                if(xpos==694&&ypos==560){
+                    if(cClicked==true){
+                        //infirmary to control
+                        cClicked=false;
+                    }
+                   else if(gClicked==true){
+                        //infirmary to gun room
+                        gClicked=false;
+                    }
+                    else if(sClicked==true){
+                        //infrimary to shield room
+                        sClicked=false;
+                    }
+                    else if(eClicked==true){
+                        //infirmary to engine room
+                        eClicked=false;
+                    }
+                    else {}
+                }
+                //shield
+                if (xpos==408&&ypos==655){
+                    if(gClicked==true){
+                        //control room to gun room
+                        gClicked=false;
+                    }
+
+                    else if(eClicked==true){
+                        //control room engine room
+                        eClicked=false;
+                    }
+                    else if(iClicked==true){
+                        //runs animations from control room to infirmary
+                        iClicked=false;
+                    }
+                    else if(cClicked==true){
+                        //infirmary to control
+                        cClicked=false;
+                    }
+                    else{}
+                }
+                //gun
+                if(xpos==675&&ypos==722){
+                    if(cClicked==true){
+                        //infirmary to control
+                        cClicked=false;
+                    }
+                    else if(eClicked==true){
+                        //control room engine room
+                        eClicked=false;
+                    }
+                    else if(iClicked==true){
+                        //runs animations from control room to infirmary
+                        iClicked=false;
+                    }
+                    else if(sClicked==true){
+                        //control room to shield room
+                        sClicked=false;
+                    }
+                    else{}
+                }
+                //engine
+                if (xpos==415&&ypos==731){
+                    if(iClicked==true){
+                        //runs animations from control room to infirmary
+                        iClicked=false;
+                    }
+                   else if(gClicked==true){
+                        //control room to gun room
+                        gClicked=false;
+                    }
+                    else if(sClicked==true){
+                        //control room to shield room
+                        sClicked=false;
+                    }
+                    else if(cClicked==true){
+                        //infirmary to control
+                        cClicked=false;
+                    }
+                    else{}
+                }
+
+            }
+        });
+
 
         //Status bar code
         healthBar = findViewById(R.id.healthBar);
@@ -157,38 +356,10 @@ public class GameActivity extends AppCompatActivity {
         shieldBar.setScaleY(2f);
         shieldBar.setProgress(100);
 
-        /*Button animate = findViewById(R.id.crew1);
-        animate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Button btn = findViewById(R.id.crew1);
-                xpos = btn.getX();
-                ypos = btn.getY();
-                if (xpos == 694 && ypos == 560) {
-                    iOccupied.add(R.id.crew1);
-                }
-                if (xpos == 408 && ypos == 655) {
-                    sOccupied.add(R.id.crew1);
-                }
-                if (xpos == 675 && ypos == 722) {
-                    gOccupied.add(R.id.crew1);
-                }
-                if (xpos == 868 && ypos == 638) {
-                    cOccupied.add(R.id.crew1);
-                }
-                if (xpos == 415 && ypos == 731) {
-                    eOccupied.add(R.id.crew1);
-                }
-                System.out.println("xpos: " + xpos + " ypos: " + ypos);
-                isclickedcrew = true;
-            }
-        });*/
-        //Room utility code
 
+        /*Room utility code
         if (iOccupied != null && iOccupied.isEmpty()) {
-            if (xpos >= 646 && xpos <= 781 && ypos >= 504 && ypos <= 708) {
-                manHealth++;
-            }
+
         }
         if (sOccupied != null && sOccupied.isEmpty()) {
 
@@ -201,7 +372,7 @@ public class GameActivity extends AppCompatActivity {
         }
         if (eOccupied != null && eOccupied.isEmpty()) {
 
-        }
+        }*/
     }
 
     public void checkdamage(){
@@ -255,8 +426,8 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
-   /* public void animate(){
-        Button btn = findViewById(R.id.crew1);
+    //OLD ANIMATION CODE
+    /*
         float cxp = btn.getX();
         float cyp = btn.getY();
         y=y-204;
@@ -266,8 +437,9 @@ public class GameActivity extends AppCompatActivity {
         ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
         animatory.setDuration(2000);
         animatory.start();
-        isclickedcrew = true;
-    }*/
+        isclickedcrew = true;*/
+
+
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel){
         if (oxygenLevel<50){
