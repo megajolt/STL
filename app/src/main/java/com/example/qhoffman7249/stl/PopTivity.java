@@ -23,7 +23,7 @@ public class PopTivity extends AppCompatActivity {
         double height = dm.heightPixels;
         width = width * 1.2;
 
-        current = findViewById(R.id.weapons);
+        /*current = findViewById(R.id.weapons);
 
         int intwidth = (int)width;
         int intheight = (int)height;
@@ -66,7 +66,7 @@ public class PopTivity extends AppCompatActivity {
                 current = findViewById(R.id.power);
                 current.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
         /*
         * Button bastardSword = findViewById(R.id.bastardSword);
         Button pruningShears = findViewById(R.id.pruningShears);
