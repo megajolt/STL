@@ -10,14 +10,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_height="250dp"
+        android:layout_height="match_parent"
         android:id="@+id/mydude"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/menuMenu"
             android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_height="300dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:visibility="visible">
 
@@ -64,7 +65,9 @@
         </LinearLayout>
         <ScrollView
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:id="@+id/weapons">
             <LinearLayout
@@ -124,7 +127,9 @@
         </ScrollView>
         <ScrollView
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:id="@+id/rooms"
             android:visibility="gone">
             <LinearLayout
@@ -184,7 +189,9 @@
         </ScrollView>
         <ScrollView
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:id="@+id/crew"
             android:visibility="gone">
             <LinearLayout
@@ -244,7 +251,9 @@
         </ScrollView>
         <ScrollView
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:id="@+id/power"
             android:visibility="gone">
             <LinearLayout

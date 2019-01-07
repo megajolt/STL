@@ -20,7 +20,7 @@ public class StlMenu extends AppCompatActivity {
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ng = new Intent(StlMenu.this, PopTivity.class);
+                Intent ng = new Intent(StlMenu.this, newgame.class);
                 startActivity(ng);
             }
         });

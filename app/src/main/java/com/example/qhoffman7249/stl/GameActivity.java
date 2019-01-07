@@ -70,18 +70,22 @@ public class GameActivity extends AppCompatActivity {
     public Gun weapons=new Gun();
     public Coordinates room=new Coordinates();
     public List<String> characternames;
+    private boolean menubool = false;
 
     @Override
     protected void onPause() {
         super.onPause();
-        Intent p = new Intent(GameActivity.this, pause.class);
-        startActivity(p);
+        if(!menubool) {
+            Intent p = new Intent(GameActivity.this, pause.class);
+            startActivity(p);
+        }
     }
 //random comment to put to server
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        menubool = false;
         Intent m = new Intent(GameActivity.this, music.class);
         BroadcastReceiver bcr = new BroadcastReceiver() {
             @Override
@@ -108,6 +112,7 @@ public class GameActivity extends AppCompatActivity {
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                menubool = true;
                Intent i = new Intent(GameActivity.this, PopTivity.class);
                startActivity(i);
             }

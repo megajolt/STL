@@ -21,7 +21,7 @@ public class PopTivity extends AppCompatActivity {
 
         double width = dm.widthPixels;
         double height = dm.heightPixels;
-        width = width * 1.2;
+        width = width * 1.1;
 
         current = findViewById(R.id.weapons);
 
