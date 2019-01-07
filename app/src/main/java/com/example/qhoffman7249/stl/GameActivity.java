@@ -58,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
     public ImageView enemy;
     public Button crew1;
     public boolean damaged=false;
-    public int enemydamage;
+    public int enemydamage = 0;
     public int coords=0;
     public boolean crewVisibility=false;
     boolean gClicked=false;
@@ -76,23 +76,70 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if(!menubool) {
-            Intent p = new Intent(GameActivity.this, pause.class);
-            startActivity(p);
+            /*Intent p = new Intent(GameActivity.this, GameActivity.class);
+            p.putExtra("todo", "back");
+            startActivity(p);*/
+            Intent r = new Intent(GameActivity.this, pause.class);
+            startActivity(r);
         }
     }
+    private int mInterval = 5000; // 5 seconds by default, can be changed later
+    private Handler mHandler;
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopRepeatingTask();
+    }
+
+    Runnable mStatusChecker = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                enemydamage = 10;
+                checkdamage();
+                //Toast.makeText(GameActivity.this, "testing func ran", Toast.LENGTH_SHORT).show();
+                 //this function can change value of mInterval.
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mHandler.postDelayed(mStatusChecker, mInterval);
+            }
+        }
+    };
+
+    public void startRepeatingTask() {
+        mStatusChecker.run();
+    }
+
+    public void stopRepeatingTask() {
+        mHandler.removeCallbacks(mStatusChecker);
+    }
+
 //random comment to put to server
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        healthBar = findViewById(R.id.healthBar);
+        healthBar.setScaleY(2f);
+        healthBar.setProgress(100);
+        //healthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
+        //shieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
+        shieldBar = findViewById(R.id.shieldBar);
+        shieldBar.setScaleY(2f);
+        shieldBar.setProgress(100);
+        mHandler = new Handler();
+        startRepeatingTask();
         menubool = false;
+        Intent intent = getIntent();
+        String todo = intent.getExtras().getString("todo");
+        if(todo == "back"){
+            Toast.makeText(this, "to == back", Toast.LENGTH_SHORT).show();
+            Intent s = new Intent(GameActivity.this, pause.class);
+            startActivity(s);
+        }
+        Toast.makeText(this, "todo: " + todo, Toast.LENGTH_SHORT).show();
         Intent m = new Intent(GameActivity.this, music.class);
-        BroadcastReceiver bcr = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                checkdamage();
-            }
-        };
         //startService(m);
         oxygenEmergency = findViewById(R.id.oxygenEmergency);
         largerOxygenEmergency = findViewById(R.id.largerOxygenEmergency);
@@ -352,14 +399,6 @@ public class GameActivity extends AppCompatActivity {
 
 
         //Status bar code
-        healthBar = findViewById(R.id.healthBar);
-        healthBar.setScaleY(2f);
-        healthBar.setProgress(100);
-        //healthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        //shieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        shieldBar = findViewById(R.id.shieldBar);
-        shieldBar.setScaleY(2f);
-        shieldBar.setProgress(100);
 
 
         /*Room utility code
@@ -379,16 +418,17 @@ public class GameActivity extends AppCompatActivity {
 
         }*/
     }
-
+    int test = 100;
     public void checkdamage(){
         //first check damage relative to enemy action
+        //test = test - 10;
         if(enemydamage>currentShield){
             enemydamage = enemydamage - currentShield;
             currentShield = 0;
             health = health - enemydamage;
         }
         else if(currentShield>=enemydamage){
-            currentShield = currentShield - damage;
+            currentShield = currentShield - enemydamage;
         }
         if(health < 50 && health > 25){
            healthBar.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -407,6 +447,7 @@ public class GameActivity extends AppCompatActivity {
         damage = 0;
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
+        Toast.makeText(this, "checkdamage ran", Toast.LENGTH_SHORT).show();
     }
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();

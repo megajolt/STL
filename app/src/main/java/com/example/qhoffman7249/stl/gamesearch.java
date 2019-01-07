@@ -75,6 +75,8 @@ public class gamesearch extends AppCompatActivity {
             }
         });*/
         Intent t = new Intent(gamesearch.this, GameActivity.class);
+        t.putExtra("todo", "load");
+        t.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(t);
     }
     public void loadfile(){
