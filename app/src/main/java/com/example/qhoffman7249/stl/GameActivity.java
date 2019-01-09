@@ -4,10 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,11 +34,11 @@ public class GameActivity extends AppCompatActivity {
     public int enemycurrentShield = 100;
     public int enemyhealth = 100;
     public int y=0;
-    public float ypos=0;
+    public double ypos=0;
     public double yfin=0;
     public boolean isclickedcrew;
     public double xfin = 0;
-    public float xpos = 0;
+    public double xpos = 0;
     public int x=0;
     public List<Integer> iOccupied;
     public List<Integer> sOccupied;
@@ -118,27 +120,21 @@ public class GameActivity extends AppCompatActivity {
             }
         });
         View myview = findViewById(R.id.view);
-        /*
+
         myview.setOnTouchListener(new View.OnTouchListener() {
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                x = (int) event.getX();
-                y = (int) event.getY();
-                Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
-                System.out.println(x + ", " + y);
-                if (isclickedcrew) {
-                    Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
-                    animate();
-                    isclickedcrew = false;
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    xfin=event.getX();
+                    yfin=event.getY();
+                    Toast.makeText(GameActivity.this, "coordinates: x: " + xfin + " y:" + yfin, Toast.LENGTH_LONG).show();
                 }
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                    case MotionEvent.ACTION_UP:
-                }
-                return false;
+                return true;
+
+
             }
-        });*/
+        });
         Button bastardSword = findViewById(R.id.bastardSword);
         Button pruningShears = findViewById(R.id.pruningShears);
         Button maul = findViewById(R.id.maul);
@@ -246,7 +242,7 @@ public class GameActivity extends AppCompatActivity {
                 xpos=crewMan.getX();
                 ypos=crewMan.getY();
                 //if the clicked crew member is in the control room
-                if(xpos==868&&ypos==638){
+                if(xpos==872.40234375&&ypos==624.654052734375){
                     if(iClicked==true){
                         //runs animations from control room to infirmary
                         iClicked=false;
@@ -266,7 +262,7 @@ public class GameActivity extends AppCompatActivity {
                     else{}
                 }
                 //Infirmary
-                if(xpos==694&&ypos==560){
+                if(xpos==534.2578125&&ypos==785.79052734375){
                     if(cClicked==true){
                         //infirmary to control
                         cClicked=false;
@@ -276,7 +272,7 @@ public class GameActivity extends AppCompatActivity {
                         gClicked=false;
                     }
                     else if(sClicked==true){
-                        //infrimary to shield room
+                        //infirmary to shield room
                         sClicked=false;
                     }
                     else if(eClicked==true){
@@ -286,7 +282,7 @@ public class GameActivity extends AppCompatActivity {
                     else {}
                 }
                 //shield
-                if (xpos==408&&ypos==655){
+                if (xpos==557.2265625&&ypos==544.563720703125){
                     if(gClicked==true){
                         //control room to gun room
                         gClicked=false;
@@ -307,7 +303,7 @@ public class GameActivity extends AppCompatActivity {
                     else{}
                 }
                 //gun
-                if(xpos==675&&ypos==722){
+                if(xpos==653.320315&&ypos==764.7626953125){
                     if(cClicked==true){
                         //infirmary to control
                         cClicked=false;
@@ -327,7 +323,7 @@ public class GameActivity extends AppCompatActivity {
                     else{}
                 }
                 //engine
-                if (xpos==415&&ypos==731){
+                if (xpos==617.28515625&&ypos==606.62548828125){
                     if(iClicked==true){
                         //runs animations from control room to infirmary
                         iClicked=false;
