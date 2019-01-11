@@ -24,9 +24,7 @@ public class GameActivity extends AppCompatActivity {
     public int damage=0;
 
     public ProgressBar shieldBar;
-    public Handler shieldHandler= new Handler();
     public int hdamage = 0;
-    public Shields shields= new Shields();
     public int currentShield=100;
     public ProgressBar healthBar;
     //private Runnable myhandler;
@@ -40,6 +38,8 @@ public class GameActivity extends AppCompatActivity {
     public double xfin = 0;
     public double xpos = 0;
     public int x=0;
+    private boolean[] roomEnabled = new boolean[6];
+    private int[] roomHealth = new int[6];
     public List<Integer> iOccupied;
     public List<Integer> sOccupied;
     public List<Integer> gOccupied;
@@ -68,6 +68,8 @@ public class GameActivity extends AppCompatActivity {
     boolean sClicked=false;
     boolean cClicked=false;
     boolean eClicked=false;
+    private AI sysAI;
+    private int target = 0;
     //random comment
     public Gun weapons=new Gun();
     public Coordinates room=new Coordinates();
@@ -97,8 +99,10 @@ public class GameActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                enemydamage = 10;
+                enemydamage = sysAI.getDamage();
+                target = sysAI.getTarget();
                 checkdamage();
+                checkTarget();
                 //Toast.makeText(GameActivity.this, "testing func ran", Toast.LENGTH_SHORT).show();
                  //this function can change value of mInterval.
             } finally {
@@ -108,7 +112,15 @@ public class GameActivity extends AppCompatActivity {
             }
         }
     };
-
+    public void checkTarget(){
+        roomHealth[target] = enemydamage;
+        if(roomHealth[target] < 1){
+            roomEnabled[target] = false;
+        }
+        else{
+            roomEnabled[target] = true;
+        }
+    }
     public void startRepeatingTask() {
         mStatusChecker.run();
     }
@@ -122,6 +134,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        sysAI = new AI(1);
         healthBar = findViewById(R.id.healthBar);
         healthBar.setScaleY(2f);
         healthBar.setProgress(100);
@@ -392,27 +405,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
-
-
-        //Status bar code
-
-
-        /*Room utility code
-        if (iOccupied != null && iOccupied.isEmpty()) {
-
-        }
-        if (sOccupied != null && sOccupied.isEmpty()) {
-
-        }
-        if (gOccupied != null && gOccupied.isEmpty()) {
-
-        }
-        if (cOccupied != null && cOccupied.isEmpty()) {
-
-        }
-        if (eOccupied != null && eOccupied.isEmpty()) {
-
-        }*/
     }
     int test = 100;
     public void checkdamage(){
@@ -448,7 +440,7 @@ public class GameActivity extends AppCompatActivity {
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
-            damage = damage - enemycurrentShield;
+            damage -= enemycurrentShield;
             enemycurrentShield = 0;
             enemyhealth = enemyhealth - damage;
         }
