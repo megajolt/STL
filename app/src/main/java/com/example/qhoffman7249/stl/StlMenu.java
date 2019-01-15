@@ -27,7 +27,7 @@ public class StlMenu extends AppCompatActivity {
         loadgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lg = new Intent(StlMenu.this, gamesearch.class);
+                Intent lg = new Intent(StlMenu.this, GameActivity.class);
                 startActivity(lg);
             }
         });
