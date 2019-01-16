@@ -24,6 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Path;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,188 +32,295 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class GameActivity extends AppCompatActivity {
-    public int damage=0;
-    //Infirmary: X:694 y: 560
-    // Shield: X: 408 y:655
-    //Gun: X: 675 y:722
-    //Control: X868 y: 638
-    //Engine: X:415 y: 731
-    public ProgressBar shieldBar;
-    public Handler shieldHandler= new Handler();
-    public int hdamage = 0;
-    public Shields shields= new Shields();
-    public int currentShield=100;
-    public ProgressBar healthBar;
-    //private Runnable myhandler;
-    public int health= 100;
-    public int enemycurrentShield = 100;
-    public int enemyhealth = 100;
-    public int y=0;
-    public float ypos=0;
-    public double yfin=0;
-    public boolean isclickedcrew;
-    public double xfin = 0;
-    public float xpos = 0;
-    public int x=0;
-    public List<Integer> iOccupied;
-    public List<Integer> sOccupied;
-    public List<Integer> gOccupied;
-    public List<Integer> cOccupied;
-    public List<Integer> eOccupied;
-    public int manHealth=99;
-    public MediaPlayer player;
-    public boolean menvis = false;
-    public boolean weaponVisibility=false;
-    public boolean roomVisibility=false;
-    public ProgressBar enemyShieldBar;
-    public ProgressBar enemyHealthBar;
-    public int oxygenLevel=100;
-    public ImageView oxygenEmergency;
-    public ImageView largerOxygenEmergency;
-    public  LinearLayout weaponButtons;
-    public LinearLayout roomButtons;
-    public ImageView enemy;
-    public Button crew1;
-    public boolean damaged=false;
-    public int enemydamage;
-    public int coords=0;
-    public boolean crewVisibility=false;
-    //random comment
-    public Gun weapons=new Gun();
-    public Coordinates room=new Coordinates();
-    public List<String> characternames;
+public class GameActivity extends variables{
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Intent p = new Intent(GameActivity.this, pause.class);
-        startActivity(p);
-    }
-//random comment to put to server
+    Path cToEPath= new Path();
+    private int mInterval = 5000; // 5 seconds by default, can be changed later
+    private Handler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        variableSet();
+        mHandler = new Handler();
+        startRepeatingTask();
         Intent m = new Intent(GameActivity.this, music.class);
-        BroadcastReceiver bcr = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                checkdamage();
-            }
-        };
         //startService(m);
-        oxygenEmergency = findViewById(R.id.oxygenEmergency);
-        largerOxygenEmergency = findViewById(R.id.largerOxygenEmergency);
-        enemyShieldBar = findViewById(R.id.enemyShieldBar);
-        enemyHealthBar = findViewById(R.id.enemyHealthBar);
-        enemyHealthBar.setProgress(100);
-        enemyShieldBar.setProgress(100);
-        enemyShieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        enemyHealthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        enemyHealthBar.setScaleY(2f);
-        enemyShieldBar.setScaleY(2f);
-        enemy = findViewById(R.id.enemyShip);
-        Button openMenu = findViewById(R.id.menu);
-        Button openWeaponMenu= findViewById(R.id.firstSubM);
-        final Button openCrewMenu = findViewById(R.id.secondSubM);
-        Button openRoomMenu= findViewById(R.id.thirdSubM);
+        clickerSet();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopRepeatingTask();
+    }
+    Runnable mStatusChecker = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                enemydamage = sysAI.getDamage();
+                target = sysAI.getTarget();
+                checkdamage();
+                checkTarget();
+            } finally {
+                mHandler.postDelayed(mStatusChecker, mInterval);
+            }
+        }
+    };
+    public void checkTarget(){
+        roomHealth[target] = enemydamage;
+        if(roomHealth[
+                target] < 1){
+            roomEnabled[target] = false;
+        }
+        else{
+            roomEnabled[target] = true;
+        }
+    }
+    public void startRepeatingTask() {
+        mStatusChecker.run();
+    }
+    public void stopRepeatingTask() {
+        mHandler.removeCallbacks(mStatusChecker);
+    }
+    /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+    public void clickerSet(){
         openMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent i = new Intent(GameActivity.this, PopTivity.class);
-               startActivity(i);
+                menubool = true;
+                Intent i = new Intent(GameActivity.this, PopTivity.class);
+                startActivity(i);
             }
         });
         View myview = findViewById(R.id.view);
-        /*
         myview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                x = (int) event.getX();
-                y = (int) event.getY();
-                Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
-                System.out.println(x + ", " + y);
-                if (isclickedcrew) {
-                    Toast.makeText(GameActivity.this, "coordinates: x: " + x + " y:" + y, Toast.LENGTH_SHORT).show();
-                    animate();
-                    isclickedcrew = false;
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    xfin=event.getX();
+                    yfin=event.getY();
+                    Toast.makeText(GameActivity.this, "coordinates: x: " + xfin + " y:" + yfin, Toast.LENGTH_LONG).show();
                 }
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                    case MotionEvent.ACTION_UP:
-                }
-                return false;
+                return true;
             }
-        });*/
+        });
 
-        //Status bar code
-        healthBar = findViewById(R.id.healthBar);
-        healthBar.setScaleY(2f);
-        healthBar.setProgress(100);
-        //healthBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.healthbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        //shieldBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.shieldbar), android.graphics.PorterDuff.Mode.SRC_IN);
-        shieldBar = findViewById(R.id.shieldBar);
-        shieldBar.setScaleY(2f);
-        shieldBar.setProgress(100);
-
-        /*Button animate = findViewById(R.id.crew1);
-        animate.setOnClickListener(new View.OnClickListener() {
+        float cxp = crewMan.getX();
+        float cyp = crewMan.getY();
+        floatY=floatY-204;
+        ObjectAnimator animationx = ObjectAnimator.ofFloat(crewMan, "translationX", cxp, floatX);
+        animationx.setDuration(2000);
+        animationx.start();
+        ObjectAnimator animatory = ObjectAnimator.ofFloat(crewMan, "translationY", cyp, floatY);
+        animatory.setDuration(2000);
+        animatory.start();
+        //damage buttons
+        halberd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button btn = findViewById(R.id.crew1);
-                xpos = btn.getX();
-                ypos = btn.getY();
-                if (xpos == 694 && ypos == 560) {
-                    iOccupied.add(R.id.crew1);
-                }
-                if (xpos == 408 && ypos == 655) {
-                    sOccupied.add(R.id.crew1);
-                }
-                if (xpos == 675 && ypos == 722) {
-                    gOccupied.add(R.id.crew1);
-                }
-                if (xpos == 868 && ypos == 638) {
-                    cOccupied.add(R.id.crew1);
-                }
-                if (xpos == 415 && ypos == 731) {
-                    eOccupied.add(R.id.crew1);
-                }
-                System.out.println("xpos: " + xpos + " ypos: " + ypos);
-                isclickedcrew = true;
+                damage = weapons.halberd;
+                enemycheckdamage();
             }
-        });*/
-        //Room utility code
-
-        if (iOccupied != null && iOccupied.isEmpty()) {
-            if (xpos >= 646 && xpos <= 781 && ypos >= 504 && ypos <= 708) {
-                manHealth++;
+        });
+        pruningShears.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.peaShooter;
+                enemycheckdamage();
             }
-        }
-        if (sOccupied != null && sOccupied.isEmpty()) {
+        });
+        maul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.maul;
+                enemycheckdamage();
+            }
+        });
+        glaive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                damage = weapons.glaive;
+                enemycheckdamage();
+            }
+        });
+        bastardSword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                damage = weapons.bastardSword;
+                enemycheckdamage();
+            }
+        });
+        //animation buttons
+        medRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.medCoords;
+                Clicked[3]=true;
+                //coordMaker(coords);
 
-        }
-        if (gOccupied != null && gOccupied.isEmpty()) {
+            }
+        });
+        engineRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.engineCoords;
+                Clicked[1]=true;
+               //coordMaker(coords);
 
-        }
-        if (cOccupied != null && cOccupied.isEmpty()) {
+            }
+        });
+        shieldRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.shieldCoords;
+                Clicked[4]=true;
+                //coordMaker(coords);
 
-        }
-        if (eOccupied != null && eOccupied.isEmpty()) {
+            }
+        });
+        gunRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.gunCoords;
+                Clicked[2]=true;
+                //coordMaker(coords);
 
-        }
+            }
+        });
+        controlRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coords = room.controlCoords;
+                Clicked[0]=true;
+                //coordMaker(coords);
+
+            }
+        });
+        //Infirmary: X:534.2578125 y: 785.79052734375
+        // Shield: X: 557.2265625  y:544.563720703125
+        //Gun: X: 653.320315 y: 544.563720703125
+        //Control: X: 872.40234375 y: 624.654052734375
+        //Engine: X:617.28515625 y: 606.62548828125
+        crewMan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xpos=crewMan.getX();
+                ypos=crewMan.getY();
+                //if the clicked crew member is in the control room
+                if(xpos==872.40234375&&ypos==624.654052734375){
+                    if(Clicked[3]==true){
+                        //runs animations from control room to infirmary
+                        Clicked[3]=false;
+                    }
+                    else if(Clicked[2]==true){
+                        //control room to gun room
+                        Clicked[2]=false;
+                    }
+                    else if(Clicked[4]==true){
+                        //control room to shield room
+                        Clicked[4]=false;
+                    }
+                    else if(Clicked[1]==true){
+                        //control room engine room
+                        cToEPath.moveTo((float)872.40234375,(float)624.654052734375);
+                        cToEPath.lineTo((float)663.28125,(float)616.64501953125);
+                        cToEPath.lineTo((float)611.25,(float)616.64501953125);
+                        cToEPath.lineTo((float)611.25,(float)584.60888671875);
+                        Clicked[1]=false;
+                    }
+                }
+                //Infirmary
+                if(xpos==534.2578125&&ypos==785.79052734375){
+                    if(Clicked[0]==true){
+                        //infirmary to control
+                        Clicked[0]=false;
+                    }
+                    else if(Clicked[2]==true){
+                        //infirmary to gun room
+                        Clicked[2]=false;
+                    }
+                    else if(Clicked[4]==true){
+                        //infirmary to shield room
+                        Clicked[4]=false;
+                    }
+                    else if(Clicked[1]==true){
+                        //infirmary to engine room
+                        Clicked[1]=false;
+                    }
+                }
+                //shield
+                if (xpos==557.2265625&&ypos==544.563720703125){
+                    if(Clicked[2]==true){
+                        //control room to gun room
+                        Clicked[2]=false;
+                    }
+
+                    else if(Clicked[1]==true){
+                        //control room engine room
+                        Clicked[1]=false;
+                    }
+                    else if(Clicked[3]==true){
+                        //runs animations from control room to infirmary
+                        Clicked[3]=false;
+                    }
+                    else if(Clicked[0]==true){
+                        //infirmary to control
+                        Clicked[0]=false;
+                    }
+                }
+                //gun
+                if(xpos==653.320315&&ypos==764.7626953125){
+                    if(Clicked[0]==true){
+                        //infirmary to control
+                        Clicked[0]=false;
+                    }
+                    else if(Clicked[1]==true){
+                        //control room engine room
+                        Clicked[1]=false;
+                    }
+                    else if(Clicked[3]==true){
+                        //runs animations from control room to infirmary
+                        Clicked[3]=false;
+                    }
+                    else if(Clicked[4]==true){
+                        //control room to shield room
+                        Clicked[4]=false;
+                    }
+                }
+                //engine
+                if (xpos==617.28515625&&ypos==606.62548828125){
+                    if(Clicked[3]==true){
+                        //runs animations from control room to infirmary
+                        Clicked[3]=false;
+                    }
+                    else if(Clicked[2]==true){
+                        //control room to gun room
+                        Clicked[2]=false;
+                    }
+                    else if(Clicked[4]==true){
+                        //control room to shield room
+                        Clicked[4]=false;
+                    }
+                    else if(Clicked[0]==true){
+                        //infirmary to control
+                        Clicked[0]=false;
+                    }
+                }
+
+            }
+        });
     }
-
+    int test = 100;
     public void checkdamage(){
         //first check damage relative to enemy action
+        //test = test - 10;
         if(enemydamage>currentShield){
             enemydamage = enemydamage - currentShield;
             currentShield = 0;
             health = health - enemydamage;
         }
         else if(currentShield>=enemydamage){
-            currentShield = currentShield - damage;
+            currentShield = currentShield - enemydamage;
         }
         if(health < 50 && health > 25){
            healthBar.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -235,7 +343,7 @@ public class GameActivity extends AppCompatActivity {
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
-            damage = damage - enemycurrentShield;
+            damage -= enemycurrentShield;
             enemycurrentShield = 0;
             enemyhealth = enemyhealth - damage;
         }
@@ -255,19 +363,6 @@ public class GameActivity extends AppCompatActivity {
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
-   /* public void animate(){
-        Button btn = findViewById(R.id.crew1);
-        float cxp = btn.getX();
-        float cyp = btn.getY();
-        y=y-204;
-        ObjectAnimator animationx = ObjectAnimator.ofFloat(btn, "translationX", cxp, x);
-        animationx.setDuration(2000);
-        animationx.start();
-        ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
-        animatory.setDuration(2000);
-        animatory.start();
-        isclickedcrew = true;
-    }*/
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel){
         if (oxygenLevel<50){
@@ -282,14 +377,9 @@ public class GameActivity extends AppCompatActivity {
             largerOxygenEmergency.setVisibility(View.VISIBLE);
         }
     }
+    /*
     public void coordMaker(int coords){
         x=coords/1000;
         y=coords%1000;
+    }*/
     }
-    @Override
-    protected void onStop() {
-        Intent m = new Intent(GameActivity.this, music.class);
-        stopService(m);
-        super.onStop();
-    }
-}
