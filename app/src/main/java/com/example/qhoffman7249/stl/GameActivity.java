@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.graphics.Path;
 
-
 public class GameActivity extends variables{
 
     Path cToEPath= new Path();
@@ -327,6 +326,7 @@ public class GameActivity extends variables{
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
     }
+    //code to change enemy health bar
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
         if(damage>enemycurrentShield){
