@@ -1,5 +1,8 @@
 package com.example.qhoffman7249.stl;
 
+import android.animation.ObjectAnimator;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -13,10 +16,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.graphics.Path;
 
 
 public class GameActivity extends variables{
 
+    Path cToEPath= new Path();
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     @Override
@@ -86,6 +91,16 @@ public class GameActivity extends variables{
                 return true;
             }
         });
+
+        float cxp = crewMan.getX();
+        float cyp = crewMan.getY();
+        floatY=floatY-204;
+        ObjectAnimator animationx = ObjectAnimator.ofFloat(crewMan, "translationX", cxp, floatX);
+        animationx.setDuration(2000);
+        animationx.start();
+        ObjectAnimator animatory = ObjectAnimator.ofFloat(crewMan, "translationY", cyp, floatY);
+        animatory.setDuration(2000);
+        animatory.start();
         //damage buttons
         halberd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,15 +137,13 @@ public class GameActivity extends variables{
                 enemycheckdamage();
             }
         });
-
         //animation buttons
-
         medRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 coords = room.medCoords;
                 Clicked[3]=true;
-                coordMaker(coords);
+                //coordMaker(coords);
 
             }
         });
@@ -139,7 +152,7 @@ public class GameActivity extends variables{
             public void onClick(View v) {
                 coords = room.engineCoords;
                 Clicked[1]=true;
-                coordMaker(coords);
+               //coordMaker(coords);
 
             }
         });
@@ -148,7 +161,7 @@ public class GameActivity extends variables{
             public void onClick(View v) {
                 coords = room.shieldCoords;
                 Clicked[4]=true;
-                coordMaker(coords);
+                //coordMaker(coords);
 
             }
         });
@@ -157,7 +170,7 @@ public class GameActivity extends variables{
             public void onClick(View v) {
                 coords = room.gunCoords;
                 Clicked[2]=true;
-                coordMaker(coords);
+                //coordMaker(coords);
 
             }
         });
@@ -166,10 +179,15 @@ public class GameActivity extends variables{
             public void onClick(View v) {
                 coords = room.controlCoords;
                 Clicked[0]=true;
-                coordMaker(coords);
+                //coordMaker(coords);
 
             }
         });
+        //Infirmary: X:534.2578125 y: 785.79052734375
+        // Shield: X: 557.2265625  y:544.563720703125
+        //Gun: X: 653.320315 y: 544.563720703125
+        //Control: X: 872.40234375 y: 624.654052734375
+        //Engine: X:617.28515625 y: 606.62548828125
         crewMan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,9 +209,12 @@ public class GameActivity extends variables{
                     }
                     else if(Clicked[1]==true){
                         //control room engine room
+                        cToEPath.moveTo((float)872.40234375,(float)624.654052734375);
+                        cToEPath.lineTo((float)663.28125,(float)616.64501953125);
+                        cToEPath.lineTo((float)611.25,(float)616.64501953125);
+                        cToEPath.lineTo((float)611.25,(float)584.60888671875);
                         Clicked[1]=false;
                     }
-                    else{}
                 }
                 //Infirmary
                 if(xpos==534.2578125&&ypos==785.79052734375){
@@ -213,7 +234,6 @@ public class GameActivity extends variables{
                         //infirmary to engine room
                         Clicked[1]=false;
                     }
-                    else {}
                 }
                 //shield
                 if (xpos==557.2265625&&ypos==544.563720703125){
@@ -234,7 +254,6 @@ public class GameActivity extends variables{
                         //infirmary to control
                         Clicked[0]=false;
                     }
-                    else{}
                 }
                 //gun
                 if(xpos==653.320315&&ypos==764.7626953125){
@@ -254,7 +273,6 @@ public class GameActivity extends variables{
                         //control room to shield room
                         Clicked[4]=false;
                     }
-                    else{}
                 }
                 //engine
                 if (xpos==617.28515625&&ypos==606.62548828125){
@@ -274,7 +292,6 @@ public class GameActivity extends variables{
                         //infirmary to control
                         Clicked[0]=false;
                     }
-                    else{}
                 }
 
             }
@@ -333,20 +350,6 @@ public class GameActivity extends variables{
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
-    //OLD ANIMATION CODE
-    /*
-        float cxp = btn.getX();
-        float cyp = btn.getY();
-        y=y-204;
-        ObjectAnimator animationx = ObjectAnimator.ofFloat(btn, "translationX", cxp, x);
-        animationx.setDuration(2000);
-        animationx.start();
-        ObjectAnimator animatory = ObjectAnimator.ofFloat(btn, "translationY", cyp, y);
-        animatory.setDuration(2000);
-        animatory.start();
-        iClicked[4]crew = true;*/
-
-
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel){
         if (oxygenLevel<50){
@@ -361,8 +364,9 @@ public class GameActivity extends variables{
             largerOxygenEmergency.setVisibility(View.VISIBLE);
         }
     }
+    /*
     public void coordMaker(int coords){
         x=coords/1000;
         y=coords%1000;
+    }*/
     }
-}

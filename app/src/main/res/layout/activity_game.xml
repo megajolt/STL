@@ -62,6 +62,12 @@
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/crewDude"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/frontwalk1"
+            android:visibility="visible" />
     </LinearLayout>
 
             <ImageView
@@ -324,12 +330,6 @@
             </ScrollView>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/crewDude"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/frontwalk1"
-            android:visibility="visible" />
 
         <ImageView
             android:layout_width="wrap_content"
