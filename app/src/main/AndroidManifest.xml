@@ -37,7 +37,8 @@
             android:name=".PopTivity"
             android:theme="@style/AppTheme.CustomTheme"></activity>
         <activity android:name=".pause"
-            android:theme="@style/AppTheme.CustomTheme"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="landscape"
             ></activity>
     </application>
 
