@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class GameActivity extends variables{
 
-    private int mInterval = 5000; // 5 seconds by default, can be changed later
+    private int mInterval = 1000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -300,6 +300,7 @@ public class GameActivity extends variables{
         }
         if(health <= 0){
             Toast.makeText(GameActivity.this, "You Dead", Toast.LENGTH_SHORT).show();
+            stopRepeatingTask();
             Intent r = new Intent(GameActivity.this, StlMenu.class);
             startActivity(r);
         }
