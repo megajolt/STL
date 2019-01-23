@@ -271,7 +271,7 @@ public class GameActivity extends variables{
                     else if(Clicked[4]==true){
                         //control room to shield room
                         Clicked[4]=false;
-                    }
+                    }//random comment
                 }
                 //engine
                 if (xpos==617.28515625&&ypos==606.62548828125){
