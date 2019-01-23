@@ -17,12 +17,10 @@ public class variables extends AppCompatActivity {
     public static int health= 100;
     public static int enemycurrentShield = 100;
     public static int enemyhealth = 100;
-    public static int y=0;
     public static double ypos=0;
     public static double yfin=0;
     public static double xfin = 0;
     public static double xpos = 0;
-    public static int x=0;
     public static boolean[] roomEnabled = new boolean[6];
     public static int[] roomHealth = new int[6];
     public static int[] iOccupied;
@@ -49,7 +47,10 @@ public class variables extends AppCompatActivity {
     public static boolean[] Clicked = new boolean[6];
     public static AI sysAI;
     public static int target = 0;
-    //random comment
+    public double y=624.654052734375;
+    public float floatY= (float)y;
+    public double x=872.40234375;
+    public float floatX=(float)x;
     public static Gun weapons=new Gun();
     public static Coordinates room=new Coordinates();
     public static List<String> characternames;
@@ -69,6 +70,7 @@ public class variables extends AppCompatActivity {
     public Button openWeaponMenu;
     public Button openCrewMenu;
     public Button openRoomMenu;
+
     public void variableSet(){
         Occupied[0] = new int[5];
         Occupied[1] = new int[5];
