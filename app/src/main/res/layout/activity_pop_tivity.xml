@@ -74,17 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-            <Button
-                android:id="@+id/pruningShears"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".25"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:text="Pruning Shears" />
 
-            <Button
+            <ImageView
                 android:id="@+id/bastardSword"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -92,9 +83,9 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="@string/bastard_sword" />
+                android:src="@drawable/weapon1"/>
 
-            <Button
+            <ImageView
                 android:id="@+id/halberd"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -102,9 +93,9 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="@string/halberd" />
+               android:src="@drawable/weapon2"/>
 
-            <Button
+            <ImageView
                 android:id="@+id/maul"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -112,17 +103,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="@string/maul" />
-
-            <Button
-                android:id="@+id/glaive"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".25"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/glaive" />
+                android:src="@drawable/weapon3" />
             </LinearLayout>
         </ScrollView>
         <ScrollView

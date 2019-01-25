@@ -45,8 +45,10 @@ public class GameActivity extends variables{
             try {
                 enemydamage = sysAI.getDamage();
                 target = sysAI.getTarget();
-                checkdamage();
-                checkTarget();
+                if(enemyhealth > 0) {
+                    checkdamage();
+                    checkTarget();
+                }
             } finally {
                 mHandler.postDelayed(mStatusChecker, mInterval);
             }
@@ -67,6 +69,7 @@ public class GameActivity extends variables{
     }
     public void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
+        mHandler = null;
     }
     /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
     public void clickerSet(){
@@ -108,24 +111,10 @@ public class GameActivity extends variables{
                 enemycheckdamage();
             }
         });
-        pruningShears.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                damage = weapons.peaShooter;
-                enemycheckdamage();
-            }
-        });
         maul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 damage = weapons.maul;
-                enemycheckdamage();
-            }
-        });
-        glaive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                damage = weapons.glaive;
                 enemycheckdamage();
             }
         });
@@ -134,52 +123,6 @@ public class GameActivity extends variables{
             public void onClick(View view) {
                 damage = weapons.bastardSword;
                 enemycheckdamage();
-            }
-        });
-        //animation buttons
-        medRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.medCoords;
-                Clicked[3]=true;
-                //coordMaker(coords);
-
-            }
-        });
-        engineRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.engineCoords;
-                Clicked[1]=true;
-               //coordMaker(coords);
-
-            }
-        });
-        shieldRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.shieldCoords;
-                Clicked[4]=true;
-                //coordMaker(coords);
-
-            }
-        });
-        gunRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.gunCoords;
-                Clicked[2]=true;
-                //coordMaker(coords);
-
-            }
-        });
-        controlRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.controlCoords;
-                Clicked[0]=true;
-                //coordMaker(coords);
-
             }
         });
         //Infirmary: X:534.2578125 y: 785.79052734375
