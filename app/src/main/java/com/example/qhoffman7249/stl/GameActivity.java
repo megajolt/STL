@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-import android.graphics.Path;
+import android.graphics.Path;//random comment
 
 public class GameActivity extends variables{
 
