@@ -11,10 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.graphics.Path;
 
@@ -23,16 +19,19 @@ public class GameActivity extends variables{
     Path cToEPath= new Path();
     private int mInterval = 1000; // 5 seconds by default, can be changed later
     private Handler mHandler;
+    private Handler mHandler2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         variableSet();
         mHandler = new Handler();
+        mHandler2 = new Handler();
         startRepeatingTask();
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
         clickerSet();
+        startAnimation();
     }
     @Override
     public void onDestroy() {
@@ -54,6 +53,53 @@ public class GameActivity extends variables{
             }
         }
     };
+    int randomint = 0;
+    int animtimes = 200;
+    int rotation = 0;
+    int time = 0;
+    Runnable animation = new Runnable() {
+        @Override
+        public void run() {
+            //put frame change code here
+            try{
+                if(randomint >= animtimes){
+                    //rotate and set frame
+                    Toast.makeText(GameActivity.this, "elapsed", Toast.LENGTH_SHORT).show();
+                    time = 0;
+                }
+                else{
+                    if(time == 0){
+
+                    }
+                    if(time == 1){
+
+                    }
+                    if(time == 2){
+
+                    }
+                    if(time == 3){
+
+                    }
+                    if(time == 4){
+
+                    }
+                    if(time == 5){
+
+                    }
+                    if(time == 6){
+
+                    }
+                    if(time == 7){
+
+                    }
+                    time++;
+                }
+                randomint++;
+            }finally {
+                mHandler2.postDelayed(animation, 12);
+            }
+        }
+    };
     public void checkTarget(){
         roomHealth[target] = enemydamage;
         if(roomHealth[
@@ -70,6 +116,15 @@ public class GameActivity extends variables{
     public void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
         mHandler = null;
+    }
+    public void stopAnimation(){
+        mHandler2.removeCallbacks(animation);
+    }
+    public void startAnimation(int times, int angle){
+        animtimes = times;
+        rotation = angle;
+        stopAnimation();
+        animation.run();
     }
     /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
     public void clickerSet(){
