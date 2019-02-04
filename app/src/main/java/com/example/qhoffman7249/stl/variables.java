@@ -3,9 +3,11 @@ package com.example.qhoffman7249.stl;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class variables extends AppCompatActivity {
     public Button openWeaponMenu;
     public Button openCrewMenu;
     public Button openRoomMenu;
-
+    public String crew1Name;
     public void variableSet(){
         Occupied[0] = new int[5];
         Occupied[1] = new int[5];
@@ -104,8 +106,8 @@ public class variables extends AppCompatActivity {
         controlRoomButton = findViewById(R.id.control);
         crewMan= findViewById(R.id.crewDude);
         openMenu = findViewById(R.id.menu);
-        openWeaponMenu= findViewById(R.id.firstSubM);
-        openCrewMenu = findViewById(R.id.secondSubM);
-        openRoomMenu= findViewById(R.id.thirdSubM);
+        //openWeaponMenu= findViewById(R.id.firstSubM);
+        //openCrewMenu = findViewById(R.id.secondSubM);
+        //openRoomMenu= findViewById(R.id.thirdSubM);
     }
 }

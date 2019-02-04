@@ -12,10 +12,9 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-import android.graphics.Path;//random comment
+import android.graphics.Path;
 
 public class GameActivity extends variables{
-
     Path cToEPath= new Path();
     private int mInterval = 1000; // 5 seconds by default, can be changed later
     private Handler mHandler;
@@ -31,7 +30,7 @@ public class GameActivity extends variables{
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
         clickerSet();
-        startAnimation();
+        //startAnimation();
     }
     @Override
     public void onDestroy() {
@@ -269,7 +268,7 @@ public class GameActivity extends variables{
                     else if(Clicked[4]==true){
                         //control room to shield room
                         Clicked[4]=false;
-                    }//random comment
+                    }
                 }
                 //engine
                 if (xpos==617.28515625&&ypos==606.62548828125){
