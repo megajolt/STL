@@ -55,11 +55,9 @@ public class variables extends AppCompatActivity {
     public static Coordinates room=new Coordinates();
     public static List<String> characternames;
     public static boolean menubool = false;
-    public Button bastardSword;
-    public Button pruningShears;
-    public Button maul;
-    public Button halberd;
-    public Button glaive;
+    public ImageView bastardSword;
+    public ImageView maul;
+    public ImageView halberd;
     public Button medRoomButton;
     public Button engineRoomButton;
     public Button gunRoomButton;
@@ -97,10 +95,8 @@ public class variables extends AppCompatActivity {
         enemyShieldBar.setScaleY(2f);
         enemy = findViewById(R.id.enemyShip);
         bastardSword = findViewById(R.id.bastardSword);
-        pruningShears = findViewById(R.id.pruningShears);
         maul = findViewById(R.id.maul);
         halberd = findViewById(R.id.halberd);
-        glaive = findViewById(R.id.glaive);
         medRoomButton = findViewById(R.id.medBay);
         engineRoomButton = findViewById(R.id.engine);
         shieldRoomButton = findViewById(R.id.shield);

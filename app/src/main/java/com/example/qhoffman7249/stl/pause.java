@@ -13,7 +13,7 @@ public class pause extends AppCompatActivity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
+        //random comment
         double width = dm.widthPixels;
         double height = dm.heightPixels;
 

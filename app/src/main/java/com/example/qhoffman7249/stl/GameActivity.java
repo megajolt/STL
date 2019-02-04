@@ -11,28 +11,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.graphics.Path;
+import android.graphics.Path;//random comment
 
 public class GameActivity extends variables{
 
     Path cToEPath= new Path();
-    private int mInterval = 5000; // 5 seconds by default, can be changed later
+    private int mInterval = 1000; // 5 seconds by default, can be changed later
     private Handler mHandler;
+    private Handler mHandler2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         variableSet();
         mHandler = new Handler();
+        mHandler2 = new Handler();
         startRepeatingTask();
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
         clickerSet();
+        startAnimation();
     }
     @Override
     public void onDestroy() {
@@ -45,10 +44,59 @@ public class GameActivity extends variables{
             try {
                 enemydamage = sysAI.getDamage();
                 target = sysAI.getTarget();
-                checkdamage();
-                checkTarget();
+                if(enemyhealth > 0) {
+                    checkdamage();
+                    checkTarget();
+                }
             } finally {
                 mHandler.postDelayed(mStatusChecker, mInterval);
+            }
+        }
+    };
+    int randomint = 0;
+    int animtimes = 200;
+    int rotation = 0;
+    int time = 0;
+    Runnable animation = new Runnable() {
+        @Override
+        public void run() {
+            //put frame change code here
+            try{
+                if(randomint >= animtimes){
+                    //rotate and set frame
+                    Toast.makeText(GameActivity.this, "elapsed", Toast.LENGTH_SHORT).show();
+                    time = 0;
+                }
+                else{
+                    if(time == 0){
+
+                    }
+                    if(time == 1){
+
+                    }
+                    if(time == 2){
+
+                    }
+                    if(time == 3){
+
+                    }
+                    if(time == 4){
+
+                    }
+                    if(time == 5){
+
+                    }
+                    if(time == 6){
+
+                    }
+                    if(time == 7){
+
+                    }
+                    time++;
+                }
+                randomint++;
+            }finally {
+                mHandler2.postDelayed(animation, 12);
             }
         }
     };
@@ -67,6 +115,16 @@ public class GameActivity extends variables{
     }
     public void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
+        mHandler = null;
+    }
+    public void stopAnimation(){
+        mHandler2.removeCallbacks(animation);
+    }
+    public void startAnimation(int times, int angle){
+        animtimes = times;
+        rotation = angle;
+        stopAnimation();
+        animation.run();
     }
     /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
     public void clickerSet(){
@@ -108,24 +166,10 @@ public class GameActivity extends variables{
                 enemycheckdamage();
             }
         });
-        pruningShears.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                damage = weapons.peaShooter;
-                enemycheckdamage();
-            }
-        });
         maul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 damage = weapons.maul;
-                enemycheckdamage();
-            }
-        });
-        glaive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                damage = weapons.glaive;
                 enemycheckdamage();
             }
         });
@@ -134,52 +178,6 @@ public class GameActivity extends variables{
             public void onClick(View view) {
                 damage = weapons.bastardSword;
                 enemycheckdamage();
-            }
-        });
-        //animation buttons
-        medRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.medCoords;
-                Clicked[3]=true;
-                //coordMaker(coords);
-
-            }
-        });
-        engineRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.engineCoords;
-                Clicked[1]=true;
-               //coordMaker(coords);
-
-            }
-        });
-        shieldRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.shieldCoords;
-                Clicked[4]=true;
-                //coordMaker(coords);
-
-            }
-        });
-        gunRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.gunCoords;
-                Clicked[2]=true;
-                //coordMaker(coords);
-
-            }
-        });
-        controlRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coords = room.controlCoords;
-                Clicked[0]=true;
-                //coordMaker(coords);
-
             }
         });
         //Infirmary: X:534.2578125 y: 785.79052734375
@@ -271,7 +269,7 @@ public class GameActivity extends variables{
                     else if(Clicked[4]==true){
                         //control room to shield room
                         Clicked[4]=false;
-                    }
+                    }//random comment
                 }
                 //engine
                 if (xpos==617.28515625&&ypos==606.62548828125){
@@ -316,6 +314,7 @@ public class GameActivity extends variables{
         }
         if(health <= 0){
             Toast.makeText(GameActivity.this, "You Dead", Toast.LENGTH_SHORT).show();
+            stopRepeatingTask();
             Intent r = new Intent(GameActivity.this, StlMenu.class);
             startActivity(r);
         }
