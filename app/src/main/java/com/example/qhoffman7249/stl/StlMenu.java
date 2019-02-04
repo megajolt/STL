@@ -15,6 +15,7 @@ public class StlMenu extends AppCompatActivity {
         Button newgame = findViewById(R.id.newGame);
         Button loadgame = findViewById(R.id.loadGame);
         Button settings = findViewById(R.id.settings);
+        final Button multiplayer = findViewById(R.id.multiplayer);
         Button exit = findViewById(R.id.exit);
 
         newgame.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +44,13 @@ public class StlMenu extends AppCompatActivity {
             public void onClick(View v) {
                 finishAffinity();
                 System.exit(0);
+            }
+        });
+        multiplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StlMenu.this, multiplayer.class);
+                startActivity(i);
             }
         });
     }

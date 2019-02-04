@@ -30,6 +30,7 @@ public class GameActivity extends variables{
         Intent m = new Intent(GameActivity.this, music.class);
         //startService(m);
         clickerSet();
+        startAnimation(2,7);
         //startAnimation();
     }
     @Override
