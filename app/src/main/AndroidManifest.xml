@@ -35,11 +35,12 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".PopTivity"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
-        <activity android:name=".pause"
-            android:theme="@style/AppTheme"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".pause"
             android:screenOrientation="landscape"
-            ></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".multiplayer"></activity>
     </application>
 
 </manifest>

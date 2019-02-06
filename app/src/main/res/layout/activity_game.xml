@@ -66,7 +66,7 @@
             android:id="@+id/crewDude"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/frontwalk1"
+            android:background="@drawable/crew1"
             android:visibility="visible" />
     </LinearLayout>
 
