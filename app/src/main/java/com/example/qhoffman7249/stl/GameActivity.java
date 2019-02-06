@@ -32,6 +32,7 @@ public class GameActivity extends variables{
         clickerSet();
         startAnimation(2,7);
         //startAnimation();
+        //
     }
     @Override
     public void onDestroy() {
