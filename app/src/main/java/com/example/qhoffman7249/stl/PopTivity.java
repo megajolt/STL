@@ -15,15 +15,15 @@ public class PopTivity extends variables {
     public Button rename;
     public EditText renameField;
     public TextView nameDisplay;
-    Crew v=new Crew();
+    Crew v = new Crew();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_tivity);
-        rename=findViewById(R.id.renameButton);
-        renameField=findViewById(R.id.crewNameField);
-        nameDisplay=findViewById(R.id.nameDisplay);
+        rename = findViewById(R.id.renameButton);
+        renameField = findViewById(R.id.crewNameField);
+        nameDisplay = findViewById(R.id.nameDisplay);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -33,7 +33,6 @@ public class PopTivity extends variables {
         width = width * 1.2;
         nameDisplay.setText(v.firstName);
         renameField.setText(v.firstName);
-        Toast.makeText(PopTivity.this, ""+v.firstName, Toast.LENGTH_LONG).show();
         rename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,8 +40,14 @@ public class PopTivity extends variables {
             }
         });
     }
-    public void nameSet(){
-        v.firstName=renameField.getText().toString();
-        nameDisplay.setText(v.firstName);
+
+    public void nameSet() {
+        if (renameField.length() == 0) {
+            Toast.makeText(PopTivity.this, "Name cannot be 0 characters", Toast.LENGTH_SHORT).show();
+            renameField.setText(v.firstName);
+        } else {
+            v.firstName = renameField.getText().toString();
+            nameDisplay.setText(v.firstName);
+        }
     }
 }
