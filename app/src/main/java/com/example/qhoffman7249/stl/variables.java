@@ -45,13 +45,12 @@ public class variables extends AppCompatActivity {
     public static boolean damaged=false;
     public static int enemydamage = 0;
     public static int coords=0;
-    public static boolean crewVisibility=false;
     public static boolean[] Clicked = new boolean[6];
     public static AI sysAI;
     public static int target = 0;
-    public double y=624.654052734375;
+    public double y=450.654052734375;
     public float floatY= (float)y;
-    public double x=872.40234375;
+    public double x=602.40234375;
     public float floatX=(float)x;
     public static Gun weapons=new Gun();
     public static Coordinates room=new Coordinates();
@@ -65,6 +64,7 @@ public class variables extends AppCompatActivity {
     public Button gunRoomButton;
     public Button controlRoomButton;
     public Button crewMan;
+    public ImageView mShip;
     public Button shieldRoomButton;
     public Button openMenu;
     public Button openWeaponMenu;
@@ -109,5 +109,6 @@ public class variables extends AppCompatActivity {
         //openWeaponMenu= findViewById(R.id.firstSubM);
         //openCrewMenu = findViewById(R.id.secondSubM);
         //openRoomMenu= findViewById(R.id.thirdSubM);
+        mShip= findViewById(R.id.ship);
     }
 }
