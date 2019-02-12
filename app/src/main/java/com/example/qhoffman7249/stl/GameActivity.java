@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.graphics.Path;
 
@@ -26,6 +27,16 @@ public class GameActivity extends variables{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Crew crew1 = new Crew(this, 0);
+        crew1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent r = new Intent(GameActivity.this, PopTivity.class);
+                startActivity(r);
+            }
+        });
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        linearLayout.addView(crew1);
         variableSet();
         mHandler = new Handler();
         mHandler2 = new Handler();

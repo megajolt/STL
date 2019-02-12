@@ -15,7 +15,7 @@ public class PopTivity extends variables {
     public Button rename;
     public EditText renameField;
     public TextView nameDisplay;
-    Crew v = new Crew();
+    //Crew v = new Crew(this, 0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,23 +31,23 @@ public class PopTivity extends variables {
         double width = dm.widthPixels;
         double height = dm.heightPixels;
         width = width * 1.2;
-        nameDisplay.setText(v.firstName);
-        renameField.setText(v.firstName);
-        rename.setOnClickListener(new View.OnClickListener() {
+        //nameDisplay.setText(v.firstName);
+        //renameField.setText(v.firstName);
+        /*rename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nameSet();
             }
-        });
+        });*/
     }
 
     public void nameSet() {
         if (renameField.length() == 0) {
             Toast.makeText(PopTivity.this, "Name cannot be 0 characters", Toast.LENGTH_SHORT).show();
-            renameField.setText(v.firstName);
+            //renameField.setText(v.firstName);
         } else {
-            v.firstName = renameField.getText().toString();
-            nameDisplay.setText(v.firstName);
+            //v.firstName = renameField.getText().toString();
+            //nameDisplay.setText(v.firstName);
         }
     }
 }
