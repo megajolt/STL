@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.util.ListIterator;
 
 public class multiplayer extends AppCompatActivity {
@@ -24,7 +26,7 @@ public class multiplayer extends AppCompatActivity {
     EditText member2;
     EditText member3;
     EditText member4;
-
+    private boolean open = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,23 @@ public class multiplayer extends AppCompatActivity {
                 }
                 if(people == 4){
                     member2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DatagramSocket ss = new DatagramSocket(7000);
+                    byte[] receive = new byte[65];
+                    DatagramPacket rec = null;
+                    while(open){
+                        rec = new DatagramPacket(receive, receive.length);
+                        ss.receive(rec);
+                        receive = new byte[65];
+                    }
+                }catch(Exception e) {
+                    e.printStackTrace();
                 }
             }
         });

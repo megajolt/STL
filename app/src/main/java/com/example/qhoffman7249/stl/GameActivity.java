@@ -15,11 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.graphics.Path;
 
+import java.util.List;
+
 public class GameActivity extends variables{
     Path cToEPath= new Path();
     Path cToSPath=new Path();
     Path cToGPath=new Path();
     Path cToIPath=new Path();
+    List<Crew> crewlist;
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     private Handler mHandler2;
@@ -27,16 +30,28 @@ public class GameActivity extends variables{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        Crew crew1 = new Crew(this, 0);
+        /*rew crew1 = new Crew(this, 0);
         crew1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent r = new Intent(GameActivity.this, PopTivity.class);
                 startActivity(r);
             }
-        });
+        });*/
+        for(int i = 0; i < 5; i++){
+            crewlist.add(new Crew(this, i));
+            final int b = i;
+            crewlist.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent r = new Intent(GameActivity.this, PopTivity.class);
+                    r.putExtra("crew-number", b);
+                    startActivity(r);
+                }
+            });
+        }
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
-        linearLayout.addView(crew1);
+        linearLayout.addView(crewlist.get(0));
         variableSet();
         mHandler = new Handler();
         mHandler2 = new Handler();

@@ -2,7 +2,7 @@ package com.example.qhoffman7249.stl;
 
 import java.util.Random;
 
-public class AI {
+public class AI{
     private int level;
     private int playerHealth;
     private int aiHealth;
