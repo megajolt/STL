@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.graphics.Path;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends variables{
@@ -22,7 +23,7 @@ public class GameActivity extends variables{
     Path cToSPath=new Path();
     Path cToGPath=new Path();
     Path cToIPath=new Path();
-    List<Crew> crewlist;
+    List<Crew> crewlist = new ArrayList<Crew>();
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     private Handler mHandler2;
@@ -30,15 +31,7 @@ public class GameActivity extends variables{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        /*rew crew1 = new Crew(this, 0);
-        crew1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent r = new Intent(GameActivity.this, PopTivity.class);
-                startActivity(r);
-            }
-        });*/
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 5; i++) {
             crewlist.add(new Crew(this, i));
             final int b = i;
             crewlist.get(i).setOnClickListener(new View.OnClickListener() {
@@ -49,9 +42,9 @@ public class GameActivity extends variables{
                     startActivity(r);
                 }
             });
+            LinearLayout linearLayout = findViewById(R.id.linearLayout);
+            linearLayout.addView(crewlist.get(i));
         }
-        LinearLayout linearLayout = findViewById(R.id.linearLayout);
-        linearLayout.addView(crewlist.get(0));
         variableSet();
         mHandler = new Handler();
         mHandler2 = new Handler();
@@ -98,30 +91,6 @@ public class GameActivity extends variables{
                     time = 0;
                 }
                 else{
-                    if(time == 0){
-
-                    }
-                    if(time == 1){
-
-                    }
-                    if(time == 2){
-
-                    }
-                    if(time == 3){
-
-                    }
-                    if(time == 4){
-
-                    }
-                    if(time == 5){
-
-                    }
-                    if(time == 6){
-
-                    }
-                    if(time == 7){
-
-                    }
                     time++;
                 }
                 randomint++;
@@ -158,38 +127,8 @@ public class GameActivity extends variables{
     }
     /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
     public void clickerSet(){
-        openMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                menubool = true;
-                Intent i = new Intent(GameActivity.this, PopTivity.class);
-                startActivity(i);
-            }
-        });
-        View myview = findViewById(R.id.view);
-        myview.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN){
-                    xfin=event.getX();
-                    yfin=event.getY();
-                    Toast.makeText(GameActivity.this, "coordinates: x: " + xfin + " y:" + yfin, Toast.LENGTH_LONG).show();
-                }
-                return true;
-            }
-        });
-
-        float cxp = crewMan.getX();
-        float cyp = crewMan.getY();
-        floatY=floatY-204;
-        ObjectAnimator animationx = ObjectAnimator.ofFloat(crewMan, "translationX", cxp, floatX);
-        animationx.setDuration(2000);
-        animationx.start();
-        ObjectAnimator animatory = ObjectAnimator.ofFloat(crewMan, "translationY", cyp, floatY);
-        animatory.setDuration(2000);
-        animatory.start();
         //damage buttons
-        /*halberd.setOnClickListener(new View.OnClickListener() {
+        halberd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 damage = weapons.halberd;
@@ -209,164 +148,8 @@ public class GameActivity extends variables{
                 damage = weapons.bastardSword;
                 enemycheckdamage();
             }
-        });*/
-        //Infirmary: X:534.2578125 y: 785.79052734375
-        // Shield: X: 557.2265625  y:544.563720703125
-        //Gun: X: 653.320315 y: 544.563720703125
-        //Control: X: 872.40234375 y: 624.654052734375
-        //Engine: X:617.28515625 y: 606.62548828125
-        crewMan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xpos=crewMan.getX();
-                ypos=crewMan.getY();
-                //if the clicked crew member is in the control room
-                Clicked[4]=true;
-                if(xpos==872.40234375&&ypos==412.654052734375){
-                    if(Clicked[3]==true){
-                        //runs animations from control room to infirmary
-                        cToIPath.moveTo((float)872.40234375,(float)624.654052734375);
-                        cToIPath.lineTo((float)657.28125,(float)616.64501953125);
-                        cToIPath.lineTo((float)657.28125,(float)702.700927734375);
-                        cToIPath.lineTo((float)611.25,(float)702.700927734375);
-                        cToIPath.lineTo((float)553.2421875,(float)702.700927734375);
-                        cToIPath.lineTo((float)553.2421875,(float)785.79052734375);
-                        cToIPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToIPath).setDuration(4000).start();
-                        Clicked[3]=false;
-                    }
-                    else if(Clicked[2]==true){
-                        //control room to gun room
-                        cToGPath.moveTo((float)872.40234375,(float)624.654052734375);
-                        cToGPath.lineTo((float)657.28125,(float)616.64501953125);
-                        cToGPath.lineTo((float)657.28125,(float)712.700927734375);
-                        cToGPath.lineTo((float)654.28125,(float)744.7626953125);
-                        cToGPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToGPath).setDuration(4000).start();
-                        Clicked[2]=false;
-                    }
-                    else if(Clicked[4]==true){
-                        //control room to shield room
-                        cToSPath.moveTo((float)872.40234375,(float)624.654052734375);
-                        cToSPath.lineTo((float)657.28125,(float)616.64501953125);
-                        cToSPath.lineTo((float)657.28125,(float)562.59228515625);
-                        cToSPath.lineTo((float)658.30078125,(float)538.565185546875);
-                        cToSPath.lineTo((float)762.363281,(float)538.565185546875);
-                        cToSPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToSPath).setDuration(20000).start();
-                        Clicked[4]=false;
-                    }
-                    else if(Clicked[1]==true){
-                        //control room engine room
-                        cToEPath.moveTo((float)872.40234375,(float)616.654052734375);
-                        cToEPath.lineTo((float)663.28125,(float)616.64501953125);
-                        cToEPath.lineTo((float)611.25,(float)616.64501953125);
-                        cToEPath.lineTo((float)611.25,(float)584.60888671875);
-                        cToEPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToEPath).setDuration(4000).start();
-                        Clicked[1]=false;
-                    }
-                }
-                //Infirmary
-                if(xpos==553.2421875&&ypos==785.79052734375){
-                    if(Clicked[0]==true){
-                        //infirmary to control
-                        cToIPath.moveTo((float)553.2421875,(float)785.79052734375);
-                        cToIPath.lineTo((float)553.2421875,(float)702.700927734375);
-                        cToIPath.lineTo((float)611.25,(float)702.700927734375);
-                        cToIPath.lineTo((float)657.28125,(float)702.700927734375);
-                        cToIPath.lineTo((float)657.28125,(float)616.64501953125);
-                        cToIPath.lineTo((float)872.40234375,(float)624.654052734375);
-                        cToIPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToIPath).setDuration(4000).start();
-                        Clicked[0]=false;
-                    }
-                    else if(Clicked[2]==true){
-                        //infirmary to gun room
-                        Clicked[2]=false;
-                    }
-                    else if(Clicked[4]==true){
-                        //infirmary to shield room
-                        Clicked[4]=false;
-                    }
-                    else if(Clicked[1]==true){
-                        //infirmary to engine room
-                        Clicked[1]=false;
-                    }
-                }
-                //shield
-                if (xpos==557.2265625&&ypos==544.563720703125){
-                    if(Clicked[2]==true){
-                        //shield room to gun room
-                        Clicked[2]=false;
-                    }
-
-                    else if(Clicked[1]==true){
-                        //shield room engine room
-                        Clicked[1]=false;
-                    }
-                    else if(Clicked[3]==true){
-                        //shield room to infirmary
-                        Clicked[3]=false;
-                    }
-                    else if(Clicked[0]==true){
-                        //shield to control
-                        Clicked[0]=false;
-                    }
-                }
-                //gun
-                if(xpos==653.320315&&ypos==764.7626953125){
-                    if(Clicked[0]==true){
-                        //gun to control
-                        cToGPath.moveTo((float)654.28125,(float)744.7626953125);
-                        cToGPath.lineTo((float)657.28125,(float)712.700927734375);
-                        cToGPath.lineTo((float)657.28125,(float)616.64501953125);
-                        cToGPath.lineTo((float)872.40234375,(float)624.654052734375);
-                        cToGPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToGPath).setDuration(4000).start();
-                        Clicked[0]=false;
-                    }
-                    else if(Clicked[1]==true){
-                        //gun room engine room
-                        Clicked[1]=false;
-                    }
-                    else if(Clicked[3]==true){
-                        //gun room to infirmary
-                        Clicked[3]=false;
-                    }
-                    else if(Clicked[4]==true){
-                        //gun room to shield room
-                        Clicked[4]=false;
-                    }
-                }
-                //engine
-                if (xpos==617.28515625&&ypos==606.62548828125){
-                    if(Clicked[3]==true){
-                        //engine room to infirmary
-                        Clicked[3]=false;
-                    }
-                    else if(Clicked[2]==true){
-                        //engine room to gun room
-                        Clicked[2]=false;
-                    }
-                    else if(Clicked[4]==true){
-                        //engine room to shield room
-                        Clicked[4]=false;
-                    }
-                    else if(Clicked[0]==true){
-                        //engine to control
-                        cToEPath.moveTo((float)611.25,(float)584.60888671875);
-                        cToEPath.lineTo((float)611.25,(float)616.64501953125);
-                        cToEPath.lineTo((float)663.28125,(float)616.64501953125);
-                        cToEPath.lineTo((float)872.40234375,(float)616.654052734375);
-                        cToEPath.offset(-10,-10);
-                        ObjectAnimator.ofFloat(crewMan,crewMan.X,crewMan.Y,cToEPath).setDuration(4000).start();
-                        Clicked[0]=false;
-                    }
-                }
-
-            }
         });
+
     }
     int test = 100;
     public void checkdamage(){
@@ -424,22 +207,17 @@ public class GameActivity extends variables{
         enemyShieldBar.setProgress(enemycurrentShield);
     }
     //call this with whatever changes oxygen
-    public void oxygenCheck(int oxygenLevel){
-        if (oxygenLevel<50){
+    public void oxygenCheck(int oxygenLevel) {
+        if (oxygenLevel < 50) {
             oxygenEmergency.setVisibility(View.VISIBLE);
         }
-        if(oxygenLevel>=50){
+        if (oxygenLevel >= 50) {
             oxygenEmergency.setVisibility(View.GONE);
             largerOxygenEmergency.setVisibility(View.GONE);
         }
-        if (oxygenLevel<25){
+        if (oxygenLevel < 25) {
             oxygenEmergency.setVisibility(View.GONE);
             largerOxygenEmergency.setVisibility(View.VISIBLE);
         }
     }
-    /*
-    public void coordMaker(int coords){
-        x=coords/1000;
-        y=coords%1000;
-    }*/
-    }
+}
