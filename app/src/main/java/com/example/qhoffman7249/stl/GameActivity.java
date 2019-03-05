@@ -20,14 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends variables{
-    public static int getScreenWidth() {
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
-    }
-    public static int getScreenHeight() {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
-    }
-    public int phoneWidth= getScreenWidth();
-    public int phoneHeight= getScreenHeight();
+
     Path cToEPath= new Path();
     Path cToSPath=new Path();
     Path cToGPath=new Path();

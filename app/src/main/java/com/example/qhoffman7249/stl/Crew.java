@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 public class Crew extends AppCompatImageView{
+    //drool
     private String crewName;
     private int[] position;
     public String firstName;
