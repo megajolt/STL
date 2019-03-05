@@ -18,7 +18,6 @@ public class Crew extends AppCompatImageView{
 
     public Crew(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
     }
     public Crew(Context context, int crewNumber) {
         super(context);
