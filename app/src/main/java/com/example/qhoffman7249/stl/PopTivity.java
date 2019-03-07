@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 public class PopTivity extends variables {
+    //tool
     public ScrollView current;
     public Button rename;
     public EditText renameField;

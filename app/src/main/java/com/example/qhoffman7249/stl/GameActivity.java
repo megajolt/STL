@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends variables{
+
     Path cToEPath= new Path();
     Path cToSPath=new Path();
     Path cToGPath=new Path();
@@ -89,7 +91,7 @@ public class GameActivity extends variables{
             try{
                 if(randomint >= animtimes){
                     //rotate and set frame
-                    Toast.makeText(GameActivity.this, "elapsed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "elapsed", Toast.LENGTH_LONG).show();
                     time = 0;
                 }
                 else{

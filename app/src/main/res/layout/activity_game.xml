@@ -9,7 +9,6 @@
     tools:context=".GameActivity">
 
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -17,10 +16,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -61,21 +60,22 @@
                         app:layout_constraintStart_toEndOf="@+id/shieldBar"
                         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/shieldBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="100dp"
-        android:layout_height="10dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:max="100"
-        android:progress="0"
-        android:progressTint="#0288d1"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+                    <ProgressBar
+                        android:id="@+id/shieldBar"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="#0288d1"
+                        android:visibility="visible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/oxygenEmergency"
@@ -93,6 +93,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/playeractivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -123,26 +124,13 @@
                         android:layout_weight=".50"
                         android:src="@drawable/weapon3" />
                 </LinearLayout>
-               <LinearLayout
-                   android:layout_width="20dp"
-                   android:layout_height="20dp">
-                <Button
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:id="@+id/crewDude"
-                    android:src="@drawable/crew1"
-                    android:foregroundGravity="top"
-                    />
-               </LinearLayout>
                 <ImageView
                     android:id="@+id/ship"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/room_layout_sprite"
                     android:rotation="90"
-                    android:src="@drawable/ship1rm"
-                    android:foregroundGravity="bottom"
-                    />
+                    android:src="@drawable/ship1rm" />
 
             </LinearLayout>
 

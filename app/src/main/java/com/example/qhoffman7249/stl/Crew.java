@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Crew extends AppCompatImageView{
+    //drool
     private String crewName;
     private int[] position;
     public String firstName;
@@ -20,7 +21,6 @@ public class Crew extends AppCompatImageView{
 
     public Crew(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
     }
     public Crew(Context context, int crewNumber) {
         super(context);
