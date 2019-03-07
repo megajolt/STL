@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship{
-    //random comment
     int shield = 100;
     int health = 100;
     double xpos;

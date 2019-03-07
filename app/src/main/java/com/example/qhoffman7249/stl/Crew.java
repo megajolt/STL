@@ -29,10 +29,11 @@ public class Crew extends AppCompatImageView{
         this.setMaxWidth(50);
         this.setMaxHeight(50);
         //this.getLocationOnScreen(position);
-        this.setLayoutParams(new DrawerLayout.LayoutParams(200,200));
+        this.setLayoutParams(new DrawerLayout.LayoutParams(30,30));
         //Toast.makeText(context, "size: " + this.getSize(), Toast.LENGTH_SHORT).show();
     }
     int getSize(){
         return this.getSize();
+
     }
 }
