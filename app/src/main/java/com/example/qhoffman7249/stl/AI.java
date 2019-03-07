@@ -32,11 +32,8 @@ public class AI{
         }
         return 0;
     }
-    public int getTarget(){
-        if(level == 2){
-            return 1;
-        }
-        return 0;
+    Room getTarget(Ship myShip){
+        return myShip.getRoom(0);
     }
     public int level1(int action){
         if(action == 0){

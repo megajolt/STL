@@ -23,6 +23,7 @@ public class GameActivity extends variables{
     Path cToSPath=new Path();
     Path cToGPath=new Path();
     Path cToIPath=new Path();
+    Ship myShip;
     List<Crew> crewlist = new ArrayList<Crew>();
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
@@ -30,6 +31,7 @@ public class GameActivity extends variables{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myShip = new Ship(6);
         setContentView(R.layout.activity_game);
         for(int i = 0; i < 5; i++) {
             crewlist.add(new Crew(this, i));
@@ -42,7 +44,7 @@ public class GameActivity extends variables{
                     startActivity(r);
                 }
             });
-            LinearLayout linearLayout = findViewById(R.id.linearLayout);
+            LinearLayout linearLayout = findViewById(R.id.crewlayout);
             linearLayout.addView(crewlist.get(i));
         }
         variableSet();
@@ -66,10 +68,10 @@ public class GameActivity extends variables{
         public void run() {
             try {
                 enemydamage = sysAI.getDamage();
-                target = sysAI.getTarget();
                 if(enemyhealth > 0) {
-                    checkdamage();
-                    checkTarget();
+                    //checkdamage(myShip.getHealth(), myShip.getShield(),  sysAI.getDamage());
+                    Room target = sysAI.getTarget(myShip);
+                    //checkTarget();
                 }
             } finally {
                 mHandler.postDelayed(mStatusChecker, mInterval);
@@ -151,8 +153,8 @@ public class GameActivity extends variables{
         });
 
     }
-    int test = 100;
-    public void checkdamage(){
+    int oxygenLevel = 100;
+    public void checkdamage(int health, int currentShield, int enemydamage){
         //first check damage relative to enemy action
         //test = test - 10;
         if(enemydamage>currentShield){
@@ -174,6 +176,10 @@ public class GameActivity extends variables{
             stopRepeatingTask();
             Intent r = new Intent(GameActivity.this, StlMenu.class);
             startActivity(r);
+        }
+        if(currentShield < 1){
+            oxygenLevel -= 20;
+            oxygenCheck(oxygenLevel);
         }
         if(health<100){
             damaged=true;
@@ -218,6 +224,11 @@ public class GameActivity extends variables{
         if (oxygenLevel < 25) {
             oxygenEmergency.setVisibility(View.GONE);
             largerOxygenEmergency.setVisibility(View.VISIBLE);
+        }
+        if(oxygenLevel < 1){
+            Intent i = new Intent(GameActivity.this, StlMenu.class);
+            Toast.makeText(this, "you suffocated", Toast.LENGTH_SHORT).show();
+            startActivity(i);
         }
     }
 }

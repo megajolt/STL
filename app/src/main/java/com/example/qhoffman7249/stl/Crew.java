@@ -5,7 +5,9 @@ import android.graphics.Point;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.util.Size;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Crew extends AppCompatImageView{
     private String crewName;
@@ -24,7 +26,13 @@ public class Crew extends AppCompatImageView{
         super(context);
         crewName = "Crew " + (crewNumber + 1);
         this.setImageResource(R.drawable.crew1);
+        this.setMaxWidth(50);
+        this.setMaxHeight(50);
         //this.getLocationOnScreen(position);
         this.setLayoutParams(new DrawerLayout.LayoutParams(200,200));
+        //Toast.makeText(context, "size: " + this.getSize(), Toast.LENGTH_SHORT).show();
+    }
+    int getSize(){
+        return this.getSize();
     }
 }
