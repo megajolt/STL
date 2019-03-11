@@ -17,7 +17,8 @@ public class StlMenu extends AppCompatActivity {
         Button settings = findViewById(R.id.settings);
         final Button multiplayer = findViewById(R.id.multiplayer);
         Button exit = findViewById(R.id.exit);
-
+        Intent music= new Intent(StlMenu.this,music.class);
+        startService(music);
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
