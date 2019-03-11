@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class StlMenu extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,13 +18,14 @@ public class StlMenu extends AppCompatActivity {
         Button settings = findViewById(R.id.settings);
         final Button multiplayer = findViewById(R.id.multiplayer);
         Button exit = findViewById(R.id.exit);
-        Intent music= new Intent(StlMenu.this,music.class);
+       final Intent music= new Intent(StlMenu.this,menuMusic.class);
         startService(music);
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent ng = new Intent(StlMenu.this, PopTivity.class);
                 startActivity(ng);
+                stopService(music);
             }
         });
         loadgame.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +33,7 @@ public class StlMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent lg = new Intent(StlMenu.this, gamesearch.class);
                 startActivity(lg);
+                stopService(music);
             }
         });
         settings.setOnClickListener(new View.OnClickListener() {

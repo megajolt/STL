@@ -6,7 +6,7 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-public class music extends Service
+public class gameMusic extends Service
 {
     MediaPlayer player;
     @Nullable
@@ -17,7 +17,7 @@ public class music extends Service
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        player = MediaPlayer.create(this, R.raw.sunshine);
+        player = MediaPlayer.create(this, R.raw.ambush);
         player.setLooping(true);
         player.start();
         return START_STICKY;

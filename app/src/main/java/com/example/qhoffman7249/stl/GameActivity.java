@@ -1,16 +1,9 @@
 package com.example.qhoffman7249.stl;
 
-import android.animation.ObjectAnimator;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -30,6 +23,7 @@ public class GameActivity extends variables{
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     private Handler mHandler2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +47,8 @@ public class GameActivity extends variables{
         mHandler = new Handler();
         mHandler2 = new Handler();
         startRepeatingTask();
-        Intent m = new Intent(GameActivity.this, music.class);
-        //startService(m);
+        Intent m = new Intent(GameActivity.this, gameMusic.class);
+        startService(m);
         clickerSet();
         startAnimation(2,7);
         //startAnimation();
