@@ -30,6 +30,7 @@ public class GameActivity extends variables{
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     private Handler mHandler2;
+    int playerCoolDown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class GameActivity extends variables{
         //startAnimation();
         //
     }
+    int coolDown;
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -69,12 +71,15 @@ public class GameActivity extends variables{
         @Override
         public void run() {
             try {
-                enemydamage = sysAI.getDamage();
-                if(enemyhealth > 0) {
+                if(enemyhealth > 0 && coolDown == 0) {
+                    Weapons weapon = sysAI.getWeapon();
+                    coolDown = weapon.coolDown;
                     //checkdamage(myShip.getHealth(), myShip.getShield(),  sysAI.getDamage());
                     Room target = sysAI.getTarget(myShip);
-                    //checkTarget();
+                    myShip.setRoomHealth(target.getIndex(), target.getHealth() - weapon.damage);
+                    checkdamage(weapon.damage);
                 }
+                coolDown--;
             } finally {
                 mHandler.postDelayed(mStatusChecker, mInterval);
             }
@@ -156,7 +161,7 @@ public class GameActivity extends variables{
 
     }
     int oxygenLevel = 100;
-    public void checkdamage(int health, int currentShield, int enemydamage){
+    public void checkdamage(int enemydamage){
         //first check damage relative to enemy action
         //test = test - 10;
         if(enemydamage>currentShield){

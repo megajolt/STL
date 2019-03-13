@@ -1,8 +1,11 @@
 package com.example.qhoffman7249.stl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class AI{
+    List<Weapons> weapons = new ArrayList<>();
     private int level;
     private int playerHealth;
     private int aiHealth;
@@ -10,6 +13,8 @@ public class AI{
     private int aiShield;
     public AI(int startlevel){
         level = startlevel;
+        weapons.get(0).coolDown = 0;
+        weapons.get(0).damage = 2;
     }
     public void update(int shield, int health, int enemyHealth, int enemyShield){
         playerHealth = enemyHealth;
@@ -59,5 +64,8 @@ public class AI{
     }
     public int getLevel(){
         return level;
+    }
+    public Weapons getWeapon(){
+        return weapons.get(0);
     }
 }

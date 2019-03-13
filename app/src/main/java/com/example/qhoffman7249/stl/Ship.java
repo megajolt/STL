@@ -102,4 +102,7 @@ public class Ship{
     double getXPosition(){
         return xpos;
     }
+    void setRoomHealth(int index, int health){
+        rooms.get(index).setHealth(health);
+    }
 }

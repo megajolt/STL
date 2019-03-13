@@ -50,4 +50,7 @@ public class Room {
     double getX(){
         return xpos;
     }
+    int getIndex(){
+        return number;
+    }
 }
