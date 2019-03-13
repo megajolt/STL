@@ -54,8 +54,8 @@ public class GameActivity extends variables{
         mHandler = new Handler();
         mHandler2 = new Handler();
         startRepeatingTask();
-        Intent m = new Intent(GameActivity.this, music.class);
-        //startService(m);
+        Intent m = new Intent(GameActivity.this, gameMusic.class);
+        startService(m);
         clickerSet();
         startAnimation(2,7);
         //startAnimation();
