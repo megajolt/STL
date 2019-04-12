@@ -29,6 +29,7 @@ public class variables extends AppCompatActivity {
     public static ProgressBar enemyShieldBar;
     public static ProgressBar enemyHealthBar;
     public static int oxygenLevel=100;
+    public static int coolDownTime=0;
     public static ImageView oxygenEmergency;
     public static ImageView largerOxygenEmergency;
     public static LinearLayout weaponButtons;
@@ -44,6 +45,7 @@ public class variables extends AppCompatActivity {
     public static Coordinates room=new Coordinates();
     public static List<String> characternames;
     public static boolean menubool = false;
+    public static boolean coolDown=false;
     public ImageView bastardSword;
     public ImageView maul;
     public ImageView halberd;

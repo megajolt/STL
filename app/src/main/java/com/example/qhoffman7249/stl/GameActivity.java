@@ -52,7 +52,6 @@ public class GameActivity extends variables{
         clickerSet();
         startAnimation(2,7);
         //startAnimation();
-        //
     }
     @Override
     public void onDestroy() {
@@ -124,45 +123,67 @@ public class GameActivity extends variables{
         animation.run();
     }
     /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
-    public void clickerSet(){
+    public void clickerSet() {
         //damage buttons
+        bastardSword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!coolDown){
+                damage=weapons.peaShooter;
+                    System.out.println("damage="+damage);
+                enemycheckdamage();
+                coolDown=true;
+                coolDownTime=1000;
+                coolDown();
+            }
+            }
+        });
         halberd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                damage = weapons.halberd;
-                enemycheckdamage();
+                if(!coolDown){
+                    damage=weapons.maul;
+                    System.out.println("damage="+damage);
+                    enemycheckdamage();
+                    coolDown=true;
+                    coolDownTime=2500;
+                    coolDown();
+                }
+
             }
         });
         maul.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                damage = weapons.maul;
-                enemycheckdamage();
-            }
-        });
-        bastardSword.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View view) {
-                damage = weapons.bastardSword;
-                enemycheckdamage();
+                if(!coolDown){
+                    damage=weapons.halberd;
+                    System.out.println("damage="+damage);
+                    enemycheckdamage();
+                    coolDown=true;
+                    coolDownTime=5000;
+                    coolDown();
+                }
+
             }
         });
-
     }
-    int oxygenLevel = 100;
-    public void checkdamage(int health, int currentShield, int enemydamage){
+    public void checkdamage(){
         //first check damage relative to enemy action
         //test = test - 10;
         if(enemydamage>currentShield){
             enemydamage = enemydamage - currentShield;
             currentShield = 0;
             health = health - enemydamage;
+            System.out.println("shield="+currentShield);
+            System.out.println("health="+health);
         }
         else if(currentShield>=enemydamage){
             currentShield = currentShield - enemydamage;
+            System.out.println("shield="+currentShield);
+            System.out.println("health="+health);
         }
         if(health < 50 && health > 25){
-           healthBar.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+            healthBar.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         if(health < 25){
             healthBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -208,6 +229,8 @@ public class GameActivity extends variables{
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
+    int oxygenLevel = 100;
+
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel) {
         if (oxygenLevel < 50) {
@@ -226,5 +249,13 @@ public class GameActivity extends variables{
             Toast.makeText(this, "you suffocated", Toast.LENGTH_SHORT).show();
             startActivity(i);
         }
+    }
+    public void coolDown(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                coolDown=false;
+            }
+        }, coolDownTime);
     }
 }
