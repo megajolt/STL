@@ -14,6 +14,7 @@ public class Room {
     public Room(int roomNumber){
         number = roomNumber;
     }
+    public Room(int roomNumber, String roomName){number = roomNumber; name = roomName;}
     void setWidth(double width){
         innerWidth = width;
     }

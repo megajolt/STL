@@ -93,7 +93,7 @@ public class variables extends AppCompatActivity {
         shieldRoomButton = findViewById(R.id.shield);
         gunRoomButton = findViewById(R.id.gun);
         controlRoomButton = findViewById(R.id.control);
-        openMenu = findViewById(R.id.menu);
+        //openMenu = findViewById(R.id.menu);
     }
 
 }

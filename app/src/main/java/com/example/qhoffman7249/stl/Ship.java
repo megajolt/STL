@@ -11,12 +11,14 @@ public class Ship{
     double xpos;
     double ypos;
     ImageView view;
+
     boolean hasView = false;
     int level = 1;
     List<Room> rooms = new ArrayList<>();
     public Ship(int numberOfRooms) {
         for(int i = 0; i < numberOfRooms; i++){
             rooms.add(new Room(i));
+            rooms.get(i).setName("room number: " + i);
         }
     }
     public Ship(int numberOfRooms, ImageView val) {

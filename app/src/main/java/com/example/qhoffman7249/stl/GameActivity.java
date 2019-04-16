@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.graphics.Path;
@@ -36,7 +37,7 @@ public class GameActivity extends variables{
         super.onCreate(savedInstanceState);
         myShip = new Ship(6);
         setContentView(R.layout.activity_game);
-        for(int i = 0; i < 5; i++) {
+        /*for(int i = 0; i < 5; i++) {
             crewlist.add(new Crew(this, i));
             final int b = i;
             crewlist.get(i).setOnClickListener(new View.OnClickListener() {
@@ -47,9 +48,19 @@ public class GameActivity extends variables{
                     startActivity(r);
                 }
             });
-            LinearLayout linearLayout = findViewById(R.id.crewlayout);
+            LinearLayout linearLayout = findViewById(R.id.ourSide);
             linearLayout.addView(crewlist.get(i));
-        }
+        }*/
+        Button enemyShowButton = findViewById(R.id.enemyShowButton);
+        enemyShowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout enemy = findViewById(R.id.enemy);
+                enemy.setVisibility(View.VISIBLE);
+                LinearLayout ourSide = findViewById(R.id.ourSide);
+                ourSide.setVisibility(View.GONE);
+            }
+        });
         variableSet();
         mHandler = new Handler();
         mHandler2 = new Handler();
@@ -71,16 +82,18 @@ public class GameActivity extends variables{
         public void run() {
             try {
                 if(enemyhealth > 0 && coolDown == 0) {
-                    Weapons weapon = sysAI.getWeapon();
+                    Weapon weapon = sysAI.getWeapon();
                     coolDown = weapon.coolDown;
-                    //checkdamage(myShip.getHealth(), myShip.getShield(),  sysAI.getDamage());
-                    Room target = sysAI.getTarget(myShip);
-                    myShip.setRoomHealth(target.getIndex(), target.getHealth() - weapon.damage);
                     checkdamage(weapon.damage);
+                    //Room target = sysAI.getTarget(myShip);
+                    //Toast.makeText(GameActivity.this, "room: " + target.getName(), Toast.LENGTH_SHORT).show();
+                    //System.out.println(target.getName());
+                    //myShip.setRoomHealth(target.getIndex(), target.getHealth() - weapon.damage);
+                    //checkdamage(weapon.damage);
                 }
                 coolDown--;
             } finally {
-                mHandler.postDelayed(mStatusChecker, mInterval);
+                mHandler.postDelayed(mStatusChecker, 100);
             }
         }
     };
@@ -180,7 +193,12 @@ public class GameActivity extends variables{
     }
     int oxygenLevel = 100;
     public void checkdamage(int enemydamage){
-    public void checkdamage(){
+        Room target = sysAI.getTarget(myShip);
+        //Toast.makeText(GameActivity.this, "room: " + target.getName(), Toast.LENGTH_SHORT).show();
+        System.out.println(target.getName());
+        myShip.setRoomHealth(target.getIndex(), target.getHealth() - enemydamage);
+        int health = myShip.getHealth();
+        int currentShield = myShip.getShield();
         //first check damage relative to enemy action
         //test = test - 10;
         if(enemydamage>currentShield){
@@ -215,6 +233,8 @@ public class GameActivity extends variables{
             damaged=true;
         }
         damage = 0;
+        myShip.setHealth(health);
+        myShip.setShield(currentShield);
         healthBar.setProgress(health);
         shieldBar.setProgress(currentShield);
     }
