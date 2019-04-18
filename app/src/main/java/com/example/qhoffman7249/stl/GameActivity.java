@@ -158,6 +158,9 @@ public class GameActivity extends variables{
                 enemycheckdamage();
                 coolDown=true;
                 coolDownTime=1000;
+                if(gunOccupied){
+                    coolDownTime=coolDownTime/2;
+                }
                 coolDown();
             }
             }
@@ -171,6 +174,9 @@ public class GameActivity extends variables{
                     enemycheckdamage();
                     coolDown=true;
                     coolDownTime=2500;
+                    if(gunOccupied){
+                        coolDownTime=coolDownTime/2;
+                    }
                     coolDown();
                 }
 
@@ -185,6 +191,9 @@ public class GameActivity extends variables{
                     enemycheckdamage();
                     coolDown=true;
                     coolDownTime=5000;
+                    if(gunOccupied){
+                        coolDownTime=coolDownTime/2;
+                    }
                     coolDown();
                 }
 
@@ -290,5 +299,21 @@ public class GameActivity extends variables{
                 coolDown=false;
             }
         }, coolDownTime);
+    }
+    public void shieldCheck(){
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(shieldOccupied){
+                    if(currentShield>=95){
+                        currentShield=100;
+                    }
+                    else{
+                        currentShield=currentShield+5;
+                    }
+                }
+                shieldCheck();
+            }
+        }, 5000);
     }
 }

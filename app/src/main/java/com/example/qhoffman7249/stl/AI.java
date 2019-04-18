@@ -95,24 +95,24 @@ public class AI{
     }
     public class targetingAlgorithim{
         //ArrayList<Target> targetArray = new ArrayList<>();
-        tuple targetingarray[][] = new tuple[6][6];
+        tuple targetingarray[][] = new tuple[5][5];
         public targetingAlgorithim(int level){
-            for(int i = 0; i < 6; i++) {
+            for(int i = 0; i < 5; i++) {
                 switch (i) {
                     case 0:
-                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(2, "med room"), new tuple(3, "control room"), new tuple(4, ""), new tuple(5, ""), new tuple(6, "shield")};
+                        targetingarray[i] = new tuple[]{new tuple(4, "gun room"), new tuple(3, "control room"), new tuple(5, "shield"), new tuple(2, "med room"), new tuple(1, "engine")};
                         break;
                     case 1:
-                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(2, "med room"), new tuple(3, "control room"), new tuple(4, ""), new tuple(5, ""), new tuple(6, "shield")};
+                        targetingarray[i] = new tuple[]{new tuple(3, "control room"), new tuple(4, "gun room"), new tuple(5, "shield"), new tuple(1, "engine"), new tuple(2, "med room")};
                         break;
                     case 2:
-                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(2, "med room"), new tuple(3, "control room"), new tuple(4, ""), new tuple(5, ""), new tuple(6, "shield")};
+                        targetingarray[i] = new tuple[]{new tuple(2, "med room"), new tuple(5, "shield"), new tuple(3, "control room"), new tuple(4, "gun room"), new tuple(1, "engine")};
                         break;
                     case 3:
-                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(2, "med room"), new tuple(3, "control room"), new tuple(4, ""), new tuple(5, ""), new tuple(6, "shield")};
+                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(5, "shield"), new tuple(3, "control room"), new tuple(4, "gun room"), new tuple(2, "med room")};
                         break;
                     case 4:
-                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(2, "med room"), new tuple(3, "control room"), new tuple(4, ""), new tuple(5, ""), new tuple(6, "shield")};
+                        targetingarray[i] = new tuple[]{new tuple(1, "engine"), new tuple(2, "med room"), new tuple(5, "shield"), new tuple(3, "control room"), new tuple(4, "gun room")};
                         break;
                 }
             }
@@ -127,7 +127,7 @@ public class AI{
     public AI(){
         targetingAlgorithim algorithim1;
         for(int i = 6; i > 6; i--){
-            levels.add(new Level(new Weapon((-i+6)*5,i*4), i*20, i*20);
+            levels.add(new Level(new Weapon((-i+6)*5,i*4), i*20, i*20));
         }
         algorithim1 = new targetingAlgorithim(level);
     }

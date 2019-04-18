@@ -46,6 +46,11 @@ public class variables extends AppCompatActivity {
     public static List<String> characternames;
     public static boolean menubool = false;
     public static boolean coolDown=false;
+    public static boolean engineOccupied=false;
+    public static boolean gunOccupied=false;
+    public static boolean shieldOccupied=false;
+    public static boolean medBayOccupied=false;
+    public static boolean controlOccupied=false;
     public ImageView bastardSword;
     public ImageView maul;
     public ImageView halberd;
