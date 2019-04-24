@@ -4,7 +4,7 @@ public class Room {
     private int number;
     private double innerHeight;
     private double innerWidth;
-    private int myHealth;
+    private int myHealth = 100/5;
     private double xpos;
     private double ypos;
     private String name;

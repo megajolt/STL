@@ -71,7 +71,8 @@ public class GameActivity extends variables{
         startAnimation(2,7);
         //startAnimation();
     }
-    int coolDown;
+    boolean coolDown;
+    int ecoolDown;
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -81,9 +82,9 @@ public class GameActivity extends variables{
         @Override
         public void run() {
             try {
-                if(enemyhealth > 0 && coolDown == 0) {
+                if(enemyhealth > 0 && ecoolDown == 0) {
                     Weapon weapon = sysAI.getWeapon();
-                    coolDown = weapon.coolDown;
+                    ecoolDown = weapon.coolDown;
                     checkdamage(weapon.damage);
                     //Room target = sysAI.getTarget(myShip);
                     //Toast.makeText(GameActivity.this, "room: " + target.getName(), Toast.LENGTH_SHORT).show();
@@ -91,7 +92,7 @@ public class GameActivity extends variables{
                     //myShip.setRoomHealth(target.getIndex(), target.getHealth() - weapon.damage);
                     //checkdamage(weapon.damage);
                 }
-                coolDown--;
+                ecoolDown--;
             } finally {
                 mHandler.postDelayed(mStatusChecker, 100);
             }
@@ -152,15 +153,12 @@ public class GameActivity extends variables{
         bastardSword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!coolingDown){
+                if(!coolDown){
                 damage=weapons.peaShooter;
                     System.out.println("damage="+damage);
                 enemycheckdamage();
-                coolingDown=true;
+                coolDown=true;
                 coolDownTime=1000;
-                if(gunOccupied){
-                    coolDownTime=coolDownTime/2;
-                }
                 coolDown();
             }
             }
@@ -168,15 +166,12 @@ public class GameActivity extends variables{
         halberd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!coolingDown){
+                if(!coolDown){
                     damage=weapons.maul;
                     System.out.println("damage="+damage);
                     enemycheckdamage();
-                    coolingDown=true;
+                    coolDown=true;
                     coolDownTime=2500;
-                    if(gunOccupied){
-                        coolDownTime=coolDownTime/2;
-                    }
                     coolDown();
                 }
 
@@ -185,24 +180,28 @@ public class GameActivity extends variables{
         maul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!coolingDown){
+                if(!coolDown){
                     damage=weapons.halberd;
                     System.out.println("damage="+damage);
                     enemycheckdamage();
-                    coolingDown=true;
+                    coolDown=true;
                     coolDownTime=5000;
-                    if(gunOccupied){
-                        coolDownTime=coolDownTime/2;
-                    }
                     coolDown();
                 }
 
             }
         });
     }
+    int activerooms = 5;
     int oxygenLevel = 100;
     public void checkdamage(int enemydamage){
         Room target = sysAI.getTarget(myShip);
+        if(target.getHealth() < 1){
+            activerooms--;
+        }
+        if(activerooms < 1 && target.getHealth() < 1){
+            Toast.makeText(this, "your dead", Toast.LENGTH_SHORT).show();
+        }
         //Toast.makeText(GameActivity.this, "room: " + target.getName(), Toast.LENGTH_SHORT).show();
         System.out.println(target.getName());
         myShip.setRoomHealth(target.getIndex(), target.getHealth() - enemydamage);
@@ -235,8 +234,8 @@ public class GameActivity extends variables{
             startActivity(r);
         }
         if(currentShield < 1){
-            oxygenLevel -= 20;
-            oxygenCheck(oxygenLevel);
+            //oxygenLevel -= 20;
+            //oxygenCheck(oxygenLevel);
         }
         if(health<100){
             damaged=true;
@@ -271,6 +270,7 @@ public class GameActivity extends variables{
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
+    //int oxygenLevel = 100;
 
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel) {
@@ -295,24 +295,8 @@ public class GameActivity extends variables{
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                coolingDown=false;
+                //coolDown=false;
             }
         }, coolDownTime);
-    }
-    public void shieldCheck(){
-        Handler handler=new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                if(shieldOccupied){
-                    if(currentShield>=95){
-                        currentShield=100;
-                    }
-                    else{
-                        currentShield=currentShield+5;
-                    }
-                }
-                shieldCheck();
-            }
-        }, 5000);
     }
 }

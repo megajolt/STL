@@ -82,9 +82,6 @@ public class AI{
             shield = setShield;
         }
     }
-    public class Target{
-        int roomNumber;
-    }
     public class tuple{
         int number;
         String name;
@@ -118,24 +115,33 @@ public class AI{
         public targetingAlgorithim(){
 
         }
+        public int getTarget(Ship theShip){
+            for(int i = 0; i < 5; i++){
+                if(theShip.getRoom(i).getHealth() > 0){
+                    return i;
+                }
+            }
+            return 7;
+        }
     }
 
     int level = 1;
     List<Level> levels = new ArrayList<>();
+    targetingAlgorithim algorithim1;
+    List<targetingAlgorithim> algors = new ArrayList<>();
     public AI(){
-        targetingAlgorithim algorithim1;
-        for(int i = 6; i > 6; i--){
-            levels.add(new Level(new Weapon((-i+6)*5,i*4), i*20, i*20);
+        targetingAlgorithim algorithim1 = new targetingAlgorithim(0);
+        for(int i = 6; i > 0; i--){
+            levels.add(new Level(new Weapon((-i+6)*5,i*1), i*20, i*20));
         }
-        algorithim1 = new targetingAlgorithim(level);
+        for(int a = 0; a < 6; a++){
+            algors.add(new targetingAlgorithim(a));
+        }
     }
     public Weapon getWeapon(){
         return levels.get(level).weapon;
     }
     public Room getTarget(Ship myShip){
-        switch(level){
-            case 1:
-                break;
-        }
+        return myShip.getRoom(algors.get(level).getTarget(myShip));
     }
 }
