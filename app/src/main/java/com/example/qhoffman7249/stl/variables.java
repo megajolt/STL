@@ -45,7 +45,7 @@ public class variables extends AppCompatActivity {
     public static Coordinates room=new Coordinates();
     public static List<String> characternames;
     public static boolean menubool = false;
-    public static boolean coolDown=false;
+    public static boolean coolingDown=false;
     public static boolean engineOccupied=false;
     public static boolean gunOccupied=false;
     public static boolean shieldOccupied=false;
@@ -70,7 +70,7 @@ public class variables extends AppCompatActivity {
         Occupied[2] = new int[5];
         Occupied[3] = new int[5];
         Occupied[4] = new int[5];
-        sysAI = new AI(1);
+        sysAI = new AI();
         healthBar = findViewById(R.id.healthBar);
         healthBar.setScaleY(2f);
         healthBar.setProgress(100);

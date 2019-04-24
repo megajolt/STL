@@ -152,11 +152,11 @@ public class GameActivity extends variables{
         bastardSword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!coolDown){
+                if(!coolingDown){
                 damage=weapons.peaShooter;
                     System.out.println("damage="+damage);
                 enemycheckdamage();
-                coolDown=true;
+                coolingDown=true;
                 coolDownTime=1000;
                 if(gunOccupied){
                     coolDownTime=coolDownTime/2;
@@ -168,11 +168,11 @@ public class GameActivity extends variables{
         halberd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!coolDown){
+                if(!coolingDown){
                     damage=weapons.maul;
                     System.out.println("damage="+damage);
                     enemycheckdamage();
-                    coolDown=true;
+                    coolingDown=true;
                     coolDownTime=2500;
                     if(gunOccupied){
                         coolDownTime=coolDownTime/2;
@@ -185,11 +185,11 @@ public class GameActivity extends variables{
         maul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!coolDown){
+                if(!coolingDown){
                     damage=weapons.halberd;
                     System.out.println("damage="+damage);
                     enemycheckdamage();
-                    coolDown=true;
+                    coolingDown=true;
                     coolDownTime=5000;
                     if(gunOccupied){
                         coolDownTime=coolDownTime/2;
@@ -271,7 +271,6 @@ public class GameActivity extends variables{
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
-    int oxygenLevel = 100;
 
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel) {
@@ -296,7 +295,7 @@ public class GameActivity extends variables{
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                coolDown=false;
+                coolingDown=false;
             }
         }, coolDownTime);
     }

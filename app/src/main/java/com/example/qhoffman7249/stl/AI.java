@@ -126,7 +126,7 @@ public class AI{
     List<Level> levels = new ArrayList<>();
     public AI(){
         targetingAlgorithim algorithim1;
-        for(int i = 6; i > 6; i--){
+        for(int i = 6; i > 5; i--){
             levels.add(new Level(new Weapon((-i+6)*5,i*4), i*20, i*20));
         }
         algorithim1 = new targetingAlgorithim(level);
@@ -139,5 +139,6 @@ public class AI{
             case 1:
                 break;
         }
+        return getTarget(myShip);
     }
 }
