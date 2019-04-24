@@ -98,6 +98,7 @@ public class GameActivity extends variables{
             }
         }
     };
+    //comment to add
     int randomint = 0;
     int animtimes = 200;
     int rotation = 0;
