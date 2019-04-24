@@ -14,7 +14,7 @@ public class Ship{
 
     boolean hasView = false;
     int level = 1;
-    List<Room> rooms = new ArrayList<>();
+    public List<Room> rooms = new ArrayList<>();
     public Ship(int numberOfRooms) {
         for(int i = 0; i < numberOfRooms; i++){
             rooms.add(new Room(i));
@@ -30,12 +30,9 @@ public class Ship{
         ypos = view.getY();
         xpos = view.getX();
     }
-    void setRoomWidth(int number, double width){
-        rooms.get(number).setWidth(width);
-    }
-    void setRoomHeight(int number, double height){
-        rooms.get(number).setHeight(height);
-    }
+
+    void setRoomWidth(int number, double width){rooms.get(number).setWidth(width);}
+    void setRoomHeight(int number, double height){rooms.get(number).setHeight(height);}
     double getWidth(int number){
         return rooms.get(number).getWidth();
     }

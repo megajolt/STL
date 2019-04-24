@@ -15,23 +15,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.graphics.Path;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends variables{
-
-    Path cToEPath= new Path();
-    Path cToSPath=new Path();
-    Path cToGPath=new Path();
-    Path cToIPath=new Path();
     Ship myShip;
     List<Crew> crewlist = new ArrayList<Crew>();
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     private Handler mHandler2;
     int playerCoolDown;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +63,7 @@ public class GameActivity extends variables{
         Intent m = new Intent(GameActivity.this, gameMusic.class);
         startService(m);
         clickerSet();
-        startAnimation(2,7);
-        //startAnimation();
+        animation.run();
     }
     boolean coolDown;
     int ecoolDown;
@@ -98,7 +92,6 @@ public class GameActivity extends variables{
             }
         }
     };
-    //comment to add
     int randomint = 0;
     int animtimes = 200;
     int rotation = 0;
@@ -107,16 +100,9 @@ public class GameActivity extends variables{
         @Override
         public void run() {
             //put frame change code here
+            Toast.makeText(GameActivity.this, "animation ran", Toast.LENGTH_LONG).show();
             try{
-                if(randomint >= animtimes){
-                    //rotate and set frame
-                    Toast.makeText(GameActivity.this, "elapsed", Toast.LENGTH_LONG).show();
-                    time = 0;
-                }
-                else{
-                    time++;
-                }
-                randomint++;
+                anim.cAnimation();
             }finally {
                 mHandler2.postDelayed(animation, 12);
             }
@@ -139,15 +125,15 @@ public class GameActivity extends variables{
         mHandler.removeCallbacks(mStatusChecker);
         mHandler = null;
     }
-    public void stopAnimation(){
-        mHandler2.removeCallbacks(animation);
-    }
-    public void startAnimation(int times, int angle){
-        animtimes = times;
-        rotation = angle;
-        stopAnimation();
-        animation.run();
-    }
+    /* public void stopAnimation(){
+         mHandler2.removeCallbacks(animation);
+     }
+     public void startAnimation(int times, int angle){
+         animtimes = times;
+         rotation = angle;
+         stopAnimation();
+         animation.run();
+     }*/
     /*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx - set onclick listeners - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
     public void clickerSet() {
         //damage buttons
@@ -160,6 +146,9 @@ public class GameActivity extends variables{
                 enemycheckdamage();
                 coolDown=true;
                 coolDownTime=1000;
+                if(gunOccupied){
+                    coolDownTime=coolDownTime/2;
+                }
                 coolDown();
             }
             }
@@ -173,6 +162,9 @@ public class GameActivity extends variables{
                     enemycheckdamage();
                     coolDown=true;
                     coolDownTime=2500;
+                    if(gunOccupied){
+                        coolDownTime=coolDownTime/2;
+                    }
                     coolDown();
                 }
 
@@ -187,6 +179,9 @@ public class GameActivity extends variables{
                     enemycheckdamage();
                     coolDown=true;
                     coolDownTime=5000;
+                    if(gunOccupied){
+                        coolDownTime=coolDownTime/2;
+                    }
                     coolDown();
                 }
 
@@ -271,7 +266,6 @@ public class GameActivity extends variables{
         enemyHealthBar.setProgress(enemyhealth);
         enemyShieldBar.setProgress(enemycurrentShield);
     }
-    //int oxygenLevel = 100;
 
     //call this with whatever changes oxygen
     public void oxygenCheck(int oxygenLevel) {
@@ -299,5 +293,21 @@ public class GameActivity extends variables{
                 //coolDown=false;
             }
         }, coolDownTime);
+    }
+    public void shieldCheck(){
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                if(shieldOccupied){
+                    if(currentShield>=95){
+                        currentShield=100;
+                    }
+                    else{
+                        currentShield=currentShield+5;
+                    }
+                }
+                shieldCheck();
+            }
+        }, 5000);
     }
 }
