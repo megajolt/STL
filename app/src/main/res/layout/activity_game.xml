@@ -94,7 +94,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/playeractivity"
+                android:id="@+id/playerActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -125,18 +125,17 @@
                         android:layout_weight=".50"
                         android:src="@drawable/weapon3" />
                 </LinearLayout>
-                <LinearLayout
+                <GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <ImageView
                     android:id="@+id/ship"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:contentDescription="@string/room_layout_sprite"
                     android:rotation="90"
                     android:src="@drawable/ship1rm" />
-                </LinearLayout>
+                </GridLayout>
             </LinearLayout>
 
         </LinearLayout>

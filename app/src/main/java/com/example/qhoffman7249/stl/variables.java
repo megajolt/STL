@@ -35,8 +35,8 @@ public class variables extends AppCompatActivity {
     public static ImageView oxygenEmergency;
     public static ImageView largerOxygenEmergency;
     public static LinearLayout weaponButtons;
-    public static LinearLayout roomButtons;
-    public  LinearLayout ship;
+    public  LinearLayout playerActivity;
+    public  ImageView ship;
     public static ImageView enemy;
     public static boolean damaged=false;
     public static int enemydamage = 0;
@@ -67,6 +67,7 @@ public class variables extends AppCompatActivity {
     public Button openWeaponMenu;
     public Button openCrewMenu;
     public Button openRoomMenu;
+
     public void variableSet(){
         Occupied[0] = new int[5];
         Occupied[1] = new int[5];
@@ -102,6 +103,8 @@ public class variables extends AppCompatActivity {
         shieldRoomButton = findViewById(R.id.shield);
         gunRoomButton = findViewById(R.id.gun);
         controlRoomButton = findViewById(R.id.control);
+        playerActivity= findViewById(R.id.playerActivity);
+
         //openMenu = findViewById(R.id.menu);
     }
 
