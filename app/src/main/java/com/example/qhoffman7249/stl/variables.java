@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
+//comment for commit
 import java.util.List;
 
 public class variables extends AppCompatActivity {
