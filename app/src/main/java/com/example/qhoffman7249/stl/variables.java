@@ -26,7 +26,7 @@ public class variables extends AppCompatActivity {
     public static boolean[] roomEnabled = new boolean[6];
     public static int[] roomHealth = new int[6];
     public static int[][] Occupied = new int[5][5];
-    public static int manHealth=99;
+    public static int[] manHealth=new int[5];
     public static MediaPlayer player;
     public static ProgressBar enemyShieldBar;
     public static ProgressBar enemyHealthBar;
@@ -36,7 +36,6 @@ public class variables extends AppCompatActivity {
     public static ImageView largerOxygenEmergency;
     public static LinearLayout weaponButtons;
     public  LinearLayout playerActivity;
-    public  ImageView ship;
     public static ImageView enemy;
     public static boolean damaged=false;
     public static int enemydamage = 0;
@@ -96,7 +95,6 @@ public class variables extends AppCompatActivity {
         enemy = findViewById(R.id.enemyShip);
         bastardSword = findViewById(R.id.bastardSword);
         maul = findViewById(R.id.maul);
-        ship = findViewById(R.id.ship);
         halberd = findViewById(R.id.halberd);
         medRoomButton = findViewById(R.id.medBay);
         engineRoomButton = findViewById(R.id.engine);

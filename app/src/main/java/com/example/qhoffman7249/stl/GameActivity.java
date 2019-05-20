@@ -8,11 +8,14 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -26,12 +29,14 @@ public class GameActivity extends variables{
     private Handler mHandler;
     private Handler mHandler2;
     int playerCoolDown;
+    ImageView ship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myShip = new Ship(6);
         setContentView(R.layout.activity_game);
+        ship= findViewById(R.id.ship);
         /*for(int i = 0; i < 5; i++) {
             crewlist.add(new Crew(this, i));
             final int b = i;
@@ -205,6 +210,13 @@ public class GameActivity extends variables{
         int currentShield = myShip.getShield();
         //first check damage relative to enemy action
         //test = test - 10;
+        if(engineOccupied){
+            double dodge=Math.random()*10;
+            if(dodge>6
+            ){
+                damage=0;
+            }
+        }
         if(enemydamage>currentShield){
             enemydamage = enemydamage - currentShield;
             currentShield = 0;
@@ -245,6 +257,17 @@ public class GameActivity extends variables{
     //code to change enemy health bar
     public void enemycheckdamage(){
         Toast.makeText(GameActivity.this, "enemycheckdamage ran", Toast.LENGTH_SHORT).show();
+        double hitChance=Math.random()*10;
+        if(controlOccupied){
+            if(hitChance<3){
+                damage=0;
+            }
+        }
+        else{
+            if(hitChance<5){
+                damage=0;
+            }
+        }
         if(damage>enemycurrentShield){
             damage -= enemycurrentShield;
             enemycurrentShield = 0;
