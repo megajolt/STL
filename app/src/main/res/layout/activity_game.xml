@@ -128,14 +128,16 @@
                 <GridLayout
                     android:id="@+id/aSpace"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                <ImageView
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ship1rm"
+                    >
+                <!--<ImageView
                     android:id="@+id/ship"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/room_layout_sprite"
                     android:rotation="90"
-                    android:src="@drawable/ship1rm" />
+                    android:src="@drawable/ship1rm" />-->
                 </GridLayout>
             </LinearLayout>
 

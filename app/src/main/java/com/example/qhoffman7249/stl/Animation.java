@@ -1,14 +1,16 @@
 package com.example.qhoffman7249.stl;
 
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class Animation {
     public enum Cell{C,X,W,_}
-    private Cell [][] board;
-    private Cell[][] change;
+    private Button [][] board;
+    private Button[][] change;
     int times;
     boolean cS =true;
     variables Variables=new variables();
@@ -17,22 +19,27 @@ public class Animation {
 
     }
     public void cAnimation() {
-        ImageView ship=mActivity.ship;
-        int bitmapHeight=ship.getDrawable().getIntrinsicHeight() , bitmapWidth=ship.getDrawable().getIntrinsicWidth();
-
-        board = new Cell[bitmapHeight][bitmapWidth];
-        System.out.println("height= "+bitmapHeight);
-        System.out.println("width= "+bitmapWidth);
+        int bitHeight=Variables.bitmapHeight;
+        int bitWidth= Variables.bitmapWidth;
+        board = new Button[bitHeight][bitWidth];
+        change = new Button[bitHeight][bitWidth];
+        GridLayout aSpace= Variables.aSpace;
+        for (int i = 0; i <bitHeight ; i++) {
+            for (int j = 0; j <bitWidth ; j++) {
+                board[i][j].setBackgroundResource(R.drawable.crew1);
+                aSpace.addView(board[i][j]);
+            }
+        }
         for (int columns = 0; columns < board.length; columns++) {
             for (int rows = 0; rows < board[columns].length; rows++) {
                 if(columns==0&&rows==0){
-                    board[columns][rows]= Cell.X;
+                    board[columns][rows].setText("X");
                 }
                 if(columns==board.length-1&&rows==board[columns].length-1){
-                    board[columns][rows]= Cell.C;
+                    board[columns][rows].setText("C");
                 }
                 if(board[columns][rows]==null){
-                board[columns][rows] = Cell._;}
+                board[columns][rows].setText("_");}
             }
         }
         for (int i = 0; i < change.length ; i++) {

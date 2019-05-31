@@ -36,8 +36,9 @@ public class GameActivity extends variables{
         super.onCreate(savedInstanceState);
         myShip = new Ship(6);
         setContentView(R.layout.activity_game);
-        ship= findViewById(R.id.ship);
-        /*for(int i = 0; i < 5; i++) {
+
+        aSpace=findViewById(R.id.aSpace);
+        for(int i = 0; i < 5; i++) {
             crewlist.add(new Crew(this, i));
             final int b = i;
             crewlist.get(i).setOnClickListener(new View.OnClickListener() {
@@ -48,9 +49,8 @@ public class GameActivity extends variables{
                     startActivity(r);
                 }
             });
-            LinearLayout linearLayout = findViewById(R.id.ourSide);
-            linearLayout.addView(crewlist.get(i));
-        }*/
+
+        }
         Button enemyShowButton = findViewById(R.id.enemyShowButton);
         enemyShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +106,7 @@ public class GameActivity extends variables{
         public void run() {
             //put frame change code here
             Toast.makeText(GameActivity.this, "animation ran", Toast.LENGTH_LONG).show();
+
             try{
                 anim.cAnimation();
             }finally {

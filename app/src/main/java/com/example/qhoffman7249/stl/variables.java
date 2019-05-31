@@ -34,8 +34,9 @@ public class variables extends AppCompatActivity {
     public static int coolDownTime=0;
     public static ImageView oxygenEmergency;
     public static ImageView largerOxygenEmergency;
-    public static LinearLayout weaponButtons;
+    public  LinearLayout linearLayout;
     public  LinearLayout playerActivity;
+    public GridLayout aSpace ;
     public static ImageView enemy;
     public static boolean damaged=false;
     public static int enemydamage = 0;
@@ -54,6 +55,9 @@ public class variables extends AppCompatActivity {
     public static boolean shieldOccupied=false;
     public static boolean medBayOccupied=false;
     public static boolean controlOccupied=false;
+    public ImageView ship;
+    public int bitmapHeight;
+    public int bitmapWidth;
     public ImageView bastardSword;
     public ImageView maul;
     public ImageView halberd;
@@ -101,8 +105,9 @@ public class variables extends AppCompatActivity {
         shieldRoomButton = findViewById(R.id.shield);
         gunRoomButton = findViewById(R.id.gun);
         controlRoomButton = findViewById(R.id.control);
-        playerActivity= findViewById(R.id.playerActivity);
-
+        aSpace=findViewById(R.id.aSpace);
+        bitmapWidth=aSpace.getWidth();
+        bitmapHeight=aSpace.getHeight();
         //openMenu = findViewById(R.id.menu);
     }
 
